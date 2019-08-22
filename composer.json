@@ -1,0 +1,38 @@
+{
+    "name": "laravel-bi/laravel-bi",
+    "description": "A beautiful and fully-featured Business Intelligence dashboard manager for Laravel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alberto Bottarini",
+            "email": "alberto.bottarini@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "illuminate/support": "^5.7.15 | 5.8.* | ^6.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.3",
+        "orchestra/testbench": "^3.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "LaravelBi\\LaravelBi\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LaravelBi\\LaravelBi\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaravelBi\\LaravelBi\\BiServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

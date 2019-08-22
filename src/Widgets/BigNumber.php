@@ -3,6 +3,7 @@
 namespace LaravelBi\LaravelBi\Widgets;
 
 use LaravelBi\LaravelBi\Metric\BaseMetric;
+use LaravelBi\Dashboard;
 
 class BigNumber extends BaseWidget
 {
@@ -30,8 +31,15 @@ class BigNumber extends BaseWidget
     public function data()
     {
         $builder = $this->model::query();
-        $builder = $this->metric->apply($builder);
-        return $builder->get();
+        $builder = $this->metric->apply($builder, $this);
+        return $builder->first();
+    }
+
+    protected function getMeta() 
+    {
+        return [
+            'metric' => $this->metric
+        ];
     }
 
 }

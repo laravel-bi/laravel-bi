@@ -12,7 +12,10 @@ class WidgetController extends BaseController
     {
         $widget = $dashboard->findWidgetOrFail($widget);
 
-        return $widget->data();
+        return [
+            'status' => 200,
+            'data'   => $widget->data()
+        ];
     }
 
 }

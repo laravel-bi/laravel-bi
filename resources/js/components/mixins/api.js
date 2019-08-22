@@ -9,6 +9,8 @@ export default {
                     return response;
                 }
                 this.sendToast(response.data.error);
+            }).catch((error) => {
+                this.sendToast(error.message);
             });
         }
     }

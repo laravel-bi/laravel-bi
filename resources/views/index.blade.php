@@ -14,12 +14,12 @@
 <body class="text-black h-full bg-gray-200 font-noto">
 
     <div id="laravel-bi" class="h-full flex flex-col">
-        <div class="p-4 w-full bg-blue-900 text-white">
+        <div class="p-4 w-full bg-gray-800 text-white text-xl uppercase">
             Laravel bi
         </div>
 
         <div class="flex flex-grow">
-            <bi-nav></bi-nav>
+            <bi-nav class="bg-gray-800 text-white"></bi-nav>
             <div class="flex-grow p-4">
                 <router-view></router-view>
             </div>

@@ -1,9 +1,10 @@
 <?php
 
-namespace LaravelBi\LaravelBi\Metrics;
+namespace LaravelBi\LaravelBi\Dimensions;
 
-abstract class BaseMetric {
-    
+abstract class BaseDimension
+{
+
     public $key;
     public $name;
 
@@ -12,7 +13,8 @@ abstract class BaseMetric {
         $this->key  = $key;
         $this->name = $name;
     }
-    static public function create($key, $name)
+
+    public static function create($key, $name)
     {
         return new static($key, $name);
     }

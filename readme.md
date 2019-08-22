@@ -14,6 +14,18 @@ Laravel Bi is a beautiful and fully-featured Business Intelligence dashboard man
 
 ### Dimensions
 
+### Main features
+
+### Installation
+
+### How to use
+
+### Widgets
+
+### Metrics
+
+### Dimensions
+
 ```php
 public function widgets()
 {

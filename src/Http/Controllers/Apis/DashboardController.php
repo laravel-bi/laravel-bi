@@ -23,7 +23,10 @@ class DashboardController extends BaseController
 
     public function getWidgets(Dashboard $dashboard)
     {
-        return $dashboard->toArray();
+        return [
+            'status' => 200,
+            'data'   => $dashboard->toArray()
+        ];
     }
 
 }

@@ -1,8 +1,21 @@
 <template>
     <div>
-        <h3>{{ dashboardKey }}</h3>
-        <div class="m-2 bg-white p-2 border border-gray-500">
-            Ciao
+        <h3 class="text-xl border-gray-800 border-b-4">{{ name }}</h3>
+        <div class="flex flex-wrap -mr-2 -ml-2">
+            <div 
+                :class="'w-' + widget.width"
+                v-for="widget in widgets" 
+                :key="widget.key">
+                <div class="m-2 bg-white border border-gray-500 shadow">
+                    <component 
+                        :is="'bi-' + widget.component" 
+                        :dashboardKey="dashboardKey"
+                        :widgetKey="widget.key"
+                        :widgetName="widget.name"
+                        :meta="widget.meta"
+                    ></component>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -14,22 +27,29 @@ import toasts from "./mixins/toasts.js";
 export default {
     name: "bi-dashboard",
     mixins: [api, toasts],
-    props: ["dashboardKey"],
+    props: {
+        dashboardKey: String
+    },
+    data() {
+        return {
+            name: '',
+            widgets: []
+        }
+    },
     watch: {
-        // call again the method if the route changes
         $route: "fetchData"
     },
     created() {
-        this.fetchData()
+        this.fetchData();
     },
     methods: {
         fetchData() {
-            this.api(`${this.dashboardKey}/widgets`).then(function(response) {
-                console.log(response.data.data);
+            this.api(`${this.dashboardKey}/widgets`).then((response) => {
+                this.widgets = response.data.data.widgets;
+                this.name = response.data.data.name;
             });
             return true;
         }
     }
 };
-
 </script>

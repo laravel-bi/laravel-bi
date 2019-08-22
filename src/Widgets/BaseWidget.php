@@ -2,6 +2,8 @@
 
 namespace LaravelBi\LaravelBi\Widgets;
 
+use LaravelBi\Dashboard;
+
 abstract class BaseWidget implements \JsonSerializable
 {
 
@@ -16,6 +18,7 @@ abstract class BaseWidget implements \JsonSerializable
     }
 
     abstract public function component();
+    abstract public function data();
 
     public static function create($key, $name)
     {
@@ -28,13 +31,19 @@ abstract class BaseWidget implements \JsonSerializable
         return $this;
     }
 
+    protected function getMeta() 
+    {
+        return [];
+    }
+
     public function jsonSerialize()
     {
         return [
             'width' => $this->width,
             'key' => $this->key,
             'name' => $this->name,
-            'component' => $this->component()
+            'component' => $this->component(),
+            'meta' => $this->getMeta()
         ];
     }
 

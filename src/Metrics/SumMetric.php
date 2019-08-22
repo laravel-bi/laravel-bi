@@ -6,12 +6,12 @@ use DB;
 use Illuminate\Database\Eloquent\Builder;
 use LaravelBi\Widgets\BaseWidget;
 
-class CountMetric extends BaseMetric
+class SumMetric extends BaseMetric
 {
 
     public function apply(Builder $builder, $widget)
     {
-        return $builder->addSelect(DB::raw('COUNT(*) as `' . $this->key . '`'));
+        return $builder->addSelect(DB::raw('SUM(' . $this->key . ') as `' . $this->key . '`'));
     }
 
 }

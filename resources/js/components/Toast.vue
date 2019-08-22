@@ -1,5 +1,5 @@
 <template>
-    <div class="absolute bottom-0">
+    <div class="absolute bottom-0 right-0">
         <div v-for="toast in toasts" v-bind:key="toast.id" class="m-4">
             {{ toast.message }}
         </div>

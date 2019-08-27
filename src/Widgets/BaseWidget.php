@@ -2,9 +2,11 @@
 
 namespace LaravelBi\LaravelBi\Widgets;
 
-use LaravelBi\Dashboard;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
+use LaravelBi\LaravelBi\Dashboard;
 
-abstract class BaseWidget implements \JsonSerializable
+abstract class BaseWidget implements \JsonSerializable, Widget
 {
 
     public $width;
@@ -17,10 +19,9 @@ abstract class BaseWidget implements \JsonSerializable
         $this->name = $name;
     }
 
-    abstract public function component();
-    abstract public function data();
+    abstract public function data(Dashboard $dashboard, Request $request);
 
-    public static function create($key, $name)
+    public static function create($key, $name): Widget
     {
         return new static($key, $name);
     }
@@ -31,19 +32,26 @@ abstract class BaseWidget implements \JsonSerializable
         return $this;
     }
 
-    protected function getMeta() 
+    protected function extra()
     {
-        return [];
+        return new \stdClass;
+    }
+
+    protected function getBaseBuilder(Dashboard $dashboard, Request $request): Builder
+    {
+        return collect($dashboard->filters())->reduce(function (Builder $builder, $filter) use ($request) {
+            return $filter->apply($builder, $request);
+        }, $dashboard->model::query());
     }
 
     public function jsonSerialize()
     {
         return [
-            'width' => $this->width,
-            'key' => $this->key,
-            'name' => $this->name,
-            'component' => $this->component(),
-            'meta' => $this->getMeta()
+            'width'     => $this->width,
+            'key'       => $this->key,
+            'name'      => $this->name,
+            'component' => $this->component,
+            'extra'     => $this->extra()
         ];
     }
 

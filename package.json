@@ -15,9 +15,12 @@
     "laravel-mix": "^4.1.2",
     "tailwindcss": "^1.1.2",
     "vue": "^2.6.10",
-    "vue-template-compiler": "^2.6.10",
-    "vue-router": "^3.1.2"
+    "vue-rangedate-picker": "^1.0.0",
+    "vue-router": "^3.1.2",
+    "vue-template-compiler": "^2.6.10"
   },
   "dependencies": {
+    "chart.js": "^2.8.0",
+    "vue-chartjs": "^3.4.2"
   }
 }

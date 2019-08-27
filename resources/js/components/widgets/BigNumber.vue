@@ -1,10 +1,10 @@
 <template>
     <div>
-        <div class="bg-gray-800 text-white p-2 text-sm">
+        <div class="p-2 text-sm">
             {{ widgetName }}
         </div>
-        <div class="p-4">
-            <div class="text-xl">{{ number }}</div>
+        <div class="p-2 pt-0">
+            <div class="text-big-number text-green-900 font-condensed">{{ number }}</div>
         </div>
     </div>
 </template>
@@ -23,7 +23,7 @@ export default {
         dashboardKey: String,
         widgetKey: String,
         widgetName: String,
-        meta: Object
+        extra: Object
     },
     data() {
         return {
@@ -35,8 +35,8 @@ export default {
     },
     methods: {
         fetchData() {
-            this.api(`${this.dashboardKey}/${this.widgetKey}`).then((response) => {
-                this.number = response.data.data[this.meta.metric.key];
+            this.api(`${this.dashboardKey}/${this.widgetKey}`).then((response) => {                
+                this.number = response.data.data[this.extra.metric.key];
             });
         }
     }

@@ -8,20 +8,24 @@
     <title>Laravel Bi</title>
 
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet"> 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('app.css', 'vendor/bi') }}">
 </head>
-<body class="text-black h-full bg-gray-200 font-noto">
+<body class="text-black h-full bg-gray-100 font-noto">
 
     <div id="laravel-bi" class="h-full flex flex-col">
-        <div class="p-4 w-full bg-gray-800 text-white text-xl uppercase">
-            Laravel bi
-        </div>
 
         <div class="flex flex-grow">
-            <bi-nav class="bg-gray-800 text-white"></bi-nav>
-            <div class="flex-grow p-4">
-                <router-view></router-view>
+            <bi-nav class="bg-gray-700 text-gray-400"></bi-nav>
+            <div class="flex-grow">
+                <div class="w-full bg-black text-white h-header">
+                    <bi-filters></bi-filters>
+                    <h1 class="p-3 text-xl uppercase">
+                        Laravel Bi
+                    </h1>
+                </div>
+                <router-view class="p-4"></router-view>
             </div>
         </div>
 

@@ -2,24 +2,19 @@
 
 namespace LaravelBi\LaravelBi\Widgets;
 
-use LaravelBi\Dashboard;
+use Illuminate\Http\Request;
+use LaravelBi\LaravelBi\Dashboard;
 
 class Table extends BaseWidget
 {
 
-    public $metrics;
-    public $dimensions;
-    public $model;
+    protected $metrics;
+    protected $dimensions;
+    protected $component = 'table';
 
     public function component()
     {
         return 'table';
-    }
-
-    public function model($model)
-    {
-        $this->model = $model;
-        return $this;
     }
 
     public function metrics($metrics)
@@ -34,9 +29,9 @@ class Table extends BaseWidget
         return $this;
     }
 
-    public function data()
+    public function data(Dashboard $dashboard, Request $request)
     {
-        $builder = $this->model::query();
+        $builder = $this->getBaseBuilder($dashboard, $request);
         $builder = collect($this->dimensions)->reduce(function ($builder, $dimension) {
             return $dimension->apply($builder, $this);
         }, $builder);
@@ -46,11 +41,11 @@ class Table extends BaseWidget
         return $builder->get();
     }
 
-    protected function getMeta() 
+    protected function extra()
     {
         return [
-            'metrics' => $this->metrics,
-            'dimensions' => $this->dimensions,
+            'metrics'    => $this->metrics,
+            'dimensions' => $this->dimensions
         ];
     }
 

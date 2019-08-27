@@ -11,3 +11,4 @@ phpunit.xml
 yarn-error.log
 /webpack.mix.js
 .phpunit.result.cache
+*.code-workspace

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="bg-gray-800 text-white p-2 text-sm flex">
+        <div class="p-2 text-sm flex">
             <div class="flex-grow">
                 {{ widgetName }}
             </div>
@@ -10,41 +10,46 @@
                 </svg>
             </div>
         </div>
-        <bi-loader v-if="loading"></bi-loader>
-        <div v-else class="p-4 overflow-auto" style="height: 400px">
+        <bi-loader v-if="loading" style="height: 400px"></bi-loader>
+        <div v-else class=" overflow-auto" style="height: 400px">
+            <div class="p-4">
             <table class="w-full text-sm">
-                <tr>
+                <tr class="border-b">
                     <th
-                        v-for="dimension in meta.dimensions"
+                        v-for="dimension in extra.dimensions"
                         :key="dimension.key"
-                        class="text-left"
+                        class="text-left p-1 py-2"
                     >{{ dimension.name }}</th>
                     <th
-                        v-for="metric in meta.metrics"
+                        v-for="metric in extra.metrics"
                         :key="metric.key"
-                        class="text-left"
+                        class="text-left p-1 py-2"
                     >{{ metric.name }}</th>
                 </tr>
                 <tbody>
                     <tr
                         v-for="(row, i) in data"
                         :key="i"
+                        class="border-b last:border-b-0 hover:bg-gray-100"
                     >
                         <td
-                            v-for="dimension in meta.dimensions"
+                            v-for="dimension in extra.dimensions"
                             :key="dimension.key"
+                            class="p-1"
                         >
                             {{ row[dimension.key] }}
                         </td>
                         <td
-                            v-for="metric in meta.metrics"
+                            v-for="metric in extra.metrics"
                             :key="metric.key"
+                            class="p-1"
                         >
                             {{ row[metric.key] }}
                         </td>
                     </tr>
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
 </template>
@@ -60,7 +65,7 @@ export default {
         dashboardKey: String,
         widgetKey: String,
         widgetName: String,
-        meta: Object
+        extra: Object
     },
     data() {
         return {

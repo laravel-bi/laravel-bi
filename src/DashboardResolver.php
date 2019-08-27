@@ -12,7 +12,7 @@ class DashboardResolver
         $this->dashboards = collect();
         foreach (config('bi.dashboards', []) as $dashboardClass) {
             $dashboard = resolve($dashboardClass);
-            $this->dashboards->put($dashboard->uriKey(), $dashboard);
+            $this->dashboards->put($dashboard->uriKey, $dashboard);
         }
     }
 

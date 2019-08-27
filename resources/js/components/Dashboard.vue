@@ -6,13 +6,13 @@
                 :class="'w-' + widget.width"
                 v-for="widget in widgets" 
                 :key="widget.key">
-                <div class="m-2 bg-white border border-gray-500 shadow">
+                <div class="m-2 bg-white shadow">
                     <component 
                         :is="'bi-' + widget.component" 
                         :dashboardKey="dashboardKey"
                         :widgetKey="widget.key"
                         :widgetName="widget.name"
-                        :meta="widget.meta"
+                        :extra="widget.extra"
                     ></component>
                 </div>
             </div>

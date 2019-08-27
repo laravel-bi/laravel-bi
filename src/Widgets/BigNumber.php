@@ -2,25 +2,14 @@
 
 namespace LaravelBi\LaravelBi\Widgets;
 
-use LaravelBi\LaravelBi\Metric\BaseMetric;
-use LaravelBi\Dashboard;
+use Illuminate\Http\Request;
+use LaravelBi\LaravelBi\Dashboard;
 
 class BigNumber extends BaseWidget
 {
 
     protected $metric;
-    protected $model;
-
-    public function component()
-    {
-        return 'big-number';
-    }
-
-    public function model($model)
-    {
-        $this->model = $model;
-        return $this;
-    }
+    protected $component = 'big-number';
 
     public function metric($metric)
     {
@@ -28,14 +17,14 @@ class BigNumber extends BaseWidget
         return $this;
     }
 
-    public function data()
+    public function data(Dashboard $dashboard, Request $request)
     {
-        $builder = $this->model::query();
+        $builder = $this->getBaseBuilder($dashboard, $request);
         $builder = $this->metric->apply($builder, $this);
         return $builder->first();
     }
 
-    protected function getMeta() 
+    protected function extra()
     {
         return [
             'metric' => $this->metric

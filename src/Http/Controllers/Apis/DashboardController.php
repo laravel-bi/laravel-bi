@@ -12,12 +12,7 @@ class DashboardController extends BaseController
     {
         return [
             'status' => 200,
-            'data'   => $this->dashboardResolver->all()->values()->map(function (Dashboard $dashboard) {
-                return [
-                    'name'   => $dashboard->name(),
-                    'uriKey' => $dashboard->uriKey()
-                ];
-            })
+            'data'   => $this->dashboardResolver->all()->values()
         ];
     }
 
@@ -25,7 +20,7 @@ class DashboardController extends BaseController
     {
         return [
             'status' => 200,
-            'data'   => $dashboard->toArray()
+            'data'   => $dashboard
         ];
     }
 

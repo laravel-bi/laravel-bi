@@ -2,13 +2,11 @@
 
 namespace LaravelBi\LaravelBi;
 
-abstract class Dashboard
+abstract class Dashboard implements \JsonSerializable
 {
 
-    abstract public function uriKey();
-    abstract public function name();
-
     abstract public function widgets();
+    abstract public function filters();
 
     public function findWidgetOrFail($widgetKey)
     {
@@ -23,12 +21,13 @@ abstract class Dashboard
         return $widget;
     }
 
-    public function toArray()
+    public function jsonSerialize()
     {
         return [
-            'uriKey'  => $this->uriKey(),
-            'name'    => $this->name(),
-            'widgets' => $this->widgets()
+            'uriKey'  => $this->uriKey,
+            'name'    => $this->name,
+            'widgets' => $this->widgets(),
+            'filters' => $this->filters()
         ];
     }
 

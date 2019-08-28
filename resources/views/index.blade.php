@@ -20,12 +20,11 @@
             <bi-nav class="bg-gray-700 text-gray-400"></bi-nav>
             <div class="flex-grow">
                 <div class="w-full bg-black text-white h-header">
-                    <bi-filters></bi-filters>
                     <h1 class="p-3 text-xl uppercase">
-                        Laravel Bi
+                        Laravel Bi >> @{{ dashboardName }}
                     </h1>
                 </div>
-                <router-view class="p-4"></router-view>
+                <router-view :filters="filters":filters="filters"></router-view>
             </div>
         </div>
 

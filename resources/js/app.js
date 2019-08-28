@@ -35,7 +35,7 @@ import BigNumber from "./components/widgets/BigNumber.vue";
 import Table from "./components/widgets/Table.vue";
 import PartitionPie from "./components/widgets/PartitionPie.vue";
 
-import VueRangedatePicker from 'vue-rangedate-picker'
+import VCalendar from "v-calendar";
 
 Vue.component("bi-nav", Nav);
 Vue.component("bi-dashboard", Dashboard);
@@ -47,12 +47,29 @@ Vue.component("bi-big-number", BigNumber);
 Vue.component("bi-table", Table);
 Vue.component("bi-partition-pie", PartitionPie);
 
-Vue.component('date-picker', VueRangedatePicker);
+import "v-calendar/lib/v-calendar.min.css";
+
+Vue.use(VCalendar, {
+    firstDayOfWeek: 2
+});
+
+import EventBus from "./utils/EventBus.js";
 
 new Vue({
     el: "#laravel-bi",
     router,
+    data: {
+        dashboardName: "",
+        filters: {}
+    },
     mounted() {
         console.log("Laravel Bi started!");
+        EventBus.$on("dashboard-ready", ({ name }) => {
+            this.dashboardName = name;
+        });
+
+        EventBus.$on("filters-confirmed", filters => {
+            this.filters = filters;
+        });
     }
 });

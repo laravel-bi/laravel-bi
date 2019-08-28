@@ -23,12 +23,18 @@ export default {
         dashboardKey: String,
         widgetKey: String,
         widgetName: String,
-        extra: Object
+        extra: Object,
+        filters: Object
     },
     data() {
         return {
             number: ''
         };
+    },
+    watch: {
+        filters() {
+            this.fetchData()
+        }
     },
     mounted() {
         this.fetchData();

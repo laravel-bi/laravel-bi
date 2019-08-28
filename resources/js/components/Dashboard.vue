@@ -1,19 +1,22 @@
 <template>
     <div>
-        <h3 class="text-xl border-gray-800 border-b-4">{{ name }}</h3>
-        <div class="flex flex-wrap -mr-2 -ml-2">
-            <div 
-                :class="'w-' + widget.width"
-                v-for="widget in widgets" 
-                :key="widget.key">
-                <div class="m-2 bg-white shadow">
-                    <component 
-                        :is="'bi-' + widget.component" 
-                        :dashboardKey="dashboardKey"
-                        :widgetKey="widget.key"
-                        :widgetName="widget.name"
-                        :extra="widget.extra"
-                    ></component>
+        <bi-filters></bi-filters>
+        <div class="p-4">
+            <div class="flex flex-wrap -mr-2 -ml-2">
+                <div 
+                    :class="'w-' + widget.width"
+                    v-for="widget in widgets" 
+                    :key="widget.key">
+                    <div class="m-2 bg-white shadow">
+                        <component 
+                            :is="'bi-' + widget.component" 
+                            :dashboardKey="dashboardKey"
+                            :widgetKey="widget.key"
+                            :widgetName="widget.name"
+                            :extra="widget.extra"
+                            :filters="filters"
+                        ></component>
+                    </div>
                 </div>
             </div>
         </div>
@@ -21,6 +24,8 @@
 </template>
 
 <script>
+import EventBus from "../utils/EventBus.js";
+
 import api from "./mixins/api.js";
 import toasts from "./mixins/toasts.js";
 
@@ -28,7 +33,8 @@ export default {
     name: "bi-dashboard",
     mixins: [api, toasts],
     props: {
-        dashboardKey: String
+        dashboardKey: String,
+        filters: Object
     },
     data() {
         return {
@@ -47,8 +53,10 @@ export default {
             this.api(`${this.dashboardKey}/widgets`).then((response) => {
                 this.widgets = response.data.data.widgets;
                 this.name = response.data.data.name;
+                EventBus.$emit('dashboard-ready', {
+                    name: this.name
+                });
             });
-            return true;
         }
     }
 };

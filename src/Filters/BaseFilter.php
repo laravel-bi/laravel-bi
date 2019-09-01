@@ -11,7 +11,7 @@ abstract class BaseFilter implements Filter
     public $key;
     public $name;
 
-    abstract public function apply(Builder $builder, Request $request);
+    abstract public function apply(Builder $builder, $filterData, Request $request);
 
     public function __construct($key, $name)
     {

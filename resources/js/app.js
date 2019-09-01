@@ -35,6 +35,8 @@ import BigNumber from "./components/widgets/BigNumber.vue";
 import Table from "./components/widgets/Table.vue";
 import PartitionPie from "./components/widgets/PartitionPie.vue";
 
+import FilterDate from "./components/filters/Date.vue";
+
 import VCalendar from "v-calendar";
 
 Vue.component("bi-nav", Nav);
@@ -46,6 +48,8 @@ Vue.component("bi-filters", Filters);
 Vue.component("bi-big-number", BigNumber);
 Vue.component("bi-table", Table);
 Vue.component("bi-partition-pie", PartitionPie);
+
+Vue.component("bi-filter-date", FilterDate);
 
 import "v-calendar/lib/v-calendar.min.css";
 

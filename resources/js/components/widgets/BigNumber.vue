@@ -1,49 +1,32 @@
 <template>
     <div>
-        <div class="p-2 text-sm">
-            {{ widgetName }}
-        </div>
-        <div class="p-2 pt-0">
-            <div class="text-big-number text-green-900 font-condensed">{{ number }}</div>
-        </div>
+        <loading-widget
+            :loading="loading"
+            :widgetName="widgetName"
+            @refresh="fetchData"
+            widgetClass="h-widget-sm"
+        >
+            <div class="p-2 pt-0">
+                <div class="text-big-number text-green-900 font-condensed">{{ number }}</div>
+            </div>
+        </loading-widget>
     </div>
 </template>
 
 <script>
-import api from "../mixins/api.js";
-import toasts from "../mixins/toasts.js";
+import Widget from "./Widget.vue";
 
 export default {
     name: "bi-big-number",
-    mixins: [
-        api,
-        toasts
-    ],
-    props: {
-        dashboardKey: String,
-        widgetKey: String,
-        widgetName: String,
-        extra: Object,
-        filters: Object
-    },
+    extends: Widget,
     data() {
         return {
-            number: ''
+            number: ""
         };
     },
-    watch: {
-        filters() {
-            this.fetchData()
-        }
-    },
-    mounted() {
-        this.fetchData();
-    },
     methods: {
-        fetchData() {
-            this.api(`${this.dashboardKey}/${this.widgetKey}`).then((response) => {                
-                this.number = response.data.data[this.extra.metric.key];
-            });
+        onFetchData(response) {
+            this.number = response.data.data[this.extra.metric.key];
         }
     }
 };

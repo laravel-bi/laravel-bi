@@ -1,10 +1,10 @@
 <template>
-    <div class="bg-gray-800 relative w-nav" :class="{'w-closed-nav': collapsed}">
+    <div class="bg-gray-nav relative w-nav" :class="{'w-closed-nav': collapsed}">
         <div class="p-4 pt-3 bg-indigo-600 text-gray-800 hover:bg-indigo-400 hover:text-white cursor-pointer h-header" @click="collapsed=!collapsed">
             <i class="fas fa-bars text-sm text-center"></i>
         </div>
         <ul>
-            <li v-for="dashboard in dashboards" v-bind:key="dashboard.uriKey" class="text-white hover:bg-gray-700">
+            <li v-for="dashboard in dashboards" v-bind:key="dashboard.uriKey" class="text-white hover:bg-gray-active">
                 <router-link :to="'/' + dashboard.uriKey" class="text-sm block p-4 my-1">
                     <i class="fas fa-tachometer-alt text-sm"></i>
                     <span v-if="!collapsed" class="ml-1">{{ dashboard.name }}</span>

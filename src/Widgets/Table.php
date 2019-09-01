@@ -12,11 +12,6 @@ class Table extends BaseWidget
     protected $dimensions;
     protected $component = 'table';
 
-    public function component()
-    {
-        return 'table';
-    }
-
     public function metrics($metrics)
     {
         $this->metrics = $metrics;

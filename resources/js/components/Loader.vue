@@ -4,7 +4,7 @@
             width="44"
             height="44"
             viewBox="0 0 44 44"
-            class="fill-current mx-auto my-4"
+            class="fill-current"
             stroke="#2d3748"
         >
             <g

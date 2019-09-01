@@ -1,6 +1,7 @@
 <template>
     <div>
-        <bi-filters></bi-filters>
+        <bi-filters 
+            v-if="filtersConfig.length" :filtersConfig="filtersConfig"></bi-filters>
         <div class="p-4">
             <div class="flex flex-wrap -mr-2 -ml-2">
                 <div 
@@ -39,6 +40,7 @@ export default {
     data() {
         return {
             name: '',
+            filtersConfig: [],
             widgets: []
         }
     },
@@ -53,6 +55,7 @@ export default {
             this.api(`${this.dashboardKey}/widgets`).then((response) => {
                 this.widgets = response.data.data.widgets;
                 this.name = response.data.data.name;
+                this.filtersConfig = response.data.data.filters;
                 EventBus.$emit('dashboard-ready', {
                     name: this.name
                 });

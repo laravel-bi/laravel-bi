@@ -39,8 +39,12 @@ abstract class BaseWidget implements \JsonSerializable, Widget
 
     protected function getBaseBuilder(Dashboard $dashboard, Request $request): Builder
     {
-        return collect($dashboard->filters())->reduce(function (Builder $builder, $filter) use ($request) {
-            return $filter->apply($builder, $request);
+        $requestedFilters = $request->input('filters');
+        return collect($dashboard->filters())->reduce(function (Builder $builder, $filter) use ($request, $requestedFilters) {
+            if(isset($requestedFilters[$filter->key])) {
+                return $filter->apply($builder, $requestedFilters[$filter->key], $request);
+            }
+            return $builder;
         }, $dashboard->model::query());
     }
 

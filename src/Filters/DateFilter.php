@@ -9,8 +9,10 @@ use Illuminate\Http\Request;
 class DateFilter extends BaseFilter
 {
 
-    public function apply(Builder $builder, Request $request)
+    public $component = 'date';
+
+    public function apply(Builder $builder, $filterData, Request $request)
     {
-        return $builder->whereBetween($this->key, [Carbon::today()->subMonths(3), Carbon::today()->subMonths(2)]);
+        return $builder->whereBetween($this->key, [$filterData['start'], $filterData['end']]);
     }
 }

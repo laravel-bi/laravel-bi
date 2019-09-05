@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.multiselect { @apply min-h-0 !important; }
+.multiselect_select { height: 28px !important; }
+.multiselect__tags { @apply rounded-none !important; min-height: 30px !important; padding-top: 4px !important; }
+.multiselect__tag { @apply text-xs !important; }
+.multiselect__tag { @apply bg-gray-200 text-gray-800 !important; }
+.multiselect__tag-icon { @apply bg-gray-200 !important; }
+.multiselect__tag-icon::after { @apply text-gray-800 !important; }
+.multiselect__tag-icon:hover { @apply bg-gray-500 text-white !important; }
+.multiselect__tag-icon::after:hover { @apply text-white !important; }
+.multiselect__single { @apply text-xs !important; }
+.multiselect__input { @apply text-xs !important; }
+.multiselect__placeholder { @apply text-xs !important; }
+.multiselect__option { @apply text-xs py-2 px-4 min-h-0 !important; }
+.multiselect__option--highlight { @apply bg-gray-200 text-gray-800 !important; }
+.multiselect__option--highlight::after { @apply bg-gray-200 text-gray-800 !important; line-height: 32px !important; }
+
+.c-arrow { width: 20px !important; height: 20px !important; }
+.c-title { @apply text-sm !important; }
+.c-weekdays { @apply text-xs !important; }
+.c-day-content { @apply text-xs !important; height: 1rem !important; }

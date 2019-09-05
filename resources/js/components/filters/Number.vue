@@ -30,14 +30,14 @@
             v-if="active"
         >
             <div class=mb-2>
-                <!-- <multiselect
+                <multiselect
                     v-model="internalValue.operator"
                     :options="options"
                     placeholder="Select an operator"
-                ></multiselect> -->
-                
-                <!-- <input type="value" v-model="internalValue.values[0]">
-                <input type="value" v-model="internalValue.values[1]" v-if="internalValue.operator == 'between'"> -->
+                ></multiselect>
+
+                <input type="text" v-model="internalValue.values[0]">
+                <input type="text" v-model="internalValue.values[1]" v-if="internalValue.operator == 'between'">
             </div>
 
             <div class="flex">
@@ -81,7 +81,11 @@ export default {
     mounted() {
         this.options = [
             '>', '>=', '<', '<=', 'between'
-        ]
+        ];
+        this.internalValue = this.internalValue || {
+            operator: null,
+            values: [null,null]
+        };
     }
 };
 </script>

@@ -7,7 +7,11 @@
             widgetClass="h-widget-sm"
         >
             <div class="p-2 pt-0">
-                <pie-chart ref="chart" :styles="{'height': '100px'}" :options="options"></pie-chart>
+                <pie-chart
+                    ref="chart"
+                    :styles="{'height': '100px'}"
+                    :options="options"
+                ></pie-chart>
             </div>
         </loading-widget>
     </div>
@@ -15,10 +19,12 @@
 
 <script>
 import { Pie } from "vue-chartjs";
+import colors from "randomcolor";
+
 import Widget from "./Widget.vue";
 
 export default {
-    name: 'partition-pie',
+    name: "partition-pie",
     components: {
         "pie-chart": Pie
     },
@@ -29,13 +35,15 @@ export default {
                 responsive: true,
                 maintainAspectRatio: false,
                 legend: {
-                    position: 'right'
+                    position: "right"
                 }
             }
         };
     },
     methods: {
         onFetchData(response) {
+
+            
             const labels = response.data.data.map(item => {
                 return item[this.extra.dimension.key];
             });
@@ -49,7 +57,11 @@ export default {
                         labels,
                         datasets: [
                             {
-                                backgroundColor: ["red", "yellow"],
+                                backgroundColor: colors({
+                                    count: data.length,
+                                    luminosity: "bright",
+                                    format: "rgb" 
+                                }),
                                 data
                             }
                         ]

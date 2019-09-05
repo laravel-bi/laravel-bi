@@ -12505,6 +12505,63 @@ video {
   z-index: auto;
 }
 
+.multiselect { min-height: 0 !important;
+}
+
+.multiselect_select { height: 28px !important;
+}
+
+.multiselect__tags { border-radius: 0 !important; min-height: 30px !important; padding-top: 4px !important;
+}
+
+.multiselect__tag { font-size: 0.75rem !important;
+}
+
+.multiselect__tag { background-color: #edf2f7 !important; color: #222 !important;
+}
+
+.multiselect__tag-icon { background-color: #edf2f7 !important;
+}
+
+.multiselect__tag-icon::after { color: #222 !important;
+}
+
+.multiselect__tag-icon:hover { background-color: #a0aec0 !important; color: #fff !important;
+}
+
+.multiselect__tag-icon::after:hover { color: #fff !important;
+}
+
+.multiselect__single { font-size: 0.75rem !important;
+}
+
+.multiselect__input { font-size: 0.75rem !important;
+}
+
+.multiselect__placeholder { font-size: 0.75rem !important;
+}
+
+.multiselect__option { font-size: 0.75rem !important; padding-top: 0.5rem !important; padding-bottom: 0.5rem !important; padding-left: 1rem !important; padding-right: 1rem !important; min-height: 0 !important;
+}
+
+.multiselect__option--highlight { background-color: #edf2f7 !important; color: #222 !important;
+}
+
+.multiselect__option--highlight::after { background-color: #edf2f7 !important; color: #222 !important; line-height: 32px !important;
+}
+
+.c-arrow { width: 20px !important; height: 20px !important;
+}
+
+.c-title { font-size: 0.875rem !important;
+}
+
+.c-weekdays { font-size: 0.75rem !important;
+}
+
+.c-day-content { font-size: 0.75rem !important; height: 1rem !important;
+}
+
 @media (min-width: 640px) {
   .sm\:sr-only {
     position: absolute;

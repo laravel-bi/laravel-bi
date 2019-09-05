@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "momentjs": "^2.0.0",
+    "randomcolor": "^0.5.4",
     "vue-multiselect": "^2.1.6"
   }
 }

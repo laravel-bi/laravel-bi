@@ -2,7 +2,6 @@
 
 namespace LaravelBi\LaravelBi\Filters;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
@@ -11,8 +10,8 @@ class DateFilter extends BaseFilter
 
     public $component = 'date';
 
-    public function apply(Builder $builder, $filterData, Request $request)
+    public function apply(Builder $builder, array $filterData, Request $request): Builder
     {
-        return $builder->whereBetween($this->key, [$filterData['start'], $filterData['end']]);
+        return $builder->whereBetween($this->column, [$filterData['start'], $filterData['end']]);
     }
 }

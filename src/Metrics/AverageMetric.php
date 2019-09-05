@@ -11,7 +11,7 @@ class AverageMetric extends BaseMetric
 
     public function apply(Builder $builder, $widget)
     {
-        return $builder->addSelect(DB::raw('AVG(' . $this->key . ') as `' . $this->key . '`'));
+        return $builder->addSelect(DB::raw('AVG(' . $this->column . ') as `' . $this->key . '`'));
     }
 
 }

@@ -12,10 +12,16 @@
         >
             <i class="fas fa-calendar"></i>
             <span v-if="internalValue == null">
-                Select a date interval
+                Select a {{ filterConfig.name }}
             </span>
             <span v-else>
-                Date interval: {{ startDate }} - {{ endDate }}
+                {{ filterConfig.name }}:
+                <!-- <span
+                    v-for="(value, i) in internalValue"
+                    :key="value"
+                >
+                    {{ value }}<span v-if="i !== internalValue.length -1">,</span>
+                </span> -->
             </span>
         </a>
 
@@ -24,11 +30,14 @@
             v-if="active"
         >
             <div class=mb-2>
-                <v-date-picker
-                    mode='range'
-                    v-model="internalValue"
-                    is-inline
-                ></v-date-picker>
+                <!-- <multiselect
+                    v-model="internalValue.operator"
+                    :options="options"
+                    placeholder="Select an operator"
+                ></multiselect> -->
+                
+                <!-- <input type="value" v-model="internalValue.values[0]">
+                <input type="value" v-model="internalValue.values[1]" v-if="internalValue.operator == 'between'"> -->
             </div>
 
             <div class="flex">
@@ -52,33 +61,29 @@
 </template>
 
 <script>
-import moment from "moment";
+import api from "../mixins/api.js";
+import toasts from "../mixins/toasts.js";
 
 import Filter from "./Filter.vue";
 
+import Multiselect from "vue-multiselect";
+
 export default {
-    name: "bi-filter-date",
+    name: "bi-filter-string",
+    mixins: [api, toasts],
     extends: Filter,
     props: {
         value: Object
     },
-    computed: {
-        startDate() {
-            if (this.internalValue == null) {
-                return null;
-            }
-            return moment(new Date(this.internalValue.start)).format(
-                "YYYY-MM-DD"
-            );
-        },
-        endDate() {
-            if (this.internalValue == null) {
-                return null;
-            }
-            return moment(new Date(this.internalValue.end)).format(
-                "YYYY-MM-DD"
-            );
-        }
+    components: {
+        Multiselect
+    },
+    mounted() {
+        this.options = [
+            '>', '>=', '<', '<=', 'between'
+        ]
     }
 };
 </script>
+
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>

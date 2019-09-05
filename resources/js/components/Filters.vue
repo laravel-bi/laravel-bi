@@ -1,26 +1,21 @@
 <template>
     <div class="bg-white text-right text-gray-600 text-xs p-2 shadow relative">
 
-        <div
+        <span
             v-for="filter in filtersConfig"
             v-bind:key="filter.key"
         >
 
             <component
                 :is="'bi-filter-' + filter.component"
+                :ref="'filter-' + filter.key"
                 v-model="filters[filter.key]"
+                :filter-config="filter"
+                :dashboardKey="dashboardKey"
+                @activated="closeOthers"
             ></component>
 
-        </div>
-
-        <!-- <a href="#">
-            <i class="fas fa-calendar text-gray-600"></i>
-            Select a blog
-        </a> -->
-
-        <div v-if="activeFilter == 'published_at'">
-
-        </div>
+        </span>
 
     </div>
 </template>
@@ -32,11 +27,11 @@ import EventBus from "../utils/EventBus.js";
 export default {
     name: "filters",
     props: {
-        filtersConfig: Array
+        filtersConfig: Array,
+        dashboardKey: null
     },
     data() {
         return {
-            activeFilter: null,
             filters: {}
         };
     },
@@ -51,6 +46,15 @@ export default {
                 EventBus.$emit("filters-confirmed", this.filters);
             });
         });
+    },
+    methods: {
+        closeOthers(filterKey) {
+            Object.keys(this.$refs).filter(filter => {
+                return filter != `filter-${filterKey}`;
+            }).forEach(filter => {
+                this.$refs[filter][0].active = false;
+            });
+        }
     }
 };
 </script>

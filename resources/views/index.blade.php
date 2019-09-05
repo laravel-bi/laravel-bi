@@ -24,7 +24,7 @@
                         Laravel Bi >> @{{ dashboardName }}
                     </h1>
                 </div>
-                <router-view :filters="filters":filters="filters"></router-view>
+                <router-view :filters="filters" :filters-flag="filtersFlag"></router-view>
             </div>
         </div>
 

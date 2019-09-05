@@ -5,32 +5,30 @@ namespace LaravelBi\LaravelBi\Widgets;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use LaravelBi\LaravelBi\Dashboard;
+use LaravelBi\LaravelBi\Dimensions\Dimension;
 
-class Table extends BaseWidget
+class LineChart extends BaseWidget
 {
-
     protected $metrics;
-    protected $dimensions;
-    protected $component = 'table';
+    protected $dimension;
+    protected $component = 'line-chart';
 
-    public function metrics(array $metrics): Table
+    public function metrics(array $metrics): self
     {
         $this->metrics = $metrics;
         return $this;
     }
 
-    public function dimensions(array $dimensions): Table
+    public function dimension(Dimension $dimension): self
     {
-        $this->dimensions = $dimensions;
+        $this->dimension = $dimension;
         return $this;
     }
 
     public function data(Dashboard $dashboard, Request $request): Collection
     {
         $builder = $this->getBaseBuilder($dashboard, $request);
-        $builder = collect($this->dimensions)->reduce(function ($builder, $dimension) {
-            return $dimension->apply($builder, $this);
-        }, $builder);
+        $builder = $this->dimension->apply($builder, $this);
         $builder = collect($this->metrics)->reduce(function ($builder, $metric) {
             return $metric->apply($builder, $this);
         }, $builder);
@@ -40,8 +38,8 @@ class Table extends BaseWidget
     protected function extra()
     {
         return [
-            'metrics'    => $this->metrics,
-            'dimensions' => $this->dimensions
+            'metrics'   => $this->metrics,
+            'dimension' => $this->dimension
         ];
     }
 

@@ -15,7 +15,8 @@ export default {
         widgetKey: String,
         widgetName: String,
         extra: Object,
-        filters: Object
+        filters: Object,
+        filtersFlag: Number
     },
     data() {
         return {
@@ -23,7 +24,7 @@ export default {
         };
     },
     watch: {
-        filters() {
+        filtersFlag() {
             this.fetchData();
         }
     },
@@ -34,8 +35,8 @@ export default {
         fetchData() {
             this.loading = true;
             const startTime = new Date().getTime();
-            this.api(`${this.dashboardKey}/${this.widgetKey}`, {
-                filters: this.filters
+            this.api(`${this.dashboardKey}/widgets/${this.widgetKey}`, {
+                filters: this.getRequestFilters()
             }).then(response => {
                 const endTime = new Date().getTime();
                 const diffTime = endTime - startTime;
@@ -49,6 +50,14 @@ export default {
                     }, 2000 - diffTime);
                 }
             });
+        },
+        getRequestFilters() {
+            return Object.keys(this.filters).reduce((carry, key) => {
+                if (this.filters[key]) {
+                    carry[key] = this.filters[key];
+                }
+                return carry;
+            }, {});
         }
     }
 };

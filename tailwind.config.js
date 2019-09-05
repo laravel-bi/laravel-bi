@@ -26,7 +26,9 @@ module.exports = {
                 "widget-sm": 100,
                 "widget-md": 250,
                 "widget-lg": 400,
-                header: 50,
+                header: 50
+            },
+            width: {
                 nav: 200,
                 "closed-nav": 50
             }

@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-gray-nav relative w-nav" :class="{'w-closed-nav': collapsed}">
+    <div class="bg-gray-nav relative w-nav flex-shrink-0" :class="{'w-closed-nav': collapsed}">
         <div class="p-4 pt-3 bg-indigo-600 text-gray-800 hover:bg-indigo-400 hover:text-white cursor-pointer h-header" @click="collapsed=!collapsed">
             <i class="fas fa-bars text-sm text-center"></i>
         </div>

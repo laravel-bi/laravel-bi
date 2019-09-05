@@ -11,7 +11,7 @@ class SumMetric extends BaseMetric
 
     public function apply(Builder $builder, $widget)
     {
-        return $builder->addSelect(DB::raw('SUM(' . $this->key . ') as `' . $this->key . '`'));
+        return $builder->addSelect(DB::raw('SUM(' . $this->column . ') as `' . $this->key . '`'));
     }
 
 }

@@ -12535,10 +12535,10 @@ video {
 .multiselect__single { font-size: 0.75rem !important;
 }
 
-.multiselect__input { font-size: 0.75rem !important;
+.multiselect__input { font-size: 0.75rem !important; padding-top: 2px !important; padding-left: 2px !important;
 }
 
-.multiselect__placeholder { font-size: 0.75rem !important;
+.multiselect__placeholder { font-size: 0.75rem !important; padding-top: 2px !important; padding-left: 2px !important;
 }
 
 .multiselect__option { font-size: 0.75rem !important; padding-top: 0.5rem !important; padding-bottom: 0.5rem !important; padding-left: 1rem !important; padding-right: 1rem !important; min-height: 0 !important;
@@ -12550,6 +12550,9 @@ video {
 .multiselect__option--highlight::after { background-color: #edf2f7 !important; color: #222 !important; line-height: 32px !important;
 }
 
+.c-pane-container { font-family: Noto Sans TC, sans-serif !important;
+}
+
 .c-arrow { width: 20px !important; height: 20px !important;
 }
 
@@ -12559,7 +12562,13 @@ video {
 .c-weekdays { font-size: 0.75rem !important;
 }
 
-.c-day-content { font-size: 0.75rem !important; height: 1rem !important;
+.c-day-content { font-size: 0.75rem !important; height: 25px !important; width: 25px !important;
+}
+
+.c-pane { min-width: 0 !important; width: 200px;
+}
+
+.c-table-cell { font-size: 0.75rem !important;
 }
 
 @media (min-width: 640px) {

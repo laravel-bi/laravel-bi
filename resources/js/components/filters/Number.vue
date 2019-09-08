@@ -11,17 +11,12 @@
             @click="active = true"
         >
             <i class="fas fa-calendar"></i>
-            <span v-if="internalValue == null">
+            <span v-if="internalValue == null || internalValue.operator == null">
                 Select a {{ filterConfig.name }}
             </span>
             <span v-else>
                 {{ filterConfig.name }}:
-                <!-- <span
-                    v-for="(value, i) in internalValue"
-                    :key="value"
-                >
-                    {{ value }}<span v-if="i !== internalValue.length -1">,</span>
-                </span> -->
+                {{ label }}
             </span>
         </a>
 
@@ -29,15 +24,19 @@
             class="absolute top-0 right-0 bg-white mt-8 p-4 shadow z-10"
             v-if="active"
         >
-            <div class=mb-2>
+            <div class="mb-2 flex">
                 <multiselect
                     v-model="internalValue.operator"
                     :options="options"
-                    placeholder="Select an operator"
+                    placeholder="Operator"
+                    :selectLabel="null"
+                    :deselectLabel="null"
+                    :selectedLabel="null"
                 ></multiselect>
 
-                <input type="text" v-model="internalValue.values[0]">
-                <input type="text" v-model="internalValue.values[1]" v-if="internalValue.operator == 'between'">
+                <input type="text" v-model="internalValue.values[0]" class="w-20 border ml-2 px-2">
+                <span v-if="internalValue.operator == 'between'" class="ml-2">and</span>
+                <input type="text" v-model="internalValue.values[1]" class="w-20 border ml-2 px-2" v-if="internalValue.operator == 'between'">
             </div>
 
             <div class="flex">
@@ -69,7 +68,7 @@ import Filter from "./Filter.vue";
 import Multiselect from "vue-multiselect";
 
 export default {
-    name: "bi-filter-string",
+    name: "bi-filter-number",
     mixins: [api, toasts],
     extends: Filter,
     props: {
@@ -78,11 +77,23 @@ export default {
     components: {
         Multiselect
     },
+    computed: {
+        label() {
+            try {
+                if(this.internalValue.operator == 'between') {
+                    return `Between ${this.internalValue.values[0] || ''} and ${this.internalValue.values[1]  || ''}`;
+                };
+                return `${this.internalValue.operator} ${this.internalValue.values[0]  || ''}`
+            } catch(error) {
+                return '';
+            }
+        }
+    },
     mounted() {
         this.options = [
             '>', '>=', '<', '<=', 'between'
         ];
-        this.internalValue = this.internalValue || {
+        this.internalValue = this.value || {
             operator: null,
             values: [null,null]
         };

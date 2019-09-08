@@ -14,9 +14,9 @@ class NumberFilter extends BaseFilter
     public function apply(Builder $builder, array $filterData, Request $request): Builder
     {
         if ($filterData['operator'] == 'between') {
-            return $builder->whereBetween($this->column, $filterData['value'][0], $filterData['value'][1]);
+            return $builder->whereBetween($this->column, $filterData['values'][0], $filterData['values'][1]);
         } else {
-            return $builder->where($this->column, $filterData['operator'], $filterData['value'][0]);
+            return $builder->where($this->column, $filterData['operator'], $filterData['values'][0]);
         }
     }
 

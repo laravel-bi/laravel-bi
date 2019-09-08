@@ -25,6 +25,8 @@
         >
             <div class=mb-2>
                 <v-date-picker
+                    is-expanded
+                    :show-day-popover="false"
                     mode='range'
                     v-model="internalValue"
                     is-inline

@@ -11,14 +11,17 @@
 .multiselect__tag-icon::after { @apply text-gray-800 !important; }
 .multiselect__tag-icon:hover { @apply bg-gray-500 text-white !important; }
 .multiselect__tag-icon::after:hover { @apply text-white !important; }
-.multiselect__single { @apply text-xs !important; }
-.multiselect__input { @apply text-xs !important; }
-.multiselect__placeholder { @apply text-xs !important; }
+.multiselect__single { @apply text-xs !important;  }
+.multiselect__input { @apply text-xs !important; padding-top: 2px !important; padding-left: 2px !important; }
+.multiselect__placeholder { @apply text-xs !important; padding-top: 2px !important; padding-left: 2px !important; }
 .multiselect__option { @apply text-xs py-2 px-4 min-h-0 !important; }
 .multiselect__option--highlight { @apply bg-gray-200 text-gray-800 !important; }
 .multiselect__option--highlight::after { @apply bg-gray-200 text-gray-800 !important; line-height: 32px !important; }
 
+.c-pane-container { @apply font-noto !important; }
 .c-arrow { width: 20px !important; height: 20px !important; }
 .c-title { @apply text-sm !important; }
 .c-weekdays { @apply text-xs !important; }
-.c-day-content { @apply text-xs !important; height: 1rem !important; }
+.c-day-content { @apply text-xs !important; height: 25px !important; width: 25px !important;}
+.c-pane { @apply min-w-0 !important; width: 200px; }
+.c-table-cell { @apply text-xs !important;}

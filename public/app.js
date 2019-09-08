@@ -2151,6 +2151,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2302,13 +2304,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "bi-filter-string",
+  name: "bi-filter-number",
   mixins: [_mixins_api_js__WEBPACK_IMPORTED_MODULE_0__["default"], _mixins_toasts_js__WEBPACK_IMPORTED_MODULE_1__["default"]],
   "extends": _Filter_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
   props: {
@@ -2317,9 +2318,23 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_3___default.a
   },
+  computed: {
+    label: function label() {
+      try {
+        if (this.internalValue.operator == 'between') {
+          return "Between ".concat(this.internalValue.values[0] || '', " and ").concat(this.internalValue.values[1] || '');
+        }
+
+        ;
+        return "".concat(this.internalValue.operator, " ").concat(this.internalValue.values[0] || '');
+      } catch (error) {
+        return '';
+      }
+    }
+  },
   mounted: function mounted() {
     this.options = ['>', '>=', '<', '<=', 'between'];
-    this.internalValue = this.internalValue || {
+    this.internalValue = this.value || {
       operator: null,
       values: [null, null]
     };
@@ -38380,7 +38395,12 @@ var render = function() {
               { staticClass: "mb-2" },
               [
                 _c("v-date-picker", {
-                  attrs: { mode: "range", "is-inline": "" },
+                  attrs: {
+                    "is-expanded": "",
+                    "show-day-popover": false,
+                    mode: "range",
+                    "is-inline": ""
+                  },
                   model: {
                     value: _vm.internalValue,
                     callback: function($$v) {
@@ -38469,7 +38489,7 @@ var render = function() {
       [
         _c("i", { staticClass: "fas fa-calendar" }),
         _vm._v(" "),
-        _vm.internalValue == null
+        _vm.internalValue == null || _vm.internalValue.operator == null
           ? _c("span", [
               _vm._v(
                 "\n            Select a " +
@@ -38481,7 +38501,9 @@ var render = function() {
               _vm._v(
                 "\n            " +
                   _vm._s(_vm.filterConfig.name) +
-                  ":\n            "
+                  ":\n            " +
+                  _vm._s(_vm.label) +
+                  "\n        "
               )
             ])
       ]
@@ -38496,12 +38518,15 @@ var render = function() {
           [
             _c(
               "div",
-              { staticClass: "mb-2" },
+              { staticClass: "mb-2 flex" },
               [
                 _c("multiselect", {
                   attrs: {
                     options: _vm.options,
-                    placeholder: "Select an operator"
+                    placeholder: "Operator",
+                    selectLabel: null,
+                    deselectLabel: null,
+                    selectedLabel: null
                   },
                   model: {
                     value: _vm.internalValue.operator,
@@ -38521,6 +38546,7 @@ var render = function() {
                       expression: "internalValue.values[0]"
                     }
                   ],
+                  staticClass: "w-20 border ml-2 px-2",
                   attrs: { type: "text" },
                   domProps: { value: _vm.internalValue.values[0] },
                   on: {
@@ -38534,6 +38560,10 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _vm.internalValue.operator == "between"
+                  ? _c("span", { staticClass: "ml-2" }, [_vm._v("and")])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.internalValue.operator == "between"
                   ? _c("input", {
                       directives: [
                         {
@@ -38543,6 +38573,7 @@ var render = function() {
                           expression: "internalValue.values[1]"
                         }
                       ],
+                      staticClass: "w-20 border ml-2 px-2",
                       attrs: { type: "text" },
                       domProps: { value: _vm.internalValue.values[1] },
                       on: {

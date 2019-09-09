@@ -32,12 +32,15 @@ export default {
         this.fetchData();
     },
     methods: {
+        fetchParams() {
+            return {
+                filters: this.fetchFiltersParam()
+            }
+        },
         fetchData() {
             this.loading = true;
             const startTime = new Date().getTime();
-            this.api(`${this.dashboardKey}/widgets/${this.widgetKey}`, {
-                filters: this.getRequestFilters()
-            }).then(response => {
+            this.api(`${this.dashboardKey}/widgets/${this.widgetKey}`, this.fetchParams()).then(response => {
                 const endTime = new Date().getTime();
                 const diffTime = endTime - startTime;
                 if (diffTime > 2000) {
@@ -51,7 +54,7 @@ export default {
                 }
             });
         },
-        getRequestFilters() {
+        fetchFiltersParam() {
             return Object.keys(this.filters).reduce((carry, key) => {
                 if (this.filters[key]) {
                     carry[key] = this.filters[key];

@@ -12,13 +12,33 @@
                         <th
                             v-for="dimension in extra.dimensions"
                             :key="dimension.key"
-                            class="text-left p-1 py-2 uppercase text-gray-600 text-xs"
-                        >{{ dimension.name }}</th>
+                            class="text-left p-1 py-2 uppercase text-gray-600 text-xs cursor-pointer"
+                            @click="changeSort(dimension.key)"
+                        >{{ dimension.name }}
+                            <i
+                                v-if="sort.col == dimension.key && sort.dir == 'asc'"
+                                class="fas fa-sort-up"
+                            ></i>
+                            <i
+                                v-if="sort.col == dimension.key && sort.dir == 'desc'"
+                                class="fas fa-sort-down"
+                            ></i>
+                        </th>
                         <th
                             v-for="metric in extra.metrics"
                             :key="metric.key"
-                            class="text-left p-1 py-2 uppercase text-gray-600 text-xs"
-                        >{{ metric.name }}</th>
+                            class="text-left p-1 py-2 uppercase text-gray-600 text-xs cursor-pointer"
+                            @click="changeSort(metric.key)"
+                        >{{ metric.name }}
+                            <i
+                                v-if="sort.col == metric.key && sort.dir == 'asc'"
+                                class="fas fa-sort-up"
+                            ></i>
+                            <i
+                                v-if="sort.col == metric.key && sort.dir == 'desc'"
+                                class="fas fa-sort-down"
+                            ></i>
+                        </th>
                     </tr>
                     <tbody>
                         <tr
@@ -57,12 +77,33 @@ export default {
     data() {
         return {
             data: [],
-            loading: true
+            sort: {
+                col: null,
+                dir: "asc"
+            }
         };
     },
+    mounted() {
+        this.sort.col = this.extra.dimensions[0].key;
+    },
     methods: {
+        fetchParams() {
+            return {
+                filters: this.fetchFiltersParam(),
+                sort: this.sort
+            };
+        },
         onFetchData(response) {
             this.data = response.data.data;
+        },
+        changeSort(key) {
+            if (this.sort.col == key) {
+                this.sort.dir = this.sort.dir == "asc" ? "desc" : "asc";
+            } else {
+                this.sort.col = key;
+                this.sort.dir = "asc";
+            }
+            this.fetchData();
         }
     }
 };

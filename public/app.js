@@ -2788,6 +2788,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "bi-table",
@@ -2795,12 +2815,34 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       data: [],
-      loading: true
+      sort: {
+        col: null,
+        dir: "asc"
+      }
     };
   },
+  mounted: function mounted() {
+    this.sort.col = this.extra.dimensions[0].key;
+  },
   methods: {
+    fetchParams: function fetchParams() {
+      return {
+        filters: this.fetchFiltersParam(),
+        sort: this.sort
+      };
+    },
     onFetchData: function onFetchData(response) {
       this.data = response.data.data;
+    },
+    changeSort: function changeSort(key) {
+      if (this.sort.col == key) {
+        this.sort.dir = this.sort.dir == "asc" ? "desc" : "asc";
+      } else {
+        this.sort.col = key;
+        this.sort.dir = "asc";
+      }
+
+      this.fetchData();
     }
   }
 });
@@ -2850,14 +2892,17 @@ __webpack_require__.r(__webpack_exports__);
     this.fetchData();
   },
   methods: {
+    fetchParams: function fetchParams() {
+      return {
+        filters: this.fetchFiltersParam()
+      };
+    },
     fetchData: function fetchData() {
       var _this = this;
 
       this.loading = true;
       var startTime = new Date().getTime();
-      this.api("".concat(this.dashboardKey, "/widgets/").concat(this.widgetKey), {
-        filters: this.getRequestFilters()
-      }).then(function (response) {
+      this.api("".concat(this.dashboardKey, "/widgets/").concat(this.widgetKey), this.fetchParams()).then(function (response) {
         var endTime = new Date().getTime();
         var diffTime = endTime - startTime;
 
@@ -2874,7 +2919,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    getRequestFilters: function getRequestFilters() {
+    fetchFiltersParam: function fetchFiltersParam() {
       var _this2 = this;
 
       return Object.keys(this.filters).reduce(function (carry, key) {
@@ -38912,50 +38957,55 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "relative" }, [
-    _c("div", { staticClass: "p-2 text-sm flex" }, [
-      _c("div", { staticClass: "flex-grow" }, [
-        _c("span", { staticClass: "font-bold" }, [
-          _vm._v(_vm._s(_vm.widgetName))
-        ])
+  return _c(
+    "div",
+    { staticClass: "relative", class: { "cursor-wait": _vm.internalLoading } },
+    [
+      _c("div", { staticClass: "p-2 text-sm flex" }, [
+        _c("div", { staticClass: "flex-grow" }, [
+          _c("span", { staticClass: "font-bold" }, [
+            _vm._v(_vm._s(_vm.widgetName))
+          ])
+        ]),
+        _vm._v(" "),
+        !_vm.internalLoading
+          ? _c("div", [
+              _c("i", {
+                staticClass: "fas fa-sync cursor-pointer text-gray-600",
+                on: { click: _vm.refresh }
+              }),
+              _vm._v(" "),
+              _c("i", {
+                staticClass:
+                  "fas fa-download cursor-pointer text-gray-600 ml-2",
+                on: { click: _vm.refresh }
+              })
+            ])
+          : _vm._e()
       ]),
       _vm._v(" "),
-      !_vm.internalLoading
-        ? _c("div", [
-            _c("i", {
-              staticClass: "fas fa-sync cursor-pointer text-gray-600",
-              on: { click: _vm.refresh }
-            }),
-            _vm._v(" "),
-            _c("i", {
-              staticClass: "fas fa-download cursor-pointer text-gray-600 ml-2",
-              on: { click: _vm.refresh }
-            })
-          ])
-        : _vm._e()
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { class: _vm.widgetClass },
-      [
-        _vm.internalLoading
-          ? _c("bi-loader", {
-              staticClass: "absolute",
-              staticStyle: {
-                top: "50%",
-                right: "50%",
-                "margin-top": "-22px",
-                "margin-left": "-22px"
-              }
-            })
-          : _vm._e(),
-        _vm._v(" "),
-        !_vm.internalLoading ? _c("div", [_vm._t("default")], 2) : _vm._e()
-      ],
-      1
-    )
-  ])
+      _c(
+        "div",
+        { class: _vm.widgetClass },
+        [
+          _vm.internalLoading
+            ? _c("bi-loader", {
+                staticClass: "absolute",
+                staticStyle: {
+                  top: "50%",
+                  right: "50%",
+                  "margin-top": "-22px",
+                  "margin-left": "-22px"
+                }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.internalLoading ? _c("div", [_vm._t("default")], 2) : _vm._e()
+        ],
+        1
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -39058,9 +39108,25 @@ var render = function() {
                       {
                         key: dimension.key,
                         staticClass:
-                          "text-left p-1 py-2 uppercase text-gray-600 text-xs"
+                          "text-left p-1 py-2 uppercase text-gray-600 text-xs cursor-pointer",
+                        on: {
+                          click: function($event) {
+                            return _vm.changeSort(dimension.key)
+                          }
+                        }
                       },
-                      [_vm._v(_vm._s(dimension.name))]
+                      [
+                        _vm._v(
+                          _vm._s(dimension.name) + "\n                        "
+                        ),
+                        _vm.sort.col == dimension.key && _vm.sort.dir == "asc"
+                          ? _c("i", { staticClass: "fas fa-sort-up" })
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.sort.col == dimension.key && _vm.sort.dir == "desc"
+                          ? _c("i", { staticClass: "fas fa-sort-down" })
+                          : _vm._e()
+                      ]
                     )
                   }),
                   _vm._v(" "),
@@ -39070,9 +39136,25 @@ var render = function() {
                       {
                         key: metric.key,
                         staticClass:
-                          "text-left p-1 py-2 uppercase text-gray-600 text-xs"
+                          "text-left p-1 py-2 uppercase text-gray-600 text-xs cursor-pointer",
+                        on: {
+                          click: function($event) {
+                            return _vm.changeSort(metric.key)
+                          }
+                        }
                       },
-                      [_vm._v(_vm._s(metric.name))]
+                      [
+                        _vm._v(
+                          _vm._s(metric.name) + "\n                        "
+                        ),
+                        _vm.sort.col == metric.key && _vm.sort.dir == "asc"
+                          ? _c("i", { staticClass: "fas fa-sort-up" })
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.sort.col == metric.key && _vm.sort.dir == "desc"
+                          ? _c("i", { staticClass: "fas fa-sort-down" })
+                          : _vm._e()
+                      ]
                     )
                   })
                 ],

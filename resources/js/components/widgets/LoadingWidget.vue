@@ -1,5 +1,5 @@
 <template>
-    <div class="relative">
+    <div class="relative" :class="{ 'cursor-wait' : internalLoading }">
         <div class="p-2 text-sm flex">
             <div class="flex-grow">
                 <span class="font-bold">{{ widgetName }}</span>

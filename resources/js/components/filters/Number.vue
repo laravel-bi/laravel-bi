@@ -25,18 +25,30 @@
             v-if="active"
         >
             <div class="mb-2 flex">
-                <multiselect
-                    v-model="internalValue.operator"
-                    :options="options"
-                    placeholder="Operator"
-                    :selectLabel="null"
-                    :deselectLabel="null"
-                    :selectedLabel="null"
-                ></multiselect>
+                <div class="w-32">
+                    <multiselect
+                        v-model="internalValue.operator"
+                        :options="options"
+                        placeholder="Operator"
+                        :showLabels="false"
+                    ></multiselect>
+                </div>
 
-                <input type="text" v-model="internalValue.values[0]" class="w-20 border ml-2 px-2">
-                <span v-if="internalValue.operator == 'between'" class="ml-2">and</span>
-                <input type="text" v-model="internalValue.values[1]" class="w-20 border ml-2 px-2" v-if="internalValue.operator == 'between'">
+                <input
+                    type="text"
+                    v-model="internalValue.values[0]"
+                    class="w-20 border ml-2 px-2"
+                >
+                <span
+                    v-if="internalValue.operator == 'between'"
+                    class="ml-2 self-center"
+                >and</span>
+                <input
+                    type="text"
+                    v-model="internalValue.values[1]"
+                    class="w-20 border ml-2 px-2"
+                    v-if="internalValue.operator == 'between'"
+                >
             </div>
 
             <div class="flex">
@@ -80,23 +92,27 @@ export default {
     computed: {
         label() {
             try {
-                if(this.internalValue.operator == 'between') {
-                    return `Between ${this.internalValue.values[0] || ''} and ${this.internalValue.values[1]  || ''}`;
-                };
-                return `${this.internalValue.operator} ${this.internalValue.values[0]  || ''}`
-            } catch(error) {
-                return '';
+                if (this.internalValue.operator == "between") {
+                    return `Between ${this.internalValue.values[0] ||
+                        ""} and ${this.internalValue.values[1] || ""}`;
+                }
+                return `${this.internalValue.operator} ${this.internalValue
+                    .values[0] || ""}`;
+            } catch (error) {
+                return "";
             }
         }
     },
     mounted() {
-        this.options = [
-            '>', '>=', '<', '<=', 'between'
-        ];
-        this.internalValue = this.value || {
-            operator: null,
-            values: [null,null]
-        };
+        this.options = [">", ">=", "<", "<=", "between"];
+    },
+    methods: {
+        defaultValue() {
+            return {
+                operator: null,
+                values: [null, null]
+            };
+        }
     }
 };
 </script>

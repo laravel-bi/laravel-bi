@@ -1972,6 +1972,8 @@ __webpack_require__.r(__webpack_exports__);
     this.filtersConfig.forEach(function (filterConfig) {
       _this.$watch("filters." + filterConfig.key, function () {
         _utils_EventBus_js__WEBPACK_IMPORTED_MODULE_1__["default"].$emit("filters-confirmed", _this.filters);
+      }, {
+        deep: true
       });
     });
   },
@@ -2202,7 +2204,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    this.internalValue = this.value;
+    this.internalValue = this.value ? JSON.parse(JSON.stringify(this.value)) : this.defaultValue();
   },
   watch: {
     active: function active(newValue) {
@@ -2212,14 +2214,17 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    defaultValue: function defaultValue() {
+      return null;
+    },
     reset: function reset() {
       this.internalValue = null;
       this.active = false;
-      this.$emit("input", this.internalValue);
+      this.$emit("input", JSON.parse(JSON.stringify(this.internalValue)));
     },
     apply: function apply() {
       this.active = false;
-      this.$emit("input", this.internalValue);
+      this.$emit("input", JSON.parse(JSON.stringify(this.internalValue)));
     },
     close: function close() {
       this.active = false;
@@ -2304,6 +2309,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2321,23 +2338,26 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     label: function label() {
       try {
-        if (this.internalValue.operator == 'between') {
-          return "Between ".concat(this.internalValue.values[0] || '', " and ").concat(this.internalValue.values[1] || '');
+        if (this.internalValue.operator == "between") {
+          return "Between ".concat(this.internalValue.values[0] || "", " and ").concat(this.internalValue.values[1] || "");
         }
 
-        ;
-        return "".concat(this.internalValue.operator, " ").concat(this.internalValue.values[0] || '');
+        return "".concat(this.internalValue.operator, " ").concat(this.internalValue.values[0] || "");
       } catch (error) {
-        return '';
+        return "";
       }
     }
   },
   mounted: function mounted() {
-    this.options = ['>', '>=', '<', '<=', 'between'];
-    this.internalValue = this.value || {
-      operator: null,
-      values: [null, null]
-    };
+    this.options = [">", ">=", "<", "<=", "between"];
+  },
+  methods: {
+    defaultValue: function defaultValue() {
+      return {
+        operator: null,
+        values: [null, null]
+      };
+    }
   }
 });
 
@@ -2357,6 +2377,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Filter_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Filter.vue */ "./resources/js/components/filters/Filter.vue");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_3__);
+//
 //
 //
 //
@@ -38516,83 +38537,85 @@ var render = function() {
             staticClass: "absolute top-0 right-0 bg-white mt-8 p-4 shadow z-10"
           },
           [
-            _c(
-              "div",
-              { staticClass: "mb-2 flex" },
-              [
-                _c("multiselect", {
-                  attrs: {
-                    options: _vm.options,
-                    placeholder: "Operator",
-                    selectLabel: null,
-                    deselectLabel: null,
-                    selectedLabel: null
-                  },
-                  model: {
-                    value: _vm.internalValue.operator,
-                    callback: function($$v) {
-                      _vm.$set(_vm.internalValue, "operator", $$v)
+            _c("div", { staticClass: "mb-2 flex" }, [
+              _c(
+                "div",
+                { staticClass: "w-32" },
+                [
+                  _c("multiselect", {
+                    attrs: {
+                      options: _vm.options,
+                      placeholder: "Operator",
+                      showLabels: false
                     },
-                    expression: "internalValue.operator"
-                  }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.internalValue.values[0],
-                      expression: "internalValue.values[0]"
+                    model: {
+                      value: _vm.internalValue.operator,
+                      callback: function($$v) {
+                        _vm.$set(_vm.internalValue, "operator", $$v)
+                      },
+                      expression: "internalValue.operator"
                     }
-                  ],
-                  staticClass: "w-20 border ml-2 px-2",
-                  attrs: { type: "text" },
-                  domProps: { value: _vm.internalValue.values[0] },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.internalValue.values, 0, $event.target.value)
-                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.internalValue.values[0],
+                    expression: "internalValue.values[0]"
                   }
-                }),
-                _vm._v(" "),
-                _vm.internalValue.operator == "between"
-                  ? _c("span", { staticClass: "ml-2" }, [_vm._v("and")])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.internalValue.operator == "between"
-                  ? _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.internalValue.values[1],
-                          expression: "internalValue.values[1]"
-                        }
-                      ],
-                      staticClass: "w-20 border ml-2 px-2",
-                      attrs: { type: "text" },
-                      domProps: { value: _vm.internalValue.values[1] },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.internalValue.values,
-                            1,
-                            $event.target.value
-                          )
-                        }
+                ],
+                staticClass: "w-20 border ml-2 px-2",
+                attrs: { type: "text" },
+                domProps: { value: _vm.internalValue.values[0] },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.internalValue.values, 0, $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.internalValue.operator == "between"
+                ? _c("span", { staticClass: "ml-2 self-center" }, [
+                    _vm._v("and")
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.internalValue.operator == "between"
+                ? _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.internalValue.values[1],
+                        expression: "internalValue.values[1]"
                       }
-                    })
-                  : _vm._e()
-              ],
-              1
-            ),
+                    ],
+                    staticClass: "w-20 border ml-2 px-2",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.internalValue.values[1] },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.internalValue.values,
+                          1,
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                : _vm._e()
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "flex" }, [
               _c(
@@ -38715,7 +38738,8 @@ var render = function() {
                   attrs: {
                     options: _vm.options,
                     multiple: true,
-                    placeholder: "Select " + _vm.filterConfig.name
+                    placeholder: "Select " + _vm.filterConfig.name,
+                    showLabels: false
                   },
                   model: {
                     value: _vm.internalValue,

@@ -35,6 +35,7 @@
                     :options="options"
                     :multiple="true"
                     :placeholder="`Select ${filterConfig.name}`"
+                    :showLabels="false"
                 ></multiselect>
             </div>
 

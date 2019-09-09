@@ -44,6 +44,8 @@ export default {
         this.filtersConfig.forEach(filterConfig => {
             this.$watch("filters." + filterConfig.key, () => {
                 EventBus.$emit("filters-confirmed", this.filters);
+            }, {
+                deep: true
             });
         });
     },

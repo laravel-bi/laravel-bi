@@ -12,7 +12,7 @@ export default {
         };
     },
     mounted() {
-        this.internalValue = this.value;
+        this.internalValue = this.value ? JSON.parse(JSON.stringify(this.value)) : this.defaultValue();
     },
     watch: {
         active: function(newValue) {
@@ -22,14 +22,17 @@ export default {
         }
     },
     methods: {
+        defaultValue() {
+            return null
+        },
         reset() {
             this.internalValue = null;
             this.active = false;
-            this.$emit("input", this.internalValue);
+            this.$emit("input", JSON.parse(JSON.stringify(this.internalValue)));
         },
         apply() {
             this.active = false;
-            this.$emit("input", this.internalValue);
+            this.$emit("input", JSON.parse(JSON.stringify(this.internalValue)));
         },
         close() {
             this.active = false;

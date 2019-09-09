@@ -2,6 +2,7 @@
 
 namespace LaravelBi\LaravelBi\Widgets;
 
+use Closure;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use LaravelBi\LaravelBi\Dashboard;
@@ -12,11 +13,15 @@ abstract class BaseWidget implements \JsonSerializable, Widget
     public $width;
     public $key;
     public $name;
+    public $scope;
 
     public function __construct($key, $name)
     {
-        $this->key  = $key;
-        $this->name = $name;
+        $this->key   = $key;
+        $this->name  = $name;
+        $this->scope = function (Builder $builder) {
+            return $builder;
+        };
     }
 
     abstract public function data(Dashboard $dashboard, Request $request);
@@ -32,20 +37,28 @@ abstract class BaseWidget implements \JsonSerializable, Widget
         return $this;
     }
 
+    public function scope(Closure $scope): Widget
+    {
+        $this->scope = $scope;
+        return $this;
+    }
+
     protected function extra()
     {
-        return new \stdClass;
+        return new \stdClass();
     }
 
     protected function getBaseBuilder(Dashboard $dashboard, Request $request): Builder
     {
         $requestedFilters = $request->input('filters');
-        return collect($dashboard->filters())->reduce(function (Builder $builder, $filter) use ($request, $requestedFilters) {
-            if(isset($requestedFilters[$filter->key])) {
+        $builder          = collect($dashboard->filters())->reduce(function (Builder $builder, $filter) use ($request, $requestedFilters) {
+            if (isset($requestedFilters[$filter->key])) {
                 return $filter->apply($builder, $requestedFilters[$filter->key], $request);
             }
             return $builder;
         }, $dashboard->model::query());
+        $builder = $this->scope->call($this, $builder);
+        return $builder;
     }
 
     public function jsonSerialize()
@@ -58,5 +71,4 @@ abstract class BaseWidget implements \JsonSerializable, Widget
             'extra'     => $this->extra()
         ];
     }
-
 }

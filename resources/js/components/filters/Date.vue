@@ -1,14 +1,13 @@
 <template>
 
-    <div class="inline-block relative mr-4">
-        <a
-            href="#"
-            class="p-2 outline-none"
-            :class="{
-                'bg-gray-500 text-white' : active,
-                'hover:bg-gray-200 hover:text-gray-600' : !active,
-            }"
-            @click="active = true"
+    <div
+        class="inline-block relative mr-4"
+        v-click-outside="close"
+    >
+
+        <bi-filter-anchor
+            :active="active"
+            @activated="active = true"
         >
             <i class="fas fa-calendar"></i>
             <span v-if="internalValue == null">
@@ -17,37 +16,22 @@
             <span v-else>
                 Date interval: {{ startDate }} - {{ endDate }}
             </span>
-        </a>
+        </bi-filter-anchor>
 
-        <div
-            class="absolute top-0 right-0 bg-white mt-8 p-4 shadow z-10"
+        <bi-filter-dropdown
+            @close="close"
+            @reset="reset"
+            @apply="apply"
             v-if="active"
         >
-            <div class=mb-2>
-                <v-date-picker
-                    is-expanded
-                    :show-day-popover="false"
-                    mode='range'
-                    v-model="internalValue"
-                    is-inline
-                ></v-date-picker>
-            </div>
-
-            <div class="flex">
-                <button
-                    @click="close"
-                    class="bg-gray-200 p-4 py-2 text-gray-800 rounded mr-2 float-right"
-                >Close</button>
-                <button
-                    @click="reset"
-                    class="bg-gray-200 p-4 py-2 text-gray-800 rounded mr-2"
-                >Reset</button>
-                <button
-                    @click="apply"
-                    class="bg-indigo-600 p-4 py-2 text-white rounded"
-                >Apply</button>
-            </div>
-        </div>
+            <v-date-picker
+                is-expanded
+                :show-day-popover="false"
+                mode='range'
+                v-model="internalValue"
+                is-inline
+            ></v-date-picker>
+        </bi-filter-dropdown>
 
     </div>
 

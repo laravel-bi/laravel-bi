@@ -2,6 +2,8 @@
     <div>
         <loading-widget
             :loading="loading"
+            :dashboardKey="dashboardKey"
+            :widgetKey="widgetKey"
             :widgetName="widgetName"
             @refresh="fetchData"
             widgetClass="h-widget-sm"
@@ -42,8 +44,6 @@ export default {
     },
     methods: {
         onFetchData(response) {
-
-            
             const labels = response.data.data.map(item => {
                 return item[this.extra.dimension.key];
             });
@@ -57,11 +57,21 @@ export default {
                         labels,
                         datasets: [
                             {
-                                backgroundColor: colors({
-                                    count: data.length,
-                                    luminosity: "bright",
-                                    format: "rgb" 
-                                }),
+                                backgroundColor: this.extra.colors
+                                    ? labels.map(label => {
+                                          return (
+                                              this.extra.colors[label] ||
+                                              colors({
+                                                  luminosity: "bright",
+                                                  format: "rgb"
+                                              })
+                                          );
+                                      })
+                                    : colors({
+                                          count: data.length,
+                                          luminosity: "bright",
+                                          format: "rgb"
+                                      }),
                                 data
                             }
                         ]

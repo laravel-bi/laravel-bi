@@ -12,7 +12,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('app.css', 'vendor/bi') }}">
 </head>
-<body class="text-black h-full bg-gray-background font-noto">
+<body class="text-black h-full bg-background font-noto">
 
     <div id="laravel-bi" class="h-full flex flex-col">
 

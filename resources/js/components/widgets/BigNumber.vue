@@ -2,12 +2,14 @@
     <div>
         <loading-widget
             :loading="loading"
+            :dashboardKey="dashboardKey"
+            :widgetKey="widgetKey"
             :widgetName="widgetName"
             @refresh="fetchData"
             widgetClass="h-widget-sm"
         >
             <div class="p-2 pt-0">
-                <div class="text-big-number text-green-900 font-condensed">{{ number }}</div>
+                <div class="text-big-number font-condensed" :style="style">{{ number }}</div>
             </div>
         </loading-widget>
     </div>
@@ -23,6 +25,13 @@ export default {
         return {
             number: ""
         };
+    },
+    computed: {
+        style() {
+            return {
+                'color': this.extra.metric.color
+            }
+        }
     },
     methods: {
         onFetchData(response) {

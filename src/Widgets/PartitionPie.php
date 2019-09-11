@@ -12,6 +12,8 @@ class PartitionPie extends BaseWidget
 {
     protected $metric;
     protected $dimension;
+    protected $colors;
+
     protected $component = 'partition-pie';
 
     public function metric(Metric $metric): self
@@ -23,6 +25,12 @@ class PartitionPie extends BaseWidget
     public function dimension(Dimension $dimension): self
     {
         $this->dimension = $dimension;
+        return $this;
+    }
+
+    public function colors(array $colors): self
+    {
+        $this->colors = $colors;
         return $this;
     }
 
@@ -38,7 +46,8 @@ class PartitionPie extends BaseWidget
     {
         return [
             'metric'    => $this->metric,
-            'dimension' => $this->dimension
+            'dimension' => $this->dimension,
+            'colors'    => $this->colors
         ];
     }
 

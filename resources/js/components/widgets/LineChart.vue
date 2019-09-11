@@ -2,6 +2,8 @@
     <div>
         <loading-widget
             :loading="loading"
+            :dashboardKey="dashboardKey"
+            :widgetKey="widgetKey"
             :widgetName="widgetName"
             @refresh="fetchData"
             widgetClass="h-widget-sm"

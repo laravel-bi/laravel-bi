@@ -1,4 +1,5 @@
 <script>
+import vueClickOutside from "vue-click-outside";
 
 export default {
     props: {
@@ -37,6 +38,9 @@ export default {
         close() {
             this.active = false;
         }
+    },
+    directives: {
+        "click-outside": vueClickOutside
     }
 };
 </script>

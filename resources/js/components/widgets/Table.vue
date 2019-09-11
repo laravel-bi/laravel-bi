@@ -2,6 +2,8 @@
     <div>
         <loading-widget
             :loading="loading"
+            :dashboardKey="dashboardKey"
+            :widgetKey="widgetKey"
             :widgetName="widgetName"
             @refresh="fetchData"
             widgetClass="overflow-auto h-widget-lg"
@@ -12,7 +14,7 @@
                         <th
                             v-for="dimension in extra.dimensions"
                             :key="dimension.key"
-                            class="text-left p-1 py-2 uppercase text-gray-600 text-xs cursor-pointer"
+                            class="text-left p-1 py-2 uppercase text-gray-600 text-xs cursor-pointer bg-gray-200 border-t"
                             @click="changeSort(dimension.key)"
                         >{{ dimension.name }}
                             <i
@@ -27,7 +29,7 @@
                         <th
                             v-for="metric in extra.metrics"
                             :key="metric.key"
-                            class="text-left p-1 py-2 uppercase text-gray-600 text-xs cursor-pointer"
+                            class="text-left p-1 py-2 uppercase text-gray-600 text-xs cursor-pointer bg-gray-200 border-t"
                             @click="changeSort(metric.key)"
                         >{{ metric.name }}
                             <i

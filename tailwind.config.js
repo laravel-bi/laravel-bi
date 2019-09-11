@@ -13,13 +13,30 @@ module.exports = {
             },
             colors: {
                 gray: {
-                    ...colors.gray,
+                    100: '#EAEAEA',
+                    200: '#DDD',
+                    300: '#BBB',
+                    400: '#888',
+                    500: '#666',
+                    600: '#444',
                     700: "#333",
                     800: "#222",
-                    900: "#111",
-                    background: "#EAEAEA",
-                    "nav-active": "#333",
-                    nav: "#212121"
+                    900: "#111"
+                },
+                background: "#EAEAEA",
+                "nav-active": "#333",
+                nav: "#212121",
+                primary: {
+                    100: "#FFEEEE",
+                    200: "#FFD5D5",
+                    300: "#FFBBBB",
+                    400: "#FF8888",
+                    500: "#FF5555",
+                    600: "#E64D4D",
+                    700: "#993333",
+                    800: "#732626",
+                    900: "#4D1A1A",
+                    default: "#FF5555"
                 }
             },
             height: {

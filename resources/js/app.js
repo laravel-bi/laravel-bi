@@ -36,6 +36,8 @@ import Table from "./components/widgets/Table.vue";
 import PartitionPie from "./components/widgets/PartitionPie.vue";
 import LineChart from "./components/widgets/LineChart.vue";
 
+import FilterAnchor from "./components/filters/FilterAnchor.vue";
+import FilterDropdown from "./components/filters/FilterDropdown.vue";
 import FilterDate from "./components/filters/Date.vue";
 import FilterString from "./components/filters/String.vue";
 import FilterNumber from "./components/filters/Number.vue";
@@ -53,6 +55,8 @@ Vue.component("bi-table", Table);
 Vue.component("bi-partition-pie", PartitionPie);
 Vue.component("bi-line-chart", LineChart);
 
+Vue.component("bi-filter-anchor", FilterAnchor);
+Vue.component("bi-filter-dropdown", FilterDropdown);
 Vue.component("bi-filter-date", FilterDate);
 Vue.component("bi-filter-string", FilterString);
 Vue.component("bi-filter-number", FilterNumber);

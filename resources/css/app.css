@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+.router-link-exact-active { @apply text-primary; }
+
 .multiselect { @apply min-h-0 !important; }
 .multiselect_select { height: 28px !important; }
 .multiselect__tags { @apply rounded-none !important; min-height: 30px !important; padding-top: 4px !important; }

@@ -1,18 +1,27 @@
 <template>
-    <div class="relative" :class="{ 'cursor-wait' : internalLoading }">
+    <div
+        class="relative"
+        :class="{ 'cursor-wait' : internalLoading }"
+    >
         <div class="p-2 text-sm flex">
             <div class="flex-grow">
                 <span class="font-bold">{{ widgetName }}</span>
             </div>
             <div v-if="!internalLoading">
-                <i class="fas fa-sync cursor-pointer text-gray-600" @click="refresh"></i>
-                <i class="fas fa-download cursor-pointer text-gray-600 ml-2" @click="refresh"></i>
+                <i
+                    class="fas fa-sync cursor-pointer text-gray-600 hover:text-primary"
+                    @click="refresh"
+                ></i>
+                <i
+                    class="fas fa-download cursor-pointer text-gray-600 ml-2 hover:text-primary"
+                    @click="download"
+                ></i>
             </div>
         </div>
         <div :class="widgetClass">
             <bi-loader
                 v-if="internalLoading"
-                class="absolute" 
+                class="absolute"
                 style="top: 50%; right: 50%; margin-top: -22px; margin-left: -22px"
             >
             </bi-loader>
@@ -27,6 +36,8 @@
 export default {
     name: "loading-widget",
     props: {
+        dashboardKey: String,
+        widgetKey: String,
         widgetName: String,
         loading: Boolean,
         widgetClass: String
@@ -46,7 +57,10 @@ export default {
     },
     methods: {
         refresh() {
-            this.$emit('refresh');
+            this.$emit("refresh");
+        },
+        download() {
+            window.open(`bi-apis/${this.dashboardKey}/widgets/${this.widgetKey}/csv`);
         }
     }
 };

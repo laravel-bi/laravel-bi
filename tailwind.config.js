@@ -29,6 +29,7 @@ module.exports = {
             "widget-border": "rgba(0, 0, 0, 0.12)",
             text: "rgba(0, 0, 0, 0.87)",
             icon: "rgba(0, 0, 0, 0.50)",
+            'table-head': 'rgba(0, 0, 0, 0.54)',
             btn: '#039be5',
             'btn-h': '#0288d1',
             white: 'white',

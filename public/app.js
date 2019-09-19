@@ -39281,11 +39281,11 @@ var render = function() {
           on: { refresh: _vm.fetchData }
         },
         [
-          _c("div", { staticClass: "py-4" }, [
+          _c("div", { staticClass: "-mt-8" }, [
             _c("table", { staticClass: "w-full text-sm" }, [
               _c(
                 "tr",
-                { staticClass: "border-b" },
+                { staticClass: "border-b border-widget-border" },
                 [
                   _vm._l(_vm.extra.dimensions, function(dimension) {
                     return _c(
@@ -39293,7 +39293,7 @@ var render = function() {
                       {
                         key: dimension.key,
                         staticClass:
-                          "text-left p-1 py-2 uppercase text-gray-600 text-xs cursor-pointer bg-gray-200 border-t",
+                          "text-left cursor-pointer p-16 text-12 font-light text-table-head",
                         on: {
                           click: function($event) {
                             return _vm.changeSort(dimension.key)
@@ -39321,7 +39321,7 @@ var render = function() {
                       {
                         key: metric.key,
                         staticClass:
-                          "text-left p-1 py-2 uppercase text-gray-600 text-xs cursor-pointer bg-gray-200 border-t",
+                          "text-left cursor-pointer p-16 pt-14 text-12 font-light text-table-head",
                         on: {
                           click: function($event) {
                             return _vm.changeSort(metric.key)
@@ -39353,13 +39353,14 @@ var render = function() {
                     "tr",
                     {
                       key: i,
-                      staticClass: "border-b last:border-b-0 hover:bg-gray-100"
+                      staticClass:
+                        "border-b border-widget-border last:border-b-0 hover:bg-gray-100"
                     },
                     [
                       _vm._l(_vm.extra.dimensions, function(dimension) {
                         return _c(
                           "td",
-                          { key: dimension.key, staticClass: "p-1" },
+                          { key: dimension.key, staticClass: "p-16 text-14" },
                           [
                             _vm._v(
                               "\n                            " +
@@ -39373,7 +39374,7 @@ var render = function() {
                       _vm._l(_vm.extra.metrics, function(metric) {
                         return _c(
                           "td",
-                          { key: metric.key, staticClass: "p-1" },
+                          { key: metric.key, staticClass: "p-16 text-14" },
                           [
                             _vm._v(
                               "\n                            " +

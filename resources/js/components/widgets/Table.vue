@@ -8,13 +8,13 @@
             @refresh="fetchData"
             widgetClass="overflow-auto h-widget-lg"
         >
-            <div class="py-4">
+            <div class="-mt-8">
                 <table class="w-full text-sm">
-                    <tr class="border-b">
+                    <tr class="border-b border-widget-border">
                         <th
                             v-for="dimension in extra.dimensions"
                             :key="dimension.key"
-                            class="text-left p-1 py-2 uppercase text-gray-600 text-xs cursor-pointer bg-gray-200 border-t"
+                            class="text-left cursor-pointer p-16 text-12 font-light text-table-head"
                             @click="changeSort(dimension.key)"
                         >{{ dimension.name }}
                             <i
@@ -29,7 +29,7 @@
                         <th
                             v-for="metric in extra.metrics"
                             :key="metric.key"
-                            class="text-left p-1 py-2 uppercase text-gray-600 text-xs cursor-pointer bg-gray-200 border-t"
+                            class="text-left cursor-pointer p-16 pt-14 text-12 font-light text-table-head"
                             @click="changeSort(metric.key)"
                         >{{ metric.name }}
                             <i
@@ -46,19 +46,19 @@
                         <tr
                             v-for="(row, i) in data"
                             :key="i"
-                            class="border-b last:border-b-0 hover:bg-gray-100"
+                            class="border-b border-widget-border last:border-b-0 hover:bg-gray-100"
                         >
                             <td
                                 v-for="dimension in extra.dimensions"
                                 :key="dimension.key"
-                                class="p-1"
+                                class="p-16 text-14"
                             >
                                 {{ row[dimension.key] }}
                             </td>
                             <td
                                 v-for="metric in extra.metrics"
                                 :key="metric.key"
-                                class="p-1"
+                                class="p-16 text-14"
                             >
                                 {{ row[metric.key] }}
                             </td>

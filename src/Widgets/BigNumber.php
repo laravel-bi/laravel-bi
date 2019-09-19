@@ -2,9 +2,9 @@
 
 namespace LaravelBi\LaravelBi\Widgets;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use LaravelBi\LaravelBi\Dashboard;
+use Illuminate\Database\Eloquent\Model;
 use LaravelBi\LaravelBi\Metrics\Metric;
 
 class BigNumber extends BaseWidget

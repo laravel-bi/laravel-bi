@@ -2,8 +2,8 @@
 
 namespace LaravelBi\LaravelBi\Filters;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 class NumberFilter extends BaseFilter
 {

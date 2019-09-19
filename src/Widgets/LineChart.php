@@ -2,9 +2,9 @@
 
 namespace LaravelBi\LaravelBi\Widgets;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use LaravelBi\LaravelBi\Dashboard;
+use Illuminate\Database\Eloquent\Collection;
 use LaravelBi\LaravelBi\Dimensions\Dimension;
 
 class LineChart extends BaseWidget

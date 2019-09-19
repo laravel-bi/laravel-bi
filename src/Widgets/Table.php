@@ -2,9 +2,9 @@
 
 namespace LaravelBi\LaravelBi\Widgets;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use LaravelBi\LaravelBi\Dashboard;
+use Illuminate\Database\Eloquent\Collection;
 
 class Table extends BaseWidget
 {
@@ -13,13 +13,13 @@ class Table extends BaseWidget
     protected $dimensions;
     protected $component = 'table';
 
-    public function metrics(array $metrics): Table
+    public function metrics(array $metrics): self
     {
         $this->metrics = $metrics;
         return $this;
     }
 
-    public function dimensions(array $dimensions): Table
+    public function dimensions(array $dimensions): self
     {
         $this->dimensions = $dimensions;
         return $this;

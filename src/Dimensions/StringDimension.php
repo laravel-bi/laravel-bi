@@ -2,8 +2,8 @@
 
 namespace LaravelBi\LaravelBi\Dimensions;
 
-use Illuminate\Database\Eloquent\Builder;
 use LaravelBi\LaravelBi\Widgets\Widget;
+use Illuminate\Database\Eloquent\Builder;
 
 class StringDimension extends BaseDimension
 {

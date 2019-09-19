@@ -4,7 +4,6 @@ namespace LaravelBi\LaravelBi\Metrics;
 
 use DB;
 use Illuminate\Database\Eloquent\Builder;
-use LaravelBi\Widgets\BaseWidget;
 
 class CountMetric extends BaseMetric
 {

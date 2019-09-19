@@ -4,5 +4,4 @@ namespace LaravelBi\LaravelBi\Dimensions;
 
 interface Dimension
 {
-
 }

@@ -2,11 +2,11 @@
 
 namespace LaravelBi\LaravelBi\Widgets;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use LaravelBi\LaravelBi\Dashboard;
-use LaravelBi\LaravelBi\Dimensions\Dimension;
 use LaravelBi\LaravelBi\Metrics\Metric;
+use Illuminate\Database\Eloquent\Collection;
+use LaravelBi\LaravelBi\Dimensions\Dimension;
 
 class PartitionPie extends BaseWidget
 {

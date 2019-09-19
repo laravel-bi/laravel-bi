@@ -2,10 +2,10 @@
 
 namespace LaravelBi\LaravelBi\Http\Controllers\Apis;
 
+use Response;
 use Illuminate\Http\Request;
 use LaravelBi\LaravelBi\Dashboard;
 use LaravelBi\LaravelBi\Http\Controllers\BaseController;
-use Response;
 
 class WidgetController extends BaseController
 {

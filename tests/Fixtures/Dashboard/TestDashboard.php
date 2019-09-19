@@ -6,5 +6,4 @@ use LaravelBi\LaravelBi\Dashboard;
 
 class TestDashboard extends Dashboard
 {
-
 }

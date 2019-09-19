@@ -1,54 +1,63 @@
-const { colors, fontSize } = require("tailwindcss/defaultTheme");
+const theme = require("tailwindcss/defaultTheme");
 
+const generateRem = function(limit, extra = {}) {
+    return Object.assign(
+        {},
+        [...Array(limit).keys()].reduce((o, n) => {
+            o[n] = n / 10 + "rem";
+            return o;
+        }, {}),
+        extra
+    );
+};
 module.exports = {
     theme: {
-        extend: {
-            fontFamily: {
-                noto: "Noto Sans TC, sans-serif",
-                condensed: "Open Sans Condensed, sans-serif"
-            },
-            fontSize: {
-                ...fontSize,
-                "big-number": "3rem"
-            },
-            colors: {
-                gray: {
-                    100: '#EAEAEA',
-                    200: '#DDD',
-                    300: '#BBB',
-                    400: '#888',
-                    500: '#666',
-                    600: '#444',
-                    700: "#333",
-                    800: "#222",
-                    900: "#111"
-                },
-                background: "#EAEAEA",
-                "nav-active": "#333",
-                nav: "#212121",
-                primary: {
-                    100: "#FFEEEE",
-                    200: "#FFD5D5",
-                    300: "#FFBBBB",
-                    400: "#FF8888",
-                    500: "#FF5555",
-                    600: "#E64D4D",
-                    700: "#993333",
-                    800: "#732626",
-                    900: "#4D1A1A",
-                    default: "#FF5555"
-                }
-            },
-            height: {
-                "widget-sm": 100,
-                "widget-md": 250,
-                "widget-lg": 400,
-                header: 50
-            },
-            width: {
-                nav: 200,
-                "closed-nav": 50
+        fontFamily: {
+            muli: "Muli, sans-serif"
+        },
+        fontSize: generateRem(30, {
+            "big-number": "5rem"
+        }),
+        borderRadius: generateRem(30, {
+            none: '0px'
+        }),
+        colors: {
+            background: "#FAFAFA",
+            head: 'rgb(45, 50, 62)',
+            header: "#f5f5f5",
+            widget: "white",
+            "widget-border": "rgba(0, 0, 0, 0.12)",
+            text: "rgba(0, 0, 0, 0.87)",
+            icon: "rgba(0, 0, 0, 0.50)",
+            btn: '#039be5',
+            'btn-h': '#0288d1',
+            white: 'white',
+            gray: {
+                100: '#EAEAEA',
+                200: '#DDD',
+                300: '#BBB',
+                400: '#888',
+                500: '#666',
+                600: '#444',
+                700: "#333",
+                800: "#222",
+                900: "#111"
             }
+        },
+        height: {
+            "head-box": "8rem",
+            header: "4.8rem",
+            "widget-sm": 150,
+            "widget-md": 250,
+            "widget-lg": 400
+        },
+        spacing: generateRem(30),
+
+        extend: {
+            width: generateRem(50, {
+                'filter-dropdown': '30rem',
+                'filter-dropdown-lg': '40rem'
+            })
         }
     },
     variants: {

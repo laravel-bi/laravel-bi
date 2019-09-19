@@ -9,11 +9,13 @@ export default {
     data() {
         return {
             internalValue: null,
+            confirmedValue: null,
             active: false
         };
     },
     mounted() {
         this.internalValue = this.value ? JSON.parse(JSON.stringify(this.value)) : this.defaultValue();
+        this.confirmedValue = this.value ? JSON.parse(JSON.stringify(this.value)) : this.defaultValue();
     },
     watch: {
         active: function(newValue) {
@@ -27,16 +29,19 @@ export default {
             return null
         },
         reset() {
-            this.internalValue = null;
+            this.internalValue = this.defaultValue();
+            this.confirmedValue = this.defaultValue();
             this.active = false;
             this.$emit("input", JSON.parse(JSON.stringify(this.internalValue)));
         },
         apply() {
             this.active = false;
+            this.confirmedValue = JSON.parse(JSON.stringify(this.internalValue));
             this.$emit("input", JSON.parse(JSON.stringify(this.internalValue)));
         },
         close() {
             this.active = false;
+            this.internalValue = JSON.parse(JSON.stringify(this.confirmedValue));
         }
     },
     directives: {

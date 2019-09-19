@@ -9,10 +9,11 @@
             <div class="flex flex-wrap -mr-2 -ml-2">
                 <div
                     :class="'w-' + widget.width"
+                    class="p-12"
                     v-for="widget in widgets"
                     :key="widget.key"
                 >
-                    <div class="m-2 bg-white shadow">
+                    <div class="bg-widget rounded-8 border border-1 border-widget-border">
                         <component
                             :is="'bi-' + widget.component"
                             :dashboardKey="dashboardKey"

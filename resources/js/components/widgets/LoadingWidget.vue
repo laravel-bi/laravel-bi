@@ -3,22 +3,22 @@
         class="relative"
         :class="{ 'cursor-wait' : internalLoading }"
     >
-        <div class="p-2 text-sm flex">
+        <div class="flex p-16">
             <div class="flex-grow">
-                <span class="font-bold">{{ widgetName }}</span>
+                <p class="text-16">{{ widgetName }}</p>
             </div>
             <div v-if="!internalLoading">
                 <i
-                    class="fas fa-sync cursor-pointer text-gray-600 hover:text-primary"
+                    class="fas fa-sync cursor-pointer text-14 text-icon"
                     @click="refresh"
                 ></i>
                 <i
-                    class="fas fa-download cursor-pointer text-gray-600 ml-2 hover:text-primary"
+                    class="fas fa-download cursor-pointer ml-4 text-14 text-icon"
                     @click="download"
                 ></i>
             </div>
         </div>
-        <div :class="widgetClass">
+        <div :class="widgetClass" class="border-t border-widget-border pt-8">
             <bi-loader
                 v-if="internalLoading"
                 class="absolute"

@@ -1,7 +1,7 @@
 <template>
 
     <div
-        class="inline-block relative mr-4"
+        class="flex relative mr-4"
         v-click-outside="close"
     >
 
@@ -10,7 +10,7 @@
             @activated="active = true"
         >
             <i class="fas fa-calendar"></i>
-            <span v-if="internalValue == null">
+            <span v-if="confirmedValue == null">
                 Select a date interval
             </span>
             <span v-else>
@@ -50,18 +50,18 @@ export default {
     },
     computed: {
         startDate() {
-            if (this.internalValue == null) {
+            if (this.confirmedValue == null) {
                 return null;
             }
-            return moment(new Date(this.internalValue.start)).format(
+            return moment(new Date(this.confirmedValue.start)).format(
                 "YYYY-MM-DD"
             );
         },
         endDate() {
-            if (this.internalValue == null) {
+            if (this.confirmedValue == null) {
                 return null;
             }
-            return moment(new Date(this.internalValue.end)).format(
+            return moment(new Date(this.confirmedValue.end)).format(
                 "YYYY-MM-DD"
             );
         }

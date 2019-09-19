@@ -7,23 +7,24 @@
 
     <title>Laravel Bi</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet"> 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet"> 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('app.css', 'vendor/bi') }}">
 </head>
-<body class="text-black h-full bg-background font-noto">
+<body class="text-text h-full bg-background font-muli">
 
     <div id="laravel-bi" class="h-full flex flex-col">
 
-        <div class="flex flex-grow">
-            <bi-nav class="bg-gray-700 text-gray-400"></bi-nav>
+        <div class="flex flex-grow flex-col">
+
+            <div class="h-head-box bg-head">
+                <h1 class="p-20 text-25 text-white ">
+                    Laravel Bi <span v-cloak v-if="dashboardName" v-text="'>> ' + dashboardName"></span>
+                </h1>
+            </div>
+
+            {{-- <bi-nav class="bg-gray-700 text-gray-400"></bi-nav> --}}
             <div class="flex-grow">
-                <div class="w-full bg-black text-white h-header">
-                    <h1 class="p-3 text-xl">
-                        Laravel Bi >> @{{ dashboardName }}
-                    </h1>
-                </div>
                 <router-view :filters="filters" :filters-flag="filtersFlag"></router-view>
             </div>
         </div>

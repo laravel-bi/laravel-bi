@@ -2,7 +2,7 @@
 
     <a
         href="#"
-        class="p-2 outline-none"
+        class="outline-none text-14 block p-14"
         :class="{
                 'bg-gray-500 text-white' : active,
                 'hover:bg-gray-200 hover:text-gray-600' : !active,

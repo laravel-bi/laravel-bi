@@ -1872,6 +1872,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -1926,6 +1927,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _utils_EventBus_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/EventBus.js */ "./resources/js/utils/EventBus.js");
+//
 //
 //
 //
@@ -2149,18 +2151,18 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     startDate: function startDate() {
-      if (this.internalValue == null) {
+      if (this.confirmedValue == null) {
         return null;
       }
 
-      return moment__WEBPACK_IMPORTED_MODULE_0___default()(new Date(this.internalValue.start)).format("YYYY-MM-DD");
+      return moment__WEBPACK_IMPORTED_MODULE_0___default()(new Date(this.confirmedValue.start)).format("YYYY-MM-DD");
     },
     endDate: function endDate() {
-      if (this.internalValue == null) {
+      if (this.confirmedValue == null) {
         return null;
       }
 
-      return moment__WEBPACK_IMPORTED_MODULE_0___default()(new Date(this.internalValue.end)).format("YYYY-MM-DD");
+      return moment__WEBPACK_IMPORTED_MODULE_0___default()(new Date(this.confirmedValue.end)).format("YYYY-MM-DD");
     }
   }
 });
@@ -2187,11 +2189,13 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       internalValue: null,
+      confirmedValue: null,
       active: false
     };
   },
   mounted: function mounted() {
     this.internalValue = this.value ? JSON.parse(JSON.stringify(this.value)) : this.defaultValue();
+    this.confirmedValue = this.value ? JSON.parse(JSON.stringify(this.value)) : this.defaultValue();
   },
   watch: {
     active: function active(newValue) {
@@ -2205,16 +2209,19 @@ __webpack_require__.r(__webpack_exports__);
       return null;
     },
     reset: function reset() {
-      this.internalValue = null;
+      this.internalValue = this.defaultValue();
+      this.confirmedValue = this.defaultValue();
       this.active = false;
       this.$emit("input", JSON.parse(JSON.stringify(this.internalValue)));
     },
     apply: function apply() {
       this.active = false;
+      this.confirmedValue = JSON.parse(JSON.stringify(this.internalValue));
       this.$emit("input", JSON.parse(JSON.stringify(this.internalValue)));
     },
     close: function close() {
       this.active = false;
+      this.internalValue = JSON.parse(JSON.stringify(this.confirmedValue));
     }
   },
   directives: {
@@ -2331,6 +2338,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2348,11 +2364,11 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     label: function label() {
       try {
-        if (this.internalValue.operator == "between") {
-          return "Between ".concat(this.internalValue.values[0] || "", " and ").concat(this.internalValue.values[1] || "");
+        if (this.confirmedValue.operator == "between") {
+          return "Between ".concat(this.confirmedValue.values[0] || "", " and ").concat(this.confirmedValue.values[1] || "");
         }
 
-        return "".concat(this.internalValue.operator, " ").concat(this.internalValue.values[0] || "");
+        return "".concat(this.confirmedValue.operator, " ").concat(this.confirmedValue.values[0] || "");
       } catch (error) {
         return "";
       }
@@ -2472,8 +2488,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Widget_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Widget.vue */ "./resources/js/components/widgets/Widget.vue");
-//
-//
 //
 //
 //
@@ -38204,26 +38218,37 @@ var render = function() {
           "div",
           { staticClass: "flex flex-wrap -mr-2 -ml-2" },
           _vm._l(_vm.widgets, function(widget) {
-            return _c("div", { key: widget.key, class: "w-" + widget.width }, [
-              _c(
-                "div",
-                { staticClass: "m-2 bg-white shadow" },
-                [
-                  _c("bi-" + widget.component, {
-                    tag: "component",
-                    attrs: {
-                      dashboardKey: _vm.dashboardKey,
-                      widgetKey: widget.key,
-                      widgetName: widget.name,
-                      extra: widget.extra,
-                      filters: _vm.filters,
-                      "filters-flag": _vm.filtersFlag
-                    }
-                  })
-                ],
-                1
-              )
-            ])
+            return _c(
+              "div",
+              {
+                key: widget.key,
+                staticClass: "p-12",
+                class: "w-" + widget.width
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "bg-widget rounded-8 border border-1 border-widget-border"
+                  },
+                  [
+                    _c("bi-" + widget.component, {
+                      tag: "component",
+                      attrs: {
+                        dashboardKey: _vm.dashboardKey,
+                        widgetKey: widget.key,
+                        widgetName: widget.name,
+                        extra: widget.extra,
+                        filters: _vm.filters,
+                        "filters-flag": _vm.filtersFlag
+                      }
+                    })
+                  ],
+                  1
+                )
+              ]
+            )
           }),
           0
         )
@@ -38258,12 +38283,12 @@ var render = function() {
     "div",
     {
       staticClass:
-        "bg-white text-right text-gray-600 text-xs p-2 shadow relative"
+        "bg-header h-header text-gray-600 shadow flex flex-row-reverse"
     },
     _vm._l(_vm.filtersConfig, function(filter) {
       return _c(
-        "span",
-        { key: filter.key },
+        "div",
+        { key: filter.key, staticClass: "h-full" },
         [
           _c("bi-filter-" + filter.component, {
             ref: "filter-" + filter.key,
@@ -38532,7 +38557,7 @@ var render = function() {
           expression: "close"
         }
       ],
-      staticClass: "inline-block relative mr-4"
+      staticClass: "flex relative mr-4"
     },
     [
       _c(
@@ -38548,7 +38573,7 @@ var render = function() {
         [
           _c("i", { staticClass: "fas fa-calendar" }),
           _vm._v(" "),
-          _vm.internalValue == null
+          _vm.confirmedValue == null
             ? _c("span", [
                 _vm._v("\n            Select a date interval\n        ")
               ])
@@ -38617,7 +38642,7 @@ var render = function() {
   return _c(
     "a",
     {
-      staticClass: "p-2 outline-none",
+      staticClass: "outline-none text-14 block p-14",
       class: {
         "bg-gray-500 text-white": _vm.active,
         "hover:bg-gray-200 hover:text-gray-600": !_vm.active
@@ -38657,16 +38682,20 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "absolute top-0 right-0 bg-white mt-8 p-4 shadow z-10" },
+    {
+      staticClass:
+        "absolute top-0 right-0 bg-white p-8 shadow z-10 w-filter-dropdown",
+      staticStyle: { "margin-top": "5rem" }
+    },
     [
-      _c("div", { staticClass: "mb-2 flex" }, [_vm._t("default")], 2),
+      _c("div", { staticClass: "flex mb-2" }, [_vm._t("default")], 2),
       _vm._v(" "),
-      _c("div", { staticClass: "flex" }, [
+      _c("div", { staticClass: "mt-6" }, [
         _c(
           "button",
           {
             staticClass:
-              "bg-gray-200 hover:bg-gray-300 p-4 py-2 text-gray-800 rounded mr-2 float-right focus:outline-none",
+              "bg-gray-200 hover:bg-gray-300 text-14 p-8 py-4 text-gray-800 rounded mr-4 focus:outline-none",
             on: {
               click: function($event) {
                 return _vm.$emit("close")
@@ -38680,7 +38709,7 @@ var render = function() {
           "button",
           {
             staticClass:
-              "bg-gray-200 hover:bg-gray-300 p-4 py-2 text-gray-800 rounded mr-2 focus:outline-none",
+              "bg-gray-200 hover:bg-gray-300 text-14 p-8 py-4 text-gray-800 rounded mr-4 focus:outline-none",
             on: {
               click: function($event) {
                 return _vm.$emit("reset")
@@ -38694,7 +38723,7 @@ var render = function() {
           "button",
           {
             staticClass:
-              "bg-primary hover:bg-primary-600 p-4 py-2 text-white rounded focus:outline-none",
+              "bg-btn hover:bg-btn-h text-14 p-8 py-4 text-white rounded focus:outline-none float-right",
             on: {
               click: function($event) {
                 return _vm.$emit("apply")
@@ -38740,7 +38769,7 @@ var render = function() {
           expression: "close"
         }
       ],
-      staticClass: "inline-block relative mr-4"
+      staticClass: "relative mr-4"
     },
     [
       _c(
@@ -38756,7 +38785,7 @@ var render = function() {
         [
           _c("i", { staticClass: "fas fa-calendar" }),
           _vm._v(" "),
-          _vm.internalValue == null || _vm.internalValue.operator == null
+          _vm.confirmedValue == null || _vm.confirmedValue.operator == null
             ? _c("span", [
                 _vm._v(
                   "\n            Select a " +
@@ -38779,11 +38808,14 @@ var render = function() {
       _vm.active
         ? _c(
             "bi-filter-dropdown",
-            { on: { close: _vm.close, reset: _vm.reset, apply: _vm.apply } },
+            {
+              staticClass: "w-filter-dropdown-lg",
+              on: { close: _vm.close, reset: _vm.reset, apply: _vm.apply }
+            },
             [
               _c(
                 "div",
-                { staticClass: "w-32" },
+                { staticClass: "w-1/2" },
                 [
                   _c("multiselect", {
                     attrs: {
@@ -38812,7 +38844,7 @@ var render = function() {
                     expression: "internalValue.values[0]"
                   }
                 ],
-                staticClass: "w-20 border ml-2 px-2",
+                staticClass: "flex-1 min-w-0 border ml-10 text-14 px-2",
                 attrs: { type: "text" },
                 domProps: { value: _vm.internalValue.values[0] },
                 on: {
@@ -38825,39 +38857,43 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _vm.internalValue.operator == "between"
-                ? _c("span", { staticClass: "ml-2 self-center" }, [
-                    _vm._v("and")
-                  ])
-                : _vm._e(),
+              _c(
+                "span",
+                {
+                  staticClass: "ml-2 self-center text-14 ml-10",
+                  class: {
+                    visible: _vm.internalValue.operator == "between",
+                    invisible: _vm.internalValue.operator != "between"
+                  }
+                },
+                [_vm._v("and")]
+              ),
               _vm._v(" "),
-              _vm.internalValue.operator == "between"
-                ? _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.internalValue.values[1],
-                        expression: "internalValue.values[1]"
-                      }
-                    ],
-                    staticClass: "w-20 border ml-2 px-2",
-                    attrs: { type: "text" },
-                    domProps: { value: _vm.internalValue.values[1] },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.internalValue.values,
-                          1,
-                          $event.target.value
-                        )
-                      }
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.internalValue.values[1],
+                    expression: "internalValue.values[1]"
+                  }
+                ],
+                staticClass: "flex-1 min-w-0 border ml-10 text-14 px-2",
+                class: {
+                  visible: _vm.internalValue.operator == "between",
+                  invisible: _vm.internalValue.operator != "between"
+                },
+                attrs: { type: "text" },
+                domProps: { value: _vm.internalValue.values[1] },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
                     }
-                  })
-                : _vm._e()
+                    _vm.$set(_vm.internalValue.values, 1, $event.target.value)
+                  }
+                }
+              })
             ]
           )
         : _vm._e()
@@ -38898,7 +38934,7 @@ var render = function() {
           expression: "close"
         }
       ],
-      staticClass: "inline-block relative mr-4"
+      staticClass: "relative mr-4"
     },
     [
       _c(
@@ -38914,7 +38950,7 @@ var render = function() {
         [
           _c("i", { staticClass: "fas fa-calendar" }),
           _vm._v(" "),
-          _vm.internalValue == null
+          _vm.confirmedValue == null
             ? _c("span", [
                 _vm._v(
                   "\n            Select a " +
@@ -38930,10 +38966,10 @@ var render = function() {
                       _vm._s(_vm.filterConfig.name) +
                       ":\n            "
                   ),
-                  _vm._l(_vm.internalValue, function(value, i) {
+                  _vm._l(_vm.confirmedValue, function(value, i) {
                     return _c("span", { key: value }, [
                       _vm._v("\n                " + _vm._s(value)),
-                      i !== _vm.internalValue.length - 1
+                      i !== _vm.confirmedValue.length - 1
                         ? _c("span", [_vm._v(",")])
                         : _vm._e()
                     ])
@@ -39010,16 +39046,14 @@ var render = function() {
           on: { refresh: _vm.fetchData }
         },
         [
-          _c("div", { staticClass: "p-2 pt-0" }, [
-            _c(
-              "div",
-              {
-                staticClass: "text-big-number font-condensed",
-                style: _vm.style
-              },
-              [_vm._v(_vm._s(_vm.number))]
-            )
-          ])
+          _c(
+            "div",
+            {
+              staticClass: "text-big-number font-condensed text-center",
+              style: _vm.style
+            },
+            [_vm._v(_vm._s(_vm.number))]
+          )
         ]
       )
     ],
@@ -39070,7 +39104,7 @@ var render = function() {
             [
               _c("chartjs-line-chart", {
                 ref: "chart",
-                attrs: { styles: { height: "100px" }, options: _vm.options }
+                attrs: { styles: { height: "130px" }, options: _vm.options }
               })
             ],
             1
@@ -39107,24 +39141,21 @@ var render = function() {
     "div",
     { staticClass: "relative", class: { "cursor-wait": _vm.internalLoading } },
     [
-      _c("div", { staticClass: "p-2 text-sm flex" }, [
+      _c("div", { staticClass: "flex p-16" }, [
         _c("div", { staticClass: "flex-grow" }, [
-          _c("span", { staticClass: "font-bold" }, [
-            _vm._v(_vm._s(_vm.widgetName))
-          ])
+          _c("p", { staticClass: "text-16" }, [_vm._v(_vm._s(_vm.widgetName))])
         ]),
         _vm._v(" "),
         !_vm.internalLoading
           ? _c("div", [
               _c("i", {
-                staticClass:
-                  "fas fa-sync cursor-pointer text-gray-600 hover:text-primary",
+                staticClass: "fas fa-sync cursor-pointer text-14 text-icon",
                 on: { click: _vm.refresh }
               }),
               _vm._v(" "),
               _c("i", {
                 staticClass:
-                  "fas fa-download cursor-pointer text-gray-600 ml-2 hover:text-primary",
+                  "fas fa-download cursor-pointer ml-4 text-14 text-icon",
                 on: { click: _vm.download }
               })
             ])
@@ -39133,7 +39164,10 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { class: _vm.widgetClass },
+        {
+          staticClass: "border-t border-widget-border pt-8",
+          class: _vm.widgetClass
+        },
         [
           _vm.internalLoading
             ? _c("bi-loader", {
@@ -39198,7 +39232,7 @@ var render = function() {
             [
               _c("pie-chart", {
                 ref: "chart",
-                attrs: { styles: { height: "100px" }, options: _vm.options }
+                attrs: { styles: { height: "130px" }, options: _vm.options }
               })
             ],
             1

@@ -1,7 +1,7 @@
 <template>
 
     <div
-        class="inline-block relative mr-4"
+        class="relative mr-4"
         v-click-outside="close"
     >
 
@@ -10,16 +10,16 @@
             @activated="active = true"
         >
             <i class="fas fa-calendar"></i>
-            <span v-if="internalValue == null">
+            <span v-if="confirmedValue == null">
                 Select a {{ filterConfig.name }}
             </span>
             <span v-else>
                 {{ filterConfig.name }}:
                 <span
-                    v-for="(value, i) in internalValue"
+                    v-for="(value, i) in confirmedValue"
                     :key="value"
                 >
-                    {{ value }}<span v-if="i !== internalValue.length -1">,</span>
+                    {{ value }}<span v-if="i !== confirmedValue.length -1">,</span>
                 </span>
             </span>
         </bi-filter-anchor>

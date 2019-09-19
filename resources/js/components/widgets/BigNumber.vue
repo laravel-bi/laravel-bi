@@ -8,9 +8,7 @@
             @refresh="fetchData"
             widgetClass="h-widget-sm"
         >
-            <div class="p-2 pt-0">
-                <div class="text-big-number font-condensed" :style="style">{{ number }}</div>
-            </div>
+            <div class="text-big-number font-condensed text-center" :style="style">{{ number }}</div>
         </loading-widget>
     </div>
 </template>

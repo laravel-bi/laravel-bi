@@ -9,7 +9,7 @@
             widgetClass="h-widget-sm"
         >
             <div class="p-2 pt-0">
-                <chartjs-line-chart ref="chart" :styles="{'height': '100px'}" :options="options"></chartjs-line-chart>
+                <chartjs-line-chart ref="chart" :styles="{'height': '130px'}" :options="options"></chartjs-line-chart>
             </div>
         </loading-widget>
     </div>

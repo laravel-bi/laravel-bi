@@ -1,7 +1,7 @@
 <template>
 
     <div
-        class="inline-block relative mr-4"
+        class="relative mr-4"
         v-click-outside="close"
     >
 
@@ -10,7 +10,7 @@
             @activated="active = true"
         >
             <i class="fas fa-calendar"></i>
-            <span v-if="internalValue == null || internalValue.operator == null">
+            <span v-if="confirmedValue == null || confirmedValue.operator == null">
                 Select a {{ filterConfig.name }}
             </span>
             <span v-else>
@@ -24,9 +24,12 @@
             @reset="reset"
             @apply="apply"
             v-if="active"
+            class="w-filter-dropdown-lg"
         >
-            <div class="w-32">
+
+            <div class="w-1/2">
                 <multiselect
+                    class=""
                     v-model="internalValue.operator"
                     :options="options"
                     placeholder="Operator"
@@ -37,19 +40,25 @@
             <input
                 type="text"
                 v-model="internalValue.values[0]"
-                class="w-20 border ml-2 px-2"
+                class="flex-1 min-w-0 border ml-10 text-14 px-2"
             >
             <span
-                v-if="internalValue.operator == 'between'"
-                class="ml-2 self-center"
+                :class="{ 
+                    'visible': internalValue.operator == 'between',
+                    'invisible': internalValue.operator != 'between'
+                }"
+                class="ml-2 self-center text-14 ml-10"
             >and</span>
+
             <input
                 type="text"
                 v-model="internalValue.values[1]"
-                class="w-20 border ml-2 px-2"
-                v-if="internalValue.operator == 'between'"
+                class="flex-1 min-w-0 border ml-10 text-14 px-2"
+                :class="{ 
+                    'visible': internalValue.operator == 'between',
+                    'invisible': internalValue.operator != 'between'
+                }"
             >
-
         </bi-filter-dropdown>
 
     </div>
@@ -77,11 +86,11 @@ export default {
     computed: {
         label() {
             try {
-                if (this.internalValue.operator == "between") {
-                    return `Between ${this.internalValue.values[0] ||
-                        ""} and ${this.internalValue.values[1] || ""}`;
+                if (this.confirmedValue.operator == "between") {
+                    return `Between ${this.confirmedValue.values[0] ||
+                        ""} and ${this.confirmedValue.values[1] || ""}`;
                 }
-                return `${this.internalValue.operator} ${this.internalValue
+                return `${this.confirmedValue.operator} ${this.confirmedValue
                     .values[0] || ""}`;
             } catch (error) {
                 return "";

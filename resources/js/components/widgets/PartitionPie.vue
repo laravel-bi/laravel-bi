@@ -11,7 +11,7 @@
             <div class="p-2 pt-0">
                 <pie-chart
                     ref="chart"
-                    :styles="{'height': '100px'}"
+                    :styles="{'height': '130px'}"
                     :options="options"
                 ></pie-chart>
             </div>

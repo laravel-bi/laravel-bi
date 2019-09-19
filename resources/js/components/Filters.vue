@@ -1,7 +1,8 @@
 <template>
-    <div class="bg-white text-right text-gray-600 text-xs p-2 shadow relative">
+    <div class="bg-header h-header text-gray-600 shadow flex flex-row-reverse">
 
-        <span
+        <div
+            class="h-full"
             v-for="filter in filtersConfig"
             v-bind:key="filter.key"
         >
@@ -15,7 +16,7 @@
                 @activated="closeOthers"
             ></component>
 
-        </span>
+        </div>
 
     </div>
 </template>

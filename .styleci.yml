@@ -1,6 +1,5 @@
-php:
-    preset: laravel
-    enabled:
-        - concat_with_spaces
-    disabled:
-        - trailing_comma_in_multiline_array
+preset: laravel
+enabled:
+    - concat_with_spaces
+disabled:
+    - trailing_comma_in_multiline_array

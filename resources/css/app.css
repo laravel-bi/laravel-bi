@@ -28,3 +28,4 @@ html { font-size: 62.5%; }
 .c-day-content { @apply text-12 !important; height: 25px !important; width: 25px !important;}
 .c-pane { @apply min-w-0 !important; width: 200px; }
 .c-table-cell { @apply text-12 !important;}
+.c-day-background { @apply bg-btn !important; height: 2.3rem !important; }

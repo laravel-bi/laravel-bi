@@ -8269,6 +8269,9 @@ html { font-size: 62.5%;
 .c-table-cell { font-size: 1.2rem !important;
 }
 
+.c-day-background { background-color: #039be5 !important; height: 2.3rem !important;
+}
+
 @media (min-width: 640px) {
   .sm\:sr-only {
     position: absolute;

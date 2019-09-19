@@ -39165,7 +39165,7 @@ var render = function() {
       _c(
         "div",
         {
-          staticClass: "border-t border-widget-border pt-8",
+          staticClass: "border-t border-widget-border pt-8 relative",
           class: _vm.widgetClass
         },
         [
@@ -39176,7 +39176,7 @@ var render = function() {
                   top: "50%",
                   right: "50%",
                   "margin-top": "-22px",
-                  "margin-left": "-22px"
+                  "margin-right": "-22px"
                 }
               })
             : _vm._e(),

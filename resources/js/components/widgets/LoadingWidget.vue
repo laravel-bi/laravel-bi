@@ -18,11 +18,11 @@
                 ></i>
             </div>
         </div>
-        <div :class="widgetClass" class="border-t border-widget-border pt-8">
+        <div :class="widgetClass" class="border-t border-widget-border pt-8 relative">
             <bi-loader
                 v-if="internalLoading"
                 class="absolute"
-                style="top: 50%; right: 50%; margin-top: -22px; margin-left: -22px"
+                style="top: 50%; right: 50%; margin-top: -22px; margin-right: -22px"
             >
             </bi-loader>
             <div v-if="!internalLoading">

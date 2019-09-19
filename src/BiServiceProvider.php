@@ -26,7 +26,7 @@ class BiServiceProvider extends ServiceProvider
         ], 'bi-config');
 
         $this->publishes([
-            __DIR__.'/../public' => public_path('vendor/bi'),
+            __DIR__ . '/../public' => public_path('vendor/bi')
         ], 'bi-assets');
     }
 

@@ -24,7 +24,7 @@ abstract class BaseWidget implements \JsonSerializable, Widget
         };
     }
 
-    abstract public function data(Dashboard $dashboard, Request $request);
+    abstract public function rawData(Dashboard $dashboard, Request $request);
 
     public static function create($key, $name): Widget
     {
@@ -59,6 +59,11 @@ abstract class BaseWidget implements \JsonSerializable, Widget
         }, $dashboard->model::query());
         $builder = $this->scope->call($this, $builder);
         return $builder;
+    }
+
+    public function data(Dashboard $dashboard, Request $request)
+    {
+        return $this->rawData($dashboard, $request);
     }
 
     public function jsonSerialize()

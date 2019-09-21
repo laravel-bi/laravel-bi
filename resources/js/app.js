@@ -41,6 +41,7 @@ import FilterDropdown from "./components/filters/FilterDropdown.vue";
 import FilterDate from "./components/filters/Date.vue";
 import FilterString from "./components/filters/String.vue";
 import FilterNumber from "./components/filters/Number.vue";
+import FilterBelongsTo from "./components/filters/BelongsTo.vue";
 
 import VCalendar from "v-calendar";
 
@@ -60,6 +61,7 @@ Vue.component("bi-filter-dropdown", FilterDropdown);
 Vue.component("bi-filter-date", FilterDate);
 Vue.component("bi-filter-string", FilterString);
 Vue.component("bi-filter-number", FilterNumber);
+Vue.component("bi-filter-belongs-to", FilterBelongsTo);
 
 import "v-calendar/lib/v-calendar.min.css";
 

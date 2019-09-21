@@ -2,31 +2,43 @@
 
 namespace LaravelBi\LaravelBi\Dimensions;
 
-use DB;
+use LaravelBi\LaravelBi\Widgets\Widget;
 use Illuminate\Database\Eloquent\Builder;
 
 class BelongsToDimension extends BaseDimension
 {
 
-    public $relationship;
-    public $relationshipColumn;
+    public $relation;
 
-    public function relationship($relationship, $column)
+    public function __construct($key, $name)
     {
-        $this->relationship       = $relationship;
-        $this->relationshipColumn = $column;
+        parent::__construct($key, $name);
+        $this->relation = $key;
+    }
+
+    public function relation($relation): self
+    {
+        $this->relation = $relation;
         return $this;
     }
 
-    public function apply(Builder $builder, $widget)
+    public function otherColumn($otherColumn): self
     {
-        $modelInstance        = new $widget->model();
-        $relationshipInstance = $modelInstance->{$this->relationship}();
-        $subQuery             = $relationshipInstance->getRelated()
-                                                     ->getQuery()
-                                                     ->select($this->relationshipColumn)
-                                                     ->where($relationshipInstance->getQualifiedOwnerKeyName(), DB::raw($relationshipInstance->getQualifiedForeignKey()));
-        return $builder->selectSub($subQuery, $this->key)
+        $this->otherColumn = $otherColumn;
+        return $this;
+    }
+
+    public function apply(Builder $builder, Widget $widget): Builder
+    {
+        $method   = $this->relation;
+        $relation = $builder->getModel()->$method();
+
+        $table      = $relation->getRelated()->getTable();
+        $parentKey  = $relation->getQualifiedOwnerKeyName();
+        $foreignKey = $relation->getQualifiedForeignKeyName();
+
+        return $builder->addSelect("$table.{$this->otherColumn} as {$this->key}")
+                       ->join($table, $parentKey, '=', $foreignKey)
                        ->groupBy($this->key);
     }
 

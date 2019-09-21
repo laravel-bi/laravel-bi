@@ -25,7 +25,7 @@ class LineChart extends BaseWidget
         return $this;
     }
 
-    public function data(Dashboard $dashboard, Request $request): Collection
+    public function rawData(Dashboard $dashboard, Request $request): Collection
     {
         $builder = $this->getBaseBuilder($dashboard, $request);
         $builder = $this->dimension->apply($builder, $this);

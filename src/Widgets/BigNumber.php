@@ -19,7 +19,7 @@ class BigNumber extends BaseWidget
         return $this;
     }
 
-    public function data(Dashboard $dashboard, Request $request): Model
+    public function rawData(Dashboard $dashboard, Request $request): Model
     {
         $builder = $this->getBaseBuilder($dashboard, $request);
         $builder = $this->metric->apply($builder, $this);

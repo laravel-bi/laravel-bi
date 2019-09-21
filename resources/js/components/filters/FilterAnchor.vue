@@ -7,7 +7,7 @@
                 'bg-gray-500 text-white' : active,
                 'hover:bg-gray-200 hover:text-gray-600' : !active,
             }"
-        @click="$emit('activated')"
+        @click.prevent="$emit('activated')"
     >
 
         <slot></slot>

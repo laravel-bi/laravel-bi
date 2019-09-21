@@ -27,4 +27,9 @@ abstract class BaseDimension implements Dimension
         return $this;
     }
 
+    public function extract($value)
+    {
+        return $value;
+    }
+
 }

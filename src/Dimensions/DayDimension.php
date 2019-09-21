@@ -11,8 +11,8 @@ class DayDimension extends BaseDimension
 
     public function apply(Builder $builder, Widget $widget): Builder
     {
-        return $builder->addSelect(DB::raw("DATE_FORMAT({$this->key}, '%Y-%m-%d') as {$this->key}"))
-                       ->groupBy(DB::raw("DATE_FORMAT({$this->key}, '%Y-%m-%d')"));
+        return $builder->addSelect(DB::raw("DATE_FORMAT({$this->column}, '%Y-%m-%d') as `{$this->key}`"))
+                       ->groupBy($this->key);
     }
 
 }

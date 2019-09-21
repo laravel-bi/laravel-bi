@@ -25,7 +25,17 @@ class Table extends BaseWidget
         return $this;
     }
 
-    public function data(Dashboard $dashboard, Request $request): Collection
+    // public function data(Dashboard $dashboard, Request $request)
+    // {
+    //     $rawData = $this->rawData($dashboard, $request);
+    //     return collect($rawData)->map(function ($rawRow) {
+    //         return collect($this->dimensions)->map(function ($dimension) use ($rawRow) {
+    //             return $dimension->extract($rawRow[$dimension->key]);
+    //         });
+    //     });
+    // }
+
+    public function rawData(Dashboard $dashboard, Request $request): Collection
     {
         $builder = $this->getBaseBuilder($dashboard, $request);
         $builder = collect($this->dimensions)->reduce(function ($builder, $dimension) {
@@ -34,7 +44,9 @@ class Table extends BaseWidget
         $builder = collect($this->metrics)->reduce(function ($builder, $metric) {
             return $metric->apply($builder, $this);
         }, $builder);
-        $builder->orderBy($request->input('sort')['col'], $request->input('sort')['dir']);
+        if($request->has('sort')) {
+            $builder->orderBy($request->input('sort')['col'], $request->input('sort')['dir']);
+        }
         return $builder->get();
     }
 

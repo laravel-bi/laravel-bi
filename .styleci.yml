@@ -1,8 +1,9 @@
 preset: laravel
 enabled:
     - concat_with_spaces
-    - align_equals 
+    - align_equals
 disabled:
     - trailing_comma_in_multiline_array
     - concat_without_spaces
     - unalign_equals
+    - not_operators_with_space

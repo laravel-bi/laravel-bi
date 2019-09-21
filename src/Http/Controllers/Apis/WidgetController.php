@@ -27,11 +27,11 @@ class WidgetController extends BaseController
         $data = $widget->data($dashboard, $request);
 
         $headers = [
-            "Content-type"        => "text/plain",
-            "Pragma"              => "no-cache",
-            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
-            "Expires"             => "0",
-            "Content-Disposition" => "attachment; filename=" . str_slug($widget->name) . ".csv"
+            'Content-type'        => 'text/plain',
+            'Pragma'              => 'no-cache',
+            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
+            'Expires'             => '0',
+            'Content-Disposition' => 'attachment; filename=' . str_slug($widget->name) . '.csv'
         ];
 
         return Response::stream(function () use ($data) {

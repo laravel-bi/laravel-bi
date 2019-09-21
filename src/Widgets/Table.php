@@ -44,7 +44,7 @@ class Table extends BaseWidget
         $builder = collect($this->metrics)->reduce(function ($builder, $metric) {
             return $metric->apply($builder, $this);
         }, $builder);
-        if($request->has('sort')) {
+        if ($request->has('sort')) {
             $builder->orderBy($request->input('sort')['col'], $request->input('sort')['dir']);
         }
         return $builder->get();
@@ -57,5 +57,4 @@ class Table extends BaseWidget
             'dimensions' => $this->dimensions
         ];
     }
-
 }

@@ -19,18 +19,21 @@ class PartitionPie extends BaseWidget
     public function metric(Metric $metric): self
     {
         $this->metric = $metric;
+
         return $this;
     }
 
     public function dimension(Dimension $dimension): self
     {
         $this->dimension = $dimension;
+
         return $this;
     }
 
     public function colors(array $colors): self
     {
         $this->colors = $colors;
+
         return $this;
     }
 
@@ -39,6 +42,7 @@ class PartitionPie extends BaseWidget
         $builder = $this->getBaseBuilder($dashboard, $request);
         $builder = $this->dimension->apply($builder, $this);
         $builder = $this->metric->apply($builder, $this);
+
         return $builder->get();
     }
 

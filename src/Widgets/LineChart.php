@@ -16,12 +16,14 @@ class LineChart extends BaseWidget
     public function metrics(array $metrics): self
     {
         $this->metrics = $metrics;
+
         return $this;
     }
 
     public function dimension(Dimension $dimension): self
     {
         $this->dimension = $dimension;
+
         return $this;
     }
 
@@ -32,6 +34,7 @@ class LineChart extends BaseWidget
         $builder = collect($this->metrics)->reduce(function ($builder, $metric) {
             return $metric->apply($builder, $this);
         }, $builder);
+
         return $builder->get();
     }
 

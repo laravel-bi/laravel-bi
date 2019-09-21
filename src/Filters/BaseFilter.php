@@ -30,6 +30,7 @@ abstract class BaseFilter implements Filter
     public function column(string $column): self
     {
         $this->column = $column;
+
         return $this;
     }
 

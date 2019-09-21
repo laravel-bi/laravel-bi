@@ -3,8 +3,8 @@
 namespace LaravelBi\LaravelBi\Metrics;
 
 use DB;
-use Illuminate\Database\Eloquent\Builder;
 use LaravelBi\LaravelBi\Widgets\Widget;
+use Illuminate\Database\Eloquent\Builder;
 
 class CountMetric extends BaseMetric
 {

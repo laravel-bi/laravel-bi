@@ -19,12 +19,14 @@ class BelongsToDimension extends BaseDimension
     public function relation($relation): self
     {
         $this->relation = $relation;
+
         return $this;
     }
 
     public function otherColumn($otherColumn): self
     {
         $this->otherColumn = $otherColumn;
+
         return $this;
     }
 

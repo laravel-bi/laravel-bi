@@ -24,6 +24,7 @@ abstract class BaseDimension implements Dimension
     public function column($column)
     {
         $this->column = $column;
+
         return $this;
     }
 

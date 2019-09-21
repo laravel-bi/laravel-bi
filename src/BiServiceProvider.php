@@ -2,8 +2,8 @@
 
 namespace LaravelBi\LaravelBi;
 
-use Illuminate\Support\ServiceProvider;
 use Route;
+use Illuminate\Support\ServiceProvider;
 
 class BiServiceProvider extends ServiceProvider
 {

@@ -25,12 +25,14 @@ abstract class BaseMetric implements Metric
     public function column($column)
     {
         $this->column = $column;
+
         return $this;
     }
 
     public function color($color)
     {
         $this->color = $color;
+
         return $this;
     }
 

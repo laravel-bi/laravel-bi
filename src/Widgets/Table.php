@@ -16,12 +16,14 @@ class Table extends BaseWidget
     public function metrics(array $metrics): self
     {
         $this->metrics = $metrics;
+
         return $this;
     }
 
     public function dimensions(array $dimensions): self
     {
         $this->dimensions = $dimensions;
+
         return $this;
     }
 
@@ -47,6 +49,7 @@ class Table extends BaseWidget
         if ($request->has('sort')) {
             $builder->orderBy($request->input('sort')['col'], $request->input('sort')['dir']);
         }
+
         return $builder->get();
     }
 

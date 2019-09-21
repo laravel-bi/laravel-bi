@@ -16,6 +16,7 @@ class BigNumber extends BaseWidget
     public function metric(Metric $metric): self
     {
         $this->metric = $metric;
+
         return $this;
     }
 
@@ -23,6 +24,7 @@ class BigNumber extends BaseWidget
     {
         $builder = $this->getBaseBuilder($dashboard, $request);
         $builder = $this->metric->apply($builder, $this);
+
         return $builder->first();
     }
 

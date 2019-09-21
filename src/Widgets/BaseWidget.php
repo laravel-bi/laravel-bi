@@ -34,12 +34,14 @@ abstract class BaseWidget implements \JsonSerializable, Widget
     public function width($width)
     {
         $this->width = $width;
+
         return $this;
     }
 
     public function scope(Closure $scope): Widget
     {
         $this->scope = $scope;
+
         return $this;
     }
 
@@ -55,9 +57,11 @@ abstract class BaseWidget implements \JsonSerializable, Widget
             if (isset($requestedFilters[$filter->key])) {
                 return $filter->apply($builder, $requestedFilters[$filter->key], $request);
             }
+
             return $builder;
         }, $dashboard->model::query());
         $builder = $this->scope->call($this, $builder);
+
         return $builder;
     }
 

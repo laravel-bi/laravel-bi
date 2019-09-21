@@ -6,4 +6,4 @@ disabled:
     - trailing_comma_in_multiline_array
     - concat_without_spaces
     - unalign_equals
-    - logical_not_operators_with_spaces 
+    - not_operator_with_successor_space

@@ -2,8 +2,8 @@
 
 return [
 
-    'path' => env('BI_PATH', 'bi'),
+    'path'       => env('BI_PATH', 'bi'),
 
-    'dashboards' => [],
+    'dashboards' => []
 
 ];

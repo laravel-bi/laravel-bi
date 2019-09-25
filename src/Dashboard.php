@@ -8,6 +8,7 @@ use LaravelBi\LaravelBi\Widgets\Widget;
 abstract class Dashboard implements \JsonSerializable
 {
     abstract public function widgets();
+
     abstract public function filters();
 
     public function findWidgetOrFail($widgetKey)

@@ -29,5 +29,6 @@ abstract class AbstractDimensionTest extends TestCase
     }
 
     abstract protected function buildDimension(): Dimension;
+
     abstract protected function getQuery(): string;
 }

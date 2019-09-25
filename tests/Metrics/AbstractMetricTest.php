@@ -29,5 +29,6 @@ abstract class AbstractMetricTest extends TestCase
     }
 
     abstract protected function buildMetric(): Metric;
+    
     abstract protected function getQuery(): string;
 }

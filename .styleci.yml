@@ -7,3 +7,4 @@ disabled:
     - concat_without_spaces
     - unalign_equals
     - not_operator_with_successor_space
+    - no_blank_lines_after_class_opening

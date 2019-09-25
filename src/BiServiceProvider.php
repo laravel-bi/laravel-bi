@@ -7,7 +7,6 @@ use Illuminate\Support\ServiceProvider;
 
 class BiServiceProvider extends ServiceProvider
 {
-
     public function boot()
     {
         if ($this->app->runningInConsole()) {

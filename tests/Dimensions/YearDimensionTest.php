@@ -16,5 +16,4 @@ class YearDimensionTest extends AbstractDimensionTest
     {
         return 'select DATE_FORMAT(column, \'%Y\') as `dimension` from `foo` group by `dimension`';
     }
-
 }

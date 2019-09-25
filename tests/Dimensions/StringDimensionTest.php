@@ -16,5 +16,4 @@ class StringDimensionTest extends AbstractDimensionTest
     {
         return 'select `column` as `dimension` from `foo` group by `dimension`';
     }
-
 }

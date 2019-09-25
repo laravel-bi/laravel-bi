@@ -16,5 +16,4 @@ class AverageMetricTest extends AbstractMetricTest
     {
         return 'select AVG(column) as `average` from `foo`';
     }
-
 }

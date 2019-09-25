@@ -10,7 +10,6 @@ use LaravelBi\LaravelBi\Tests\Models\FooModel;
 
 abstract class AbstractDimensionTest extends TestCase
 {
-
     public function setUp(): void
     {
         parent::setUp();
@@ -31,5 +30,4 @@ abstract class AbstractDimensionTest extends TestCase
 
     abstract protected function buildDimension(): Dimension;
     abstract protected function getQuery(): string;
-
 }

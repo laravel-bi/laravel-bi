@@ -16,5 +16,4 @@ class SumMetricTest extends AbstractMetricTest
     {
         return 'select SUM(column) as `sum` from `foo`';
     }
-
 }

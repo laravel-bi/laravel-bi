@@ -16,5 +16,4 @@ class CountMetricTest extends AbstractMetricTest
     {
         return 'select COUNT(*) as `count` from `foo`';
     }
-
 }

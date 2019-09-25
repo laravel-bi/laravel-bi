@@ -10,7 +10,6 @@ use LaravelBi\LaravelBi\Tests\Models\FooModel;
 
 abstract class AbstractMetricTest extends TestCase
 {
-
     public function setUp(): void
     {
         parent::setUp();
@@ -31,5 +30,4 @@ abstract class AbstractMetricTest extends TestCase
 
     abstract protected function buildMetric(): Metric;
     abstract protected function getQuery(): string;
-
 }

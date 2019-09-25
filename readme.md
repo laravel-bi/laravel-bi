@@ -76,6 +76,10 @@ It shows a line chart with different axis on a single horizontal dimension.
 
 It shows a pie chart with a single metric and a single dimension.
 
+#### Filters
+
+Filters are special tools that allow users to filter data in each dashboard. Laravel-Bi is shippend with some preconfigured filters:
+
 ### Usage
 
 #### Installation
@@ -95,6 +99,8 @@ php artisan bi:dashboard ExampleDashboard
 ```
 
 #### Dashboard configuration
+
+Each dashboard presents 2 method: `filters()` and `widgets()`. You have to implement them returning respectively a list of filters and a list of widget.
 
 ```php
 public function widgets()

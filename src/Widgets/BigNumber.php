@@ -9,7 +9,6 @@ use LaravelBi\LaravelBi\Metrics\Metric;
 
 class BigNumber extends BaseWidget
 {
-
     protected $metric;
     protected $component = 'big-number';
 
@@ -34,5 +33,4 @@ class BigNumber extends BaseWidget
             'metric' => $this->metric
         ];
     }
-
 }

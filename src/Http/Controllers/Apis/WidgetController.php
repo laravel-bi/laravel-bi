@@ -9,7 +9,6 @@ use LaravelBi\LaravelBi\Http\Controllers\BaseController;
 
 class WidgetController extends BaseController
 {
-
     public function getWidget(Dashboard $dashboard, $widget, Request $request)
     {
         $widget = $dashboard->findWidgetOrFail($widget);
@@ -42,5 +41,4 @@ class WidgetController extends BaseController
             fclose($file);
         }, 200, $headers);
     }
-
 }

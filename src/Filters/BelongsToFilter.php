@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class BelongsToFilter extends BaseFilter
 {
-
     private $relation;
     private $otherColumn;
 
@@ -46,5 +45,4 @@ class BelongsToFilter extends BaseFilter
             'otherColumn' => $this->otherColumn
         ];
     }
-
 }

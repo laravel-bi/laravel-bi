@@ -4,7 +4,6 @@ namespace LaravelBi\LaravelBi\Http\Controllers;
 
 class HomepageController extends BaseController
 {
-
     public function getIndex()
     {
         return view('bi::index')
@@ -17,5 +16,4 @@ class HomepageController extends BaseController
             'base' => config('bi.path')
         ];
     }
-
 }

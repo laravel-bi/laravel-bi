@@ -7,7 +7,6 @@ use LaravelBi\LaravelBi\Http\Controllers\BaseController;
 
 class DashboardController extends BaseController
 {
-
     public function getDashboards()
     {
         return [
@@ -23,5 +22,4 @@ class DashboardController extends BaseController
             'data'   => $dashboard
         ];
     }
-
 }

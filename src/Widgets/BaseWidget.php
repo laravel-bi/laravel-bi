@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 abstract class BaseWidget implements \JsonSerializable, Widget
 {
-
     public $width;
     public $key;
     public $name;

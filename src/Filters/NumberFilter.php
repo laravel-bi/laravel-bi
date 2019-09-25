@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class NumberFilter extends BaseFilter
 {
-
     public $component = 'number';
 
     public function apply(Builder $builder, array $filterData, Request $request): Builder

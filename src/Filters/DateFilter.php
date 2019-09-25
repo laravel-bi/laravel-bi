@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class DateFilter extends BaseFilter
 {
-
     public $component = 'date';
 
     public function apply(Builder $builder, array $filterData, Request $request): Builder

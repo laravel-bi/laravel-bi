@@ -54,5 +54,4 @@ class PartitionPie extends BaseWidget
             'colors'    => $this->colors
         ];
     }
-
 }

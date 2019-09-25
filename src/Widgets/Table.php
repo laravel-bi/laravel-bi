@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Collection;
 
 class Table extends BaseWidget
 {
-
     protected $metrics;
     protected $dimensions;
     protected $component = 'table';

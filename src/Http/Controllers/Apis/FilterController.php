@@ -8,7 +8,6 @@ use LaravelBi\LaravelBi\Http\Controllers\BaseController;
 
 class FilterController extends BaseController
 {
-
     public function getFilter(Dashboard $dashboard, string $filterKey, Request $request)
     {
         $filter = $dashboard->findFilterOrFail($filterKey);
@@ -18,5 +17,4 @@ class FilterController extends BaseController
             'data'   => $filter->data($dashboard, $request)
         ];
     }
-
 }

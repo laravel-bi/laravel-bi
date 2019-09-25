@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 abstract class BaseFilter implements Filter
 {
-
     public $key;
     public $name;
     public $column;
@@ -38,5 +37,4 @@ abstract class BaseFilter implements Filter
     {
         return [];
     }
-
 }

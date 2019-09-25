@@ -45,5 +45,4 @@ class LineChart extends BaseWidget
             'dimension' => $this->dimension
         ];
     }
-
 }

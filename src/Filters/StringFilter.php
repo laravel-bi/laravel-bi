@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class StringFilter extends BaseFilter
 {
-
     public $component = 'string';
 
     public function apply(Builder $builder, array $filterData, Request $request): Builder
@@ -22,5 +21,4 @@ class StringFilter extends BaseFilter
             'options' => $dashboard->model::query()->select($this->column)->distinct()->pluck($this->column)
         ];
     }
-
 }

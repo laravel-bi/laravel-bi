@@ -4,7 +4,6 @@ namespace LaravelBi\LaravelBi\Metrics;
 
 abstract class BaseMetric implements Metric
 {
-
     public $key;
     public $name;
     public $column;
@@ -35,5 +34,4 @@ abstract class BaseMetric implements Metric
 
         return $this;
     }
-
 }

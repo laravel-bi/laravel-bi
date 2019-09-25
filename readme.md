@@ -2,7 +2,8 @@
 
 Laravel Bi is a beautiful and fully-featured Business Intelligence dashboard manager for Laravel.
 
-![StyleCI](https://github.styleci.io/repos/203451164/shield)
+[![Build Status](https://travis-ci.org/laravel-bi/laravel-bi.svg?branch=master)](https://travis-ci.org/laravel-bi/laravel-bi)
+[![StyleCI](https://github.styleci.io/repos/203451164/shield?style=plastic&branch=master)](https://github.styleci.io/repos/203451164)
 
 ### Main features
 

@@ -2,6 +2,8 @@
 
 Laravel Bi is a beautiful and fully-featured Business Intelligence dashboard manager for Laravel.
 
+![StyleCI](https://github.styleci.io/repos/203451164/shield)
+
 ### Main features
 
 Laravel-Bi uses `dashboards` to show data to the users. Each dashboard contains `widgets`. Each widget presents data to your user using different tool. Each widget's `metrics` and `dimensions` are fully customizable.

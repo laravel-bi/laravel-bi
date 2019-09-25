@@ -4,7 +4,6 @@ namespace LaravelBi\LaravelBi\Dimensions;
 
 abstract class BaseDimension implements Dimension
 {
-
     public $key;
     public $name;
     public $column;
@@ -32,5 +31,4 @@ abstract class BaseDimension implements Dimension
     {
         return $value;
     }
-
 }

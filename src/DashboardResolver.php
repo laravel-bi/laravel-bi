@@ -4,7 +4,6 @@ namespace LaravelBi\LaravelBi;
 
 class DashboardResolver
 {
-
     private $dashboards;
 
     public function __construct()

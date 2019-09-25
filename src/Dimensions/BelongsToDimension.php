@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class BelongsToDimension extends BaseDimension
 {
-
     public $relation;
 
     public function __construct($key, $name)
@@ -43,5 +42,4 @@ class BelongsToDimension extends BaseDimension
                        ->join($table, $parentKey, '=', $foreignKey)
                        ->groupBy($this->key);
     }
-
 }

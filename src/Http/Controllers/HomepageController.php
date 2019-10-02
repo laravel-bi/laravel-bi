@@ -2,6 +2,8 @@
 
 namespace LaravelBi\LaravelBi\Http\Controllers;
 
+use Config;
+
 class HomepageController extends BaseController
 {
     public function getIndex()
@@ -13,7 +15,7 @@ class HomepageController extends BaseController
     protected function getServerData()
     {
         return [
-            'base' => config('bi.path')
+            'base' => Config::get('bi.path', 'bi')
         ];
     }
 }

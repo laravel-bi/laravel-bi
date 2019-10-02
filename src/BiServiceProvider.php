@@ -2,7 +2,9 @@
 
 namespace LaravelBi\LaravelBi;
 
+use App;
 use Route;
+use Config;
 use Illuminate\Support\ServiceProvider;
 
 class BiServiceProvider extends ServiceProvider
@@ -13,9 +15,11 @@ class BiServiceProvider extends ServiceProvider
             $this->registerPublishing();
         }
 
+        $this->setUpRouteModelBinding();
+
         $this->registerViews();
         $this->registerRoutes();
-        $this->setUpRouteModelBinding();
+        $this->registerCommands();
     }
 
     protected function registerPublishing()
@@ -39,24 +43,32 @@ class BiServiceProvider extends ServiceProvider
         Route::group([
             'namespace'  => 'LaravelBi\LaravelBi\Http\Controllers',
             'as'         => 'bi',
-            'prefix'     => config('bi.path', 'bi'),
+            'prefix'     => Config::get('bi.path', 'bi'),
             'middleware' => 'web'
         ], function () {
-            Route::group([
-                'namespace' => 'Apis',
-                'as'        => 'bi.api',
-                'prefix'    => '/bi-apis'
-            ], function () {
-                $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
-            });
             $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         });
+        Route::group([
+            'namespace'  => 'LaravelBi\LaravelBi\Http\Controllers\Apis',
+            'as'         => 'bi.api',
+            'prefix'     => Config::get('bi.path', 'bi') . '-apis',
+            'middleware' => 'web'
+        ], function () {
+            $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
+        });
+    }
+
+    protected function registerCommands()
+    {
+        $this->commands([
+            Console\DashboardCommand::class
+        ]);
     }
 
     protected function setUpRouteModelBinding()
     {
         Route::bind('dashboard', function ($value) {
-            return resolve(DashboardResolver::class)->find($value) ?? abort(404);
+            return App::make(DashboardResolver::class)->find($value) ?? abort(404);
         });
     }
 }

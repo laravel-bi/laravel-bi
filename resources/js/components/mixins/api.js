@@ -17,7 +17,7 @@ export default {
     methods: {
         api(url, params) {
             return axios
-                .get(`bi-apis/${url}`, {
+                .get(`/${window.bi.base}-apis/${url}`, {
                     params: params
                 })
                 .then(response => {

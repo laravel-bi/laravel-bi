@@ -60,7 +60,7 @@ export default {
             this.$emit("refresh");
         },
         download() {
-            window.open(`bi-apis/${this.dashboardKey}/widgets/${this.widgetKey}/csv`);
+            window.open(`/${window.bi.base}-apis/${this.dashboardKey}/widgets/${this.widgetKey}/csv`);
         }
     }
 };

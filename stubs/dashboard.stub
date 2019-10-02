@@ -1,0 +1,27 @@
+<?php
+
+namespace DummyNamespace;
+
+use LaravelBi\LaravelBi\Dashboard;
+
+class DummyClassDashboard extends Dashboard
+{
+
+    public $model  = DummyModel::class;
+    public $uriKey = 'dummyName';
+    public $name   = 'dummyName';
+
+    public function filters()
+    {
+        return [
+            
+        ];
+    }
+
+    public function widgets()
+    {
+        return [
+            
+        ];
+    }
+}

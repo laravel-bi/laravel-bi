@@ -2772,7 +2772,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$emit("refresh");
     },
     download: function download() {
-      window.open("bi-apis/".concat(this.dashboardKey, "/widgets/").concat(this.widgetKey, "/csv"));
+      window.open("/".concat(window.bi.base, "-apis/").concat(this.dashboardKey, "/widgets/").concat(this.widgetKey, "/csv"));
     }
   }
 });
@@ -55570,7 +55570,7 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.interceptors.request.use(function (
     api: function api(url, params) {
       var _this = this;
 
-      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("bi-apis/".concat(url), {
+      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/".concat(window.bi.base, "-apis/").concat(url), {
         params: params
       }).then(function (response) {
         var status = response.data.status;

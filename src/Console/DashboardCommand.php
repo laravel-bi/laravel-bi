@@ -42,8 +42,7 @@ class DashboardCommand extends GeneratorCommand
                 Str::studly($name),
                 Str::camel($shortName),
                 Str::studly($model)
-            ]
-            , parent::buildClass($name)
+            ], parent::buildClass($name)
         );
     }
 

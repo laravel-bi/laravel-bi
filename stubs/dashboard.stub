@@ -4,12 +4,12 @@ namespace DummyNamespace;
 
 use LaravelBi\LaravelBi\Dashboard;
 
-class DummyClassDashboard extends Dashboard
+class DummyClass extends Dashboard
 {
 
     public $model  = DummyModel::class;
     public $uriKey = 'dummyName';
-    public $name   = 'dummyName';
+    public $name   = 'DummyClass';
 
     public function filters()
     {

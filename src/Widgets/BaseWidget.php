@@ -60,9 +60,9 @@ abstract class BaseWidget implements \JsonSerializable, Widget
 
             return $builder;
         }, $builder);
-        
+
         $builder = $this->scope->call($this, $builder);
-        
+
         return $builder;
     }
 

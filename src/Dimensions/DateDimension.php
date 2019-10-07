@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class DateDimension extends BaseDimension
 {
-
     private $format;
 
     public function apply(Builder $builder, Widget $widget): Builder
@@ -20,6 +19,7 @@ class DateDimension extends BaseDimension
     public function format($format)
     {
         $this->format = $format;
+
         return $this;
     }
 }

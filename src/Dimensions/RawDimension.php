@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class RawDimension extends BaseDimension
 {
-
     private $raw;
 
     public function apply(Builder $builder, Widget $widget): Builder
@@ -20,6 +19,7 @@ class RawDimension extends BaseDimension
     public function raw($raw)
     {
         $this->raw = $raw;
+
         return $this;
     }
 }

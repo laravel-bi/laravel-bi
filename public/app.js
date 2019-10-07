@@ -2032,11 +2032,6 @@ __webpack_require__.r(__webpack_exports__);
       collapsed: false
     };
   },
-  computed: {
-    width: function width() {
-      return this.collapsed ? '50px' : 'auto';
-    }
-  },
   mounted: function mounted() {
     var _this = this;
 
@@ -38537,43 +38532,43 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "bg-nav relative w-nav flex-shrink-0",
+      staticClass: "bg-nav absolute h-full w-nav z-20 shadow p-4",
       class: { "w-closed-nav": _vm.collapsed }
     },
     [
       _c(
-        "div",
+        "a",
         {
-          staticClass:
-            "p-4 pt-3 bg-primary text-gray-800 hover:bg-primary-600 hover:text-white cursor-pointer h-header",
+          staticClass: "float-right text-white text-24 p-8 py-12",
+          attrs: { href: "#" },
           on: {
             click: function($event) {
-              _vm.collapsed = !_vm.collapsed
+              return _vm.$emit("close")
             }
           }
         },
-        [_c("i", { staticClass: "fas fa-bars text-sm text-center" })]
+        [_c("i", { staticClass: "fa fa-window-close" })]
       ),
+      _vm._v(" "),
+      _c("div", { staticClass: "h-head-box text-white text-24 p-8 py-12" }, [
+        _vm._v("\n        Dashboard List:\n    ")
+      ]),
       _vm._v(" "),
       _c(
         "ul",
         _vm._l(_vm.dashboards, function(dashboard) {
           return _c(
             "li",
-            {
-              key: dashboard.uriKey,
-              staticClass: "text-white hover:text-primary"
-            },
+            { key: dashboard.uriKey },
             [
               _c(
                 "router-link",
                 {
-                  staticClass: "text-sm block p-4 my-1 outline-none",
+                  staticClass:
+                    "block px-8 my-1 outline-none text-16 text-white hover:bg-white hover:text-head",
                   attrs: { to: "/" + dashboard.uriKey }
                 },
                 [
-                  _c("i", { staticClass: "fas fa-tachometer-alt text-sm" }),
-                  _vm._v(" "),
                   !_vm.collapsed
                     ? _c("span", { staticClass: "ml-1" }, [
                         _vm._v(_vm._s(dashboard.name))
@@ -54735,8 +54730,14 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   router: router,
   data: {
     dashboardName: "",
+    nav: false,
     filters: {},
     filtersFlag: 0
+  },
+  watch: {
+    $route: function $route() {
+      this.nav = false;
+    }
   },
   mounted: function mounted() {
     var _this = this;

@@ -1,12 +1,12 @@
 <template>
-    <div class="bg-nav relative w-nav flex-shrink-0" :class="{'w-closed-nav': collapsed}">
-        <div class="p-4 pt-3 bg-primary text-gray-800 hover:bg-primary-600 hover:text-white cursor-pointer h-header" @click="collapsed=!collapsed">
-            <i class="fas fa-bars text-sm text-center"></i>
+    <div class="bg-nav absolute h-full w-nav z-20 shadow p-4" :class="{'w-closed-nav': collapsed}">
+        <a href="#" class="float-right text-white text-24 p-8 py-12" @click="$emit('close')"><i class="fa fa-window-close"></i></a>
+        <div class="h-head-box text-white text-24 p-8 py-12">
+            Dashboard List:
         </div>
         <ul>
-            <li v-for="dashboard in dashboards" v-bind:key="dashboard.uriKey" class="text-white hover:text-primary">
-                <router-link :to="'/' + dashboard.uriKey" class="text-sm block p-4 my-1 outline-none">
-                    <i class="fas fa-tachometer-alt text-sm"></i>
+            <li v-for="dashboard in dashboards" v-bind:key="dashboard.uriKey">
+                <router-link :to="'/' + dashboard.uriKey" class="block px-8 my-1 outline-none text-16 text-white hover:bg-white hover:text-head">
                     <span v-if="!collapsed" class="ml-1">{{ dashboard.name }}</span>
                 </router-link>
             </li>
@@ -29,11 +29,6 @@ export default {
             dashboards: [],
             collapsed: false
         };
-    },
-    computed: {
-        width() {
-            return this.collapsed ? '50px' : 'auto';
-        }
     },
     mounted() {
         this.api('dashboards').then(response => {            

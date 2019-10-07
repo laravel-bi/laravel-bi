@@ -2,15 +2,11 @@
 
 namespace LaravelBi\LaravelBi\Dimensions;
 
-use DB;
-use LaravelBi\LaravelBi\Widgets\Widget;
-use Illuminate\Database\Eloquent\Builder;
-
-class DayDimension extends BaseDimension
+class DayDimension extends DateDimension
 {
-    public function apply(Builder $builder, Widget $widget): Builder
+    public function __construct($key, $name)
     {
-        return $builder->addSelect(DB::raw("DATE_FORMAT({$this->column}, '%Y-%m-%d') as `{$this->key}`"))
-                       ->groupBy($this->key);
+        parent::__construct($key, $name);
+        $this->format('%Y-%m-%d');
     }
 }

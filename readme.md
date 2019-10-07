@@ -31,9 +31,17 @@ It represents a month. It applies a `DATE_FORMAT` clause to your database format
 
 It represents a day. It applies a `DATE_FORMAT` clause to your database format in order to take only year, month and day digits. Its default format is `%Y-%m-%d`  (e.g. _2019-01-15_).
 
+##### `DateDimension`
+
+It represents a day. It allows to set a custom `DATE_FORMAT` clause using `format()` method.
+
 ##### `BelongsToDimension`
 
 It represents a string value taken from a BelongsTo relationship. It comes from a JOIN clause in order to use it in filters or in sorting.
+
+##### `RawDimension`
+
+It represents a raw dimension you can edit as you want using `raw` method.
 
 ##### Custom dimensions
 

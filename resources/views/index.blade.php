@@ -13,20 +13,22 @@
 </head>
 <body class="text-text h-full bg-background font-muli">
 
-    <div id="laravel-bi" class="h-full flex flex-col">
+    <div id="laravel-bi" class="h-full flex flex-col" :class="{ 'overflow-hidden' : nav }">
 
         <div class="flex flex-grow flex-col">
 
             <div class="h-head-box bg-head">
                 <h1 class="p-20 text-25 text-white ">
-                    Laravel Bi <span v-cloak v-if="dashboardName" v-text="'>> ' + dashboardName"></span>
+                    <i class="fas fa-bars mr-10 cursor-pointer" @click.prevent="nav = true"></i> Laravel Bi <span v-cloak v-if="dashboardName" v-text="'>> ' + dashboardName"></span>
                 </h1>
             </div>
 
-            {{-- <bi-nav class="bg-gray-700 text-gray-400"></bi-nav> --}}
+            <bi-nav class="nav" :class="{ 'open': nav }" @close="nav = false"></bi-nav>
             <div class="flex-grow">
                 <router-view :filters="filters" :filters-flag="filtersFlag"></router-view>
             </div>
+
+            <div v-if="nav" class="h-full w-full z-10 bg-gray-100-alpha absolute" @click.prevent="nav = false"></div>
         </div>
 
         <bi-toast></bi-toast>

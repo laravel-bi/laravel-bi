@@ -4,7 +4,10 @@
 
 html { font-size: 62.5%; }
 
-/* .router-link-exact-active { @apply text-primary; } */
+.nav { transform: translateX(-300px); transition: ease transform .2s; box-shadow: 0 1px 12px 0 rgb(45, 50, 62); }
+.nav.open { transform: translateX(0px);  }
+
+.router-link-exact-active { @apply font-bold; }
 
 .multiselect { @apply min-h-0 !important; height: 40px !important; }
 .multiselect_select { height: 40px !important; }

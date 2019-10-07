@@ -76,8 +76,14 @@ new Vue({
     router,
     data: {
         dashboardName: "",
+        nav: false,
         filters: {},
         filtersFlag: 0
+    },
+    watch: {
+        $route() {
+            this.nav = false;
+        }
     },
     mounted() {
         console.log("Laravel Bi started!");

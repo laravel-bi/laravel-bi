@@ -1,12 +1,12 @@
 <?php
 
-namespace LaravelBi\LaravelBi\Dimensions;
+namespace LaravelBi\LaravelBi\Metrics;
 
 use DB;
 use LaravelBi\LaravelBi\Widgets\Widget;
 use Illuminate\Database\Eloquent\Builder;
 
-class RawDimension extends BaseDimension
+class RawMetric extends BaseMetric
 {
     private $raw;
 
@@ -19,7 +19,6 @@ class RawDimension extends BaseDimension
 
     public function apply(Builder $builder, Widget $widget): Builder
     {
-        return $builder->addSelect(DB::raw("{$this->raw} as `{$this->key}`"))
-                       ->groupBy($this->key);
+        return $builder->addSelect(DB::raw("{$this->raw} as `{$this->key}`"));
     }
 }

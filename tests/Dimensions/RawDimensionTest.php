@@ -9,11 +9,11 @@ class RawDimensionTest extends AbstractDimensionTest
 {
     protected function buildDimension(): Dimension
     {
-        return RawDimension::create('dimension', 'Dimension')->raw('SUM(col) / 100');
+        return RawDimension::create('dimension', 'Dimension')->raw('CONCAT(firstname, \' \', lastname)');
     }
 
     protected function getQuery(): string
     {
-        return 'select SUM(col) / 100 as `dimension` from `foo` group by `dimension`';
+        return 'select CONCAT(firstname, \' \', lastname) as `dimension` from `foo` group by `dimension`';
     }
 }

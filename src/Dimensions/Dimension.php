@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Builder;
 interface Dimension
 {
     public function apply(Builder $builder, Widget $widget): Builder;
+
+    public function display($value);
 }

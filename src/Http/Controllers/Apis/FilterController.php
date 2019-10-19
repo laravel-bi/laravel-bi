@@ -14,7 +14,7 @@ class FilterController extends BaseController
 
         return [
             'status' => 200,
-            'data'   => $filter->data($dashboard, $request)
+            'extra'  => $filter->extra($dashboard, $request)
         ];
     }
 }

@@ -4,7 +4,7 @@ namespace LaravelBi\LaravelBi\Widgets;
 
 use Illuminate\Http\Request;
 use LaravelBi\LaravelBi\Dashboard;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 
 class Table extends BaseWidget
 {
@@ -49,7 +49,19 @@ class Table extends BaseWidget
             $builder->orderBy($request->input('sort')['col'], $request->input('sort')['dir']);
         }
 
-        return $builder->get();
+        $rawData = $builder->get();
+
+        return $rawData->map(function ($rawRow) {
+            return $this->formatRow($rawRow);
+        });
+    }
+
+    protected function formatRow($rawRow)
+    {
+        return collect($this->dimensions)->reduce(function ($rawRow, $dimension) {
+            $rawRow->{$dimension->key} = $dimension->display($rawRow->{$dimension->key});
+            return $rawRow;
+        }, $rawRow);
     }
 
     protected function extra()

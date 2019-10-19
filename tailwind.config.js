@@ -1,5 +1,3 @@
-const theme = require("tailwindcss/defaultTheme");
-
 const generateRem = function(limit, extra = {}) {
     return Object.assign(
         {},

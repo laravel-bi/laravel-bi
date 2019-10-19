@@ -11,7 +11,7 @@
                     :class="'w-' + widget.width"
                     class="p-12"
                     v-for="widget in widgets"
-                    :key="widget.key"
+                    :key="'widget-' + widget.key"
                 >
                     <div class="bg-widget rounded-8 border border-1 border-widget-border">
                         <component

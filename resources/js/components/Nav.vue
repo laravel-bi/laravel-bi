@@ -5,7 +5,7 @@
             Dashboard List:
         </div>
         <ul>
-            <li v-for="dashboard in dashboards" v-bind:key="dashboard.uriKey">
+            <li v-for="dashboard in dashboards" v-bind:key="'nav-' + dashboard.uriKey">
                 <router-link :to="'/' + dashboard.uriKey" class="block px-8 my-1 outline-none text-16 text-white hover:bg-white hover:text-head">
                     <span v-if="!collapsed" class="ml-1">{{ dashboard.name }}</span>
                 </router-link>

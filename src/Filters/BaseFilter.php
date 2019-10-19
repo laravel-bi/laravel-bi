@@ -11,6 +11,7 @@ abstract class BaseFilter implements Filter
     public $key;
     public $name;
     public $column;
+    public $defaultValue;
 
     abstract public function apply(Builder $builder, array $filterData, Request $request);
 
@@ -33,7 +34,14 @@ abstract class BaseFilter implements Filter
         return $this;
     }
 
-    public function data(Dashboard $dashboard, Request $request)
+    public function defaultValue($defaultValue): self
+    {
+        $this->defaultValue = $defaultValue;
+
+        return $this;
+    }
+
+    public function extra(Dashboard $dashboard, Request $request)
     {
         return [];
     }

@@ -16,6 +16,10 @@ export default {
     mounted() {
         this.internalValue = this.value ? JSON.parse(JSON.stringify(this.value)) : this.defaultValue();
         this.confirmedValue = this.value ? JSON.parse(JSON.stringify(this.value)) : this.defaultValue();
+        this.$nextTick(() => {
+            this.$emit("input", JSON.parse(JSON.stringify(this.internalValue)));
+        });
+        
     },
     watch: {
         active: function(newValue) {
@@ -26,7 +30,7 @@ export default {
     },
     methods: {
         defaultValue() {
-            return null
+            return this.filterConfig.defaultValue;
         },
         reset() {
             this.internalValue = this.defaultValue();

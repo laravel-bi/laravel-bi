@@ -8,26 +8,26 @@ abstract class BaseDimension implements Dimension
     public $name;
     public $column;
 
-    public function __construct($key, $name)
+    public function __construct(string $key, string $name)
     {
         $this->key    = $key;
         $this->name   = $name;
         $this->column = $key;
     }
 
-    public static function create($key, $name): self
+    public static function create(string $key, string $name): self
     {
         return new static($key, $name);
     }
 
-    public function column($column)
+    public function column(string $column): self
     {
         $this->column = $column;
 
         return $this;
     }
 
-    public function extract($value)
+    public function display($value)
     {
         return $value;
     }

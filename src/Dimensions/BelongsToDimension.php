@@ -35,11 +35,16 @@ class BelongsToDimension extends BaseDimension
         $relation = $builder->getModel()->$method();
 
         $table      = $relation->getRelated()->getTable();
-        $parentKey  = $relation->getQualifiedOwnerKeyName();
-        $foreignKey = $relation->getQualifiedForeignKeyName();
+        $parentKey  = method_exists($relation, 'getQualifiedOwnerKey') ? $relation->getQualifiedOwnerKey() : $relation->getQualifiedOwnerKeyName();
+        $foreignKey = method_exists($relation, 'getQualifiedForeignKey') ? $relation->getQualifiedForeignKey() : $relation->getQualifiedForeignKeyName();
 
         return $builder->addSelect("$table.{$this->otherColumn} as {$this->key}")
                        ->join($table, $parentKey, '=', $foreignKey)
                        ->groupBy($this->key);
+    }
+
+    public function display($value)
+    {
+        return strtoupper($value);
     }
 }

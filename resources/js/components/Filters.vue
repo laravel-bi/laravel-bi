@@ -4,7 +4,7 @@
         <div
             class="h-full"
             v-for="filter in filtersConfig"
-            v-bind:key="filter.key"
+            v-bind:key="'filter' + filter.key"
         >
 
             <component

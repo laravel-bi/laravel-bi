@@ -12,4 +12,9 @@ class StringDimension extends BaseDimension
         return $builder->addSelect("{$this->column} as {$this->key}")
                        ->groupBy($this->key);
     }
+
+    public function display($value)
+    {
+        return strtoupper($value);
+    }
 }

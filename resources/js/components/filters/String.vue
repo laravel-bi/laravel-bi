@@ -17,7 +17,7 @@
                 {{ filterConfig.name }}:
                 <span
                     v-for="(value, i) in confirmedValue"
-                    :key="value"
+                    :key="'filter-' + filterConfig.name + '-' + value"
                 >
                     {{ value }}<span v-if="i !== confirmedValue.length -1">,</span>
                 </span>
@@ -69,7 +69,7 @@ export default {
             this.api(
                 `${this.dashboardKey}/filters/${this.filterConfig.key}`
             ).then(response => {
-                this.options = response.data.data.options;
+                this.options = response.data.extra.options;
             });
         }
     }

@@ -38,7 +38,7 @@ class BelongsToFilter extends BaseFilter
         return $builder->whereIn($builder->getModel()->{$this->relation}()->getForeignKey(), $filterData);
     }
 
-    public function data(Dashboard $dashboard, Request $request)
+    public function extra(Dashboard $dashboard, Request $request)
     {
         return [
             'options'     => (new $dashboard->model())->{$this->relation}()->getRelated()->newQuery()->select('id', 'name')->get(),

@@ -2168,8 +2168,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.api("".concat(this.dashboardKey, "/filters/").concat(this.filterConfig.key)).then(function (response) {
-        _this.options = response.data.data.options;
-        _this.otherColumn = response.data.data.otherColumn;
+        _this.options = response.data.extra.options;
+        _this.otherColumn = response.data.extra.otherColumn;
       });
     },
     apply: function apply() {
@@ -2288,8 +2288,13 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
+    var _this = this;
+
     this.internalValue = this.value ? JSON.parse(JSON.stringify(this.value)) : this.defaultValue();
     this.confirmedValue = this.value ? JSON.parse(JSON.stringify(this.value)) : this.defaultValue();
+    this.$nextTick(function () {
+      _this.$emit("input", JSON.parse(JSON.stringify(_this.internalValue)));
+    });
   },
   watch: {
     active: function active(newValue) {
@@ -2300,7 +2305,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     defaultValue: function defaultValue() {
-      return null;
+      return this.filterConfig.defaultValue;
     },
     reset: function reset() {
       this.internalValue = this.defaultValue();
@@ -2564,7 +2569,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.api("".concat(this.dashboardKey, "/filters/").concat(this.filterConfig.key)).then(function (response) {
-        _this.options = response.data.data.options;
+        _this.options = response.data.extra.options;
       });
     }
   }
@@ -3024,8 +3029,7 @@ __webpack_require__.r(__webpack_exports__);
       this.fetchData();
     }
   },
-  mounted: function mounted() {
-    this.fetchData();
+  mounted: function mounted() {// this.fetchData();
   },
   methods: {
     fetchParams: function fetchParams() {
@@ -38315,7 +38319,7 @@ var render = function() {
             return _c(
               "div",
               {
-                key: widget.key,
+                key: "widget-" + widget.key,
                 staticClass: "p-12",
                 class: "w-" + widget.width
               },
@@ -38382,7 +38386,7 @@ var render = function() {
     _vm._l(_vm.filtersConfig, function(filter) {
       return _c(
         "div",
-        { key: filter.key, staticClass: "h-full" },
+        { key: "filter" + filter.key, staticClass: "h-full" },
         [
           _c("bi-filter-" + filter.component, {
             ref: "filter-" + filter.key,
@@ -38559,7 +38563,7 @@ var render = function() {
         _vm._l(_vm.dashboards, function(dashboard) {
           return _c(
             "li",
-            { key: dashboard.uriKey },
+            { key: "nav-" + dashboard.uriKey },
             [
               _c(
                 "router-link",
@@ -38611,7 +38615,7 @@ var render = function() {
     "div",
     { staticClass: "absolute bottom-0 right-0" },
     _vm._l(_vm.toasts, function(toast) {
-      return _c("div", { key: toast.id, staticClass: "m-4" }, [
+      return _c("div", { key: "toast-" + toast.id, staticClass: "m-4" }, [
         _vm._v("\n        " + _vm._s(toast.message) + "\n    ")
       ])
     }),
@@ -38684,14 +38688,20 @@ var render = function() {
                       ":\n            "
                   ),
                   _vm._l(_vm.confirmedValue, function(value, i) {
-                    return _c("span", { key: value.id }, [
-                      _vm._v(
-                        "\n                " + _vm._s(value[_vm.otherColumn])
-                      ),
-                      i !== _vm.confirmedValue.length - 1
-                        ? _c("span", [_vm._v(",")])
-                        : _vm._e()
-                    ])
+                    return _c(
+                      "span",
+                      {
+                        key: "filter-" + _vm.filterConfig.name + "-" + value.id
+                      },
+                      [
+                        _vm._v(
+                          "\n                " + _vm._s(value[_vm.otherColumn])
+                        ),
+                        i !== _vm.confirmedValue.length - 1
+                          ? _c("span", [_vm._v(",")])
+                          : _vm._e()
+                      ]
+                    )
                   })
                 ],
                 2
@@ -39173,12 +39183,16 @@ var render = function() {
                       ":\n            "
                   ),
                   _vm._l(_vm.confirmedValue, function(value, i) {
-                    return _c("span", { key: value }, [
-                      _vm._v("\n                " + _vm._s(value)),
-                      i !== _vm.confirmedValue.length - 1
-                        ? _c("span", [_vm._v(",")])
-                        : _vm._e()
-                    ])
+                    return _c(
+                      "span",
+                      { key: "filter-" + _vm.filterConfig.name + "-" + value },
+                      [
+                        _vm._v("\n                " + _vm._s(value)),
+                        i !== _vm.confirmedValue.length - 1
+                          ? _c("span", [_vm._v(",")])
+                          : _vm._e()
+                      ]
+                    )
                   })
                 ],
                 2
@@ -39497,7 +39511,11 @@ var render = function() {
                     return _c(
                       "th",
                       {
-                        key: dimension.key,
+                        key:
+                          "table-" +
+                          _vm.widgetKey +
+                          "-dimension-" +
+                          dimension.key,
                         staticClass:
                           "text-left cursor-pointer p-16 text-12 font-light text-table-head",
                         on: {
@@ -39525,7 +39543,7 @@ var render = function() {
                     return _c(
                       "th",
                       {
-                        key: metric.key,
+                        key: "table-" + _vm.widgetKey + "-metric-" + metric.key,
                         staticClass:
                           "text-left cursor-pointer p-16 pt-14 text-12 font-light text-table-head",
                         on: {
@@ -39558,7 +39576,7 @@ var render = function() {
                   return _c(
                     "tr",
                     {
-                      key: i,
+                      key: "table-" + _vm.widgetKey + "-" + i,
                       staticClass:
                         "border-b border-widget-border last:border-b-0 hover:bg-gray-100"
                     },
@@ -39566,7 +39584,14 @@ var render = function() {
                       _vm._l(_vm.extra.dimensions, function(dimension) {
                         return _c(
                           "td",
-                          { key: dimension.key, staticClass: "p-16 text-14" },
+                          {
+                            key:
+                              "table-" +
+                              _vm.widgetKey +
+                              "-dimension-col-" +
+                              dimension.key,
+                            staticClass: "p-16 text-14"
+                          },
                           [
                             _vm._v(
                               "\n                            " +
@@ -39580,7 +39605,14 @@ var render = function() {
                       _vm._l(_vm.extra.metrics, function(metric) {
                         return _c(
                           "td",
-                          { key: metric.key, staticClass: "p-16 text-14" },
+                          {
+                            key:
+                              "table-" +
+                              _vm.widgetKey +
+                              "-metric-col-" +
+                              metric.key,
+                            staticClass: "p-16 text-14"
+                          },
                           [
                             _vm._v(
                               "\n                            " +

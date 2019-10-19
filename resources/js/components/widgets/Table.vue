@@ -13,7 +13,7 @@
                     <tr class="border-b border-widget-border">
                         <th
                             v-for="dimension in extra.dimensions"
-                            :key="dimension.key"
+                            :key="'table-' + widgetKey + '-dimension-' + dimension.key"
                             class="text-left cursor-pointer p-16 text-12 font-light text-table-head"
                             @click="changeSort(dimension.key)"
                         >{{ dimension.name }}
@@ -28,7 +28,7 @@
                         </th>
                         <th
                             v-for="metric in extra.metrics"
-                            :key="metric.key"
+                            :key="'table-' + widgetKey + '-metric-' + metric.key"
                             class="text-left cursor-pointer p-16 pt-14 text-12 font-light text-table-head"
                             @click="changeSort(metric.key)"
                         >{{ metric.name }}
@@ -45,19 +45,19 @@
                     <tbody>
                         <tr
                             v-for="(row, i) in data"
-                            :key="i"
+                            :key="'table-' + widgetKey + '-' + i"
                             class="border-b border-widget-border last:border-b-0 hover:bg-gray-100"
                         >
                             <td
                                 v-for="dimension in extra.dimensions"
-                                :key="dimension.key"
+                                :key="'table-' + widgetKey + '-dimension-col-' + dimension.key"
                                 class="p-16 text-14"
                             >
                                 {{ row[dimension.key] }}
                             </td>
                             <td
                                 v-for="metric in extra.metrics"
-                                :key="metric.key"
+                                :key="'table-' + widgetKey + '-metric-col-' + metric.key"
                                 class="p-16 text-14"
                             >
                                 {{ row[metric.key] }}

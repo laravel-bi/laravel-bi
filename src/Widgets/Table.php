@@ -2,67 +2,34 @@
 
 namespace LaravelBi\LaravelBi\Widgets;
 
-use Illuminate\Http\Request;
-use LaravelBi\LaravelBi\Dashboard;
-use Illuminate\Support\Collection;
-
 class Table extends BaseWidget
 {
-    protected $metrics;
-    protected $dimensions;
     protected $component = 'table';
 
-    public function metrics(array $metrics): self
-    {
-        $this->metrics = $metrics;
-
-        return $this;
-    }
-
-    public function dimensions(array $dimensions): self
-    {
-        $this->dimensions = $dimensions;
-
-        return $this;
-    }
-
-    // public function data(Dashboard $dashboard, Request $request)
+    // public function rawData(Dashboard $dashboard, Request $request): Collection
     // {
-    //     $rawData = $this->rawData($dashboard, $request);
-    //     return collect($rawData)->map(function ($rawRow) {
-    //         return collect($this->dimensions)->map(function ($dimension) use ($rawRow) {
-    //             return $dimension->extract($rawRow[$dimension->key]);
-    //         });
-    //     });
+    //     $builder = $this->getBaseBuilder($dashboard, $request);
+    //     $builder = collect($this->dimensions)->reduce(function ($builder, $dimension) {
+    //         return $dimension->apply($builder, $this);
+    //     }, $builder);
+    //     $builder = collect($this->metrics)->reduce(function ($builder, $metric) {
+    //         return $metric->apply($builder, $this);
+    //     }, $builder);
+
+    //     if ($request->has('sort')) {
+    //         $dimension = $this->dimensions->getByKey($request->input('sort')['col']);
+    //         if ($dimension) {
+    //             $builder = $dimension->applySort($builder, $request->input('sort')['dir']);
+    //         } else {
+    //             $metric = $this->metrics->getByKey($request->input('sort')['col']);
+    //             if ($metric) {
+    //                 $builder = $metric->applySort($builder, $request->input('sort')['dir']);
+    //             }
+    //         }
+    //     }
+
+    //     return $builder->get();
     // }
-
-    public function rawData(Dashboard $dashboard, Request $request): Collection
-    {
-        $builder = $this->getBaseBuilder($dashboard, $request);
-        $builder = collect($this->dimensions)->reduce(function ($builder, $dimension) {
-            return $dimension->apply($builder, $this);
-        }, $builder);
-        $builder = collect($this->metrics)->reduce(function ($builder, $metric) {
-            return $metric->apply($builder, $this);
-        }, $builder);
-        if ($request->has('sort')) {
-            $builder->orderBy($request->input('sort')['col'], $request->input('sort')['dir']);
-        }
-
-        $rawData = $builder->get();
-
-        return $rawData->map(function ($rawRow) {
-            return $this->formatRow($rawRow);
-        });
-    }
-
-    protected function formatRow($rawRow)
-    {
-        return collect($this->dimensions)->reduce(function ($rawRow, $dimension) {
-            $rawRow->{$dimension->key} = $dimension->display($rawRow->{$dimension->key});
-            return $rawRow;
-        }, $rawRow);
-    }
 
     protected function extra()
     {

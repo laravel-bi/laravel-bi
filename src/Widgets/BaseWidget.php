@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 abstract class BaseWidget implements \JsonSerializable, Widget
 {
+    use Traits\HasAttributes;
+
     public $width;
     public $key;
     public $name;
@@ -22,8 +24,6 @@ abstract class BaseWidget implements \JsonSerializable, Widget
             return $builder;
         };
     }
-
-    abstract public function rawData(Dashboard $dashboard, Request $request);
 
     public static function create($key, $name): Widget
     {
@@ -49,26 +49,17 @@ abstract class BaseWidget implements \JsonSerializable, Widget
         return new \stdClass();
     }
 
-    protected function getBaseBuilder(Dashboard $dashboard, Request $request): Builder
-    {
-        $requestedFilters = $request->input('filters');
-        $builder          = $dashboard->model::query();
-        $builder          = collect($dashboard->filters())->reduce(function (Builder $builder, $filter) use ($request, $requestedFilters) {
-            if (isset($requestedFilters[$filter->key])) {
-                return $filter->apply($builder, $requestedFilters[$filter->key], $request);
-            }
-
-            return $builder;
-        }, $builder);
-
-        $builder = $this->scope->call($this, $builder);
-
-        return $builder;
-    }
-
     public function data(Dashboard $dashboard, Request $request)
     {
-        return $this->rawData($dashboard, $request);
+        $builder = $this->getBaseBuilder($dashboard);
+        $builder = $this->applyAttributes($builder);
+        $builder = $this->applyFilters($builder, $dashboard, $request);
+
+        $rawModels = $builder->get();
+
+        return $rawModels->map(function ($rawModel) {
+            return $this->displayModel($rawModel)->toArray();
+        });
     }
 
     public function jsonSerialize()
@@ -80,5 +71,44 @@ abstract class BaseWidget implements \JsonSerializable, Widget
             'component' => $this->component,
             'extra'     => $this->extra()
         ];
+    }
+
+    protected function getBaseBuilder(Dashboard $dashboard): Builder
+    {
+        $builder = $dashboard->model::query();
+        $builder = $this->scope->call($this, $builder);
+
+        return $builder;
+    }
+
+    protected function applyAttributes(Builder $builder): Builder
+    {
+        $this->getAttributes()->reduce(function ($builder, $attribute) {
+            return $attribute->apply($builder, $this);
+        }, $builder);
+
+        return $builder;
+    }
+
+    protected function applyFilters(Builder $builder, Dashboard $dashboard, Request $request)
+    {
+        $requestedFilters = $request->input('filters');
+
+        return collect($dashboard->filters())->reduce(function (Builder $builder, $filter) use ($request, $requestedFilters) {
+            if (isset($requestedFilters[$filter->key])) {
+                return $filter->apply($builder, $requestedFilters[$filter->key], $request);
+            }
+
+            return $builder;
+        }, $builder);
+    }
+
+    protected function displayModel($rawRow)
+    {
+        return $this->getAttributes()->reduce(function ($rawRow, $attribute) {
+            $rawRow->{$attribute->key} = $attribute->display($rawRow);
+
+            return $rawRow;
+        }, $rawRow);
     }
 }

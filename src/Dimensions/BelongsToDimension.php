@@ -2,6 +2,7 @@
 
 namespace LaravelBi\LaravelBi\Dimensions;
 
+use Illuminate\Database\Eloquent\Model;
 use LaravelBi\LaravelBi\Widgets\Widget;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -31,20 +32,34 @@ class BelongsToDimension extends BaseDimension
 
     public function apply(Builder $builder, Widget $widget): Builder
     {
+        $foreignKey = $this->getForeignKey($builder);
+
+        return $builder->addSelect($foreignKey)
+                       ->with($this->relation)
+                       ->groupBy($foreignKey);
+    }
+
+    public function applySort(Builder $builder, string $dir): Builder
+    {
+        $foreignKey = $this->getForeignKey($builder);
+
+        return $builder->orderBy($foreignKey, $dir);
+    }
+
+    public function display(Model $model)
+    {
+        $value = $model->{$this->relation}->{$this->otherColumn};
+        $model->unsetRelation($this->relation);
+
+        return $value;
+
+    }
+
+    private function getForeignKey(Builder $builder)
+    {
         $method   = $this->relation;
         $relation = $builder->getModel()->$method();
 
-        $table      = $relation->getRelated()->getTable();
-        $parentKey  = method_exists($relation, 'getQualifiedOwnerKey') ? $relation->getQualifiedOwnerKey() : $relation->getQualifiedOwnerKeyName();
-        $foreignKey = method_exists($relation, 'getQualifiedForeignKey') ? $relation->getQualifiedForeignKey() : $relation->getQualifiedForeignKeyName();
-
-        return $builder->addSelect("$table.{$this->otherColumn} as {$this->key}")
-                       ->join($table, $parentKey, '=', $foreignKey)
-                       ->groupBy($this->key);
-    }
-
-    public function display($value)
-    {
-        return strtoupper($value);
+        return method_exists($relation, 'getForeignKey') ? $relation->getForeignKey() : $relation->getForeignKeyName();
     }
 }

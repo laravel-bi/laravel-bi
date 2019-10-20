@@ -2,8 +2,6 @@
 
 namespace LaravelBi\LaravelBi\Widgets;
 
-use LaravelBi\LaravelBi\Dimensions\Dimension;
-
 class LineChart extends BaseWidget
 {
     protected $component = 'line-chart';

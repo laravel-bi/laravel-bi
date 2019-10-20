@@ -52,7 +52,6 @@ class BelongsToDimension extends BaseDimension
         $model->unsetRelation($this->relation);
 
         return $value;
-
     }
 
     private function getForeignKey(Builder $builder)

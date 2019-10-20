@@ -2,9 +2,6 @@
 
 namespace LaravelBi\LaravelBi\Widgets;
 
-use LaravelBi\LaravelBi\Metrics\Metric;
-use LaravelBi\LaravelBi\Dimensions\Dimension;
-
 class PartitionPie extends BaseWidget
 {
     protected $component = 'partition-pie';

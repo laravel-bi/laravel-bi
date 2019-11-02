@@ -2,6 +2,11 @@
 
 namespace LaravelBi\LaravelBi;
 
+use App;
+use ReflectionClass;
+use Illuminate\Support\Str;
+use Symfony\Component\Finder\Finder;
+
 class DashboardResolver
 {
     private $dashboards;
@@ -9,9 +14,21 @@ class DashboardResolver
     public function __construct()
     {
         $this->dashboards = collect();
-        foreach (config('bi.dashboards', []) as $dashboardClass) {
-            $dashboard = resolve($dashboardClass);
-            $this->dashboards->put($dashboard->uriKey, $dashboard);
+
+        $directory = app_path('Bi/Dashboards');
+        $namespace = app()->getNamespace();
+
+        foreach ((new Finder())->in($directory)->files() as $dashboard) {
+            $dashboard = $namespace . str_replace(
+                ['/', '.php'],
+                ['\\', ''],
+                Str::after($dashboard->getPathname(), app_path() . DIRECTORY_SEPARATOR)
+            );
+            if (is_subclass_of($dashboard, Dashboard::class) &&
+                !(new ReflectionClass($dashboard))->isAbstract()) {
+                $dashboardInstance = App::make($dashboard);
+                $this->dashboards->put($dashboardInstance->uriKey, $dashboardInstance);
+            }
         }
     }
 

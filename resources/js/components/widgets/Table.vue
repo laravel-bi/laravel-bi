@@ -9,7 +9,7 @@
             widgetClass="overflow-auto h-widget-lg"
         >
             <div class="-mt-8">
-                <table class="w-full text-sm">
+                <table class="w-full text-14">
                     <tr class="border-b border-widget-border">
                         <th
                             v-for="dimension in extra.dimensions"

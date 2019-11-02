@@ -8,7 +8,7 @@
             @refresh="fetchData"
             widgetClass="h-widget-sm"
         >
-            <div class="p-2 pt-0">
+            <div class="p-4 pt-0">
                 <pie-chart
                     ref="chart"
                     :styles="{'height': '130px'}"

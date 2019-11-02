@@ -38328,7 +38328,7 @@ var render = function() {
                   "div",
                   {
                     staticClass:
-                      "bg-widget rounded-8 border border-1 border-widget-border"
+                      "bg-widget rounded-widget border border-1 border-widget-border"
                   },
                   [
                     _c("bi-" + widget.component, {
@@ -38543,7 +38543,7 @@ var render = function() {
       _c(
         "a",
         {
-          staticClass: "float-right text-white text-24 p-8 py-12",
+          staticClass: "float-right text-white text-nav-title p-8 py-12",
           attrs: { href: "#" },
           on: {
             click: function($event) {
@@ -38554,9 +38554,11 @@ var render = function() {
         [_c("i", { staticClass: "fa fa-window-close" })]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "h-head-box text-white text-24 p-8 py-12" }, [
-        _vm._v("\n        Dashboard List:\n    ")
-      ]),
+      _c(
+        "div",
+        { staticClass: "h-head-box text-white text-nav-title p-8 py-12" },
+        [_vm._v("\n        Dashboard List:\n    ")]
+      ),
       _vm._v(" "),
       _c(
         "ul",
@@ -39320,7 +39322,7 @@ var render = function() {
         [
           _c(
             "div",
-            { staticClass: "p-2 pt-0" },
+            { staticClass: "p-4 pt-0" },
             [
               _c("chartjs-line-chart", {
                 ref: "chart",
@@ -39448,7 +39450,7 @@ var render = function() {
         [
           _c(
             "div",
-            { staticClass: "p-2 pt-0" },
+            { staticClass: "p-4 pt-0" },
             [
               _c("pie-chart", {
                 ref: "chart",
@@ -39502,7 +39504,7 @@ var render = function() {
         },
         [
           _c("div", { staticClass: "-mt-8" }, [
-            _c("table", { staticClass: "w-full text-sm" }, [
+            _c("table", { staticClass: "w-full text-14" }, [
               _c(
                 "tr",
                 { staticClass: "border-b border-widget-border" },

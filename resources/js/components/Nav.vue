@@ -1,7 +1,7 @@
 <template>
     <div class="bg-nav absolute h-full w-nav z-20 shadow p-4" :class="{'w-closed-nav': collapsed}">
-        <a href="#" class="float-right text-white text-24 p-8 py-12" @click="$emit('close')"><i class="fa fa-window-close"></i></a>
-        <div class="h-head-box text-white text-24 p-8 py-12">
+        <a href="#" class="float-right text-white text-nav-title p-8 py-12" @click="$emit('close')"><i class="fa fa-window-close"></i></a>
+        <div class="h-head-box text-white text-nav-title p-8 py-12">
             Dashboard List:
         </div>
         <ul>

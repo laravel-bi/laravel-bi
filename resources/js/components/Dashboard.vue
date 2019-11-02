@@ -13,7 +13,7 @@
                     v-for="widget in widgets"
                     :key="'widget-' + widget.key"
                 >
-                    <div class="bg-widget rounded-8 border border-1 border-widget-border">
+                    <div class="bg-widget rounded-widget border border-1 border-widget-border">
                         <component
                             :is="'bi-' + widget.component"
                             :dashboardKey="dashboardKey"

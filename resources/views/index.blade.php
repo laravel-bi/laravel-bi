@@ -18,7 +18,7 @@
         <div class="flex flex-grow flex-col">
 
             <div class="h-head-box bg-head">
-                <h1 class="p-20 text-25 text-white ">
+                <h1 class="p-20 text-nav-title text-white ">
                     <i class="fas fa-bars mr-10 cursor-pointer" @click.prevent="nav = true"></i> Laravel Bi <span v-cloak v-if="dashboardName" v-text="'>> ' + dashboardName"></span>
                 </h1>
             </div>

@@ -2,8 +2,10 @@ preset: laravel
 enabled:
     - concat_with_spaces
     - align_equals
+    - length_ordered_imports 
 disabled:
     - trailing_comma_in_multiline_array
     - concat_without_spaces
     - unalign_equals
     - not_operator_with_successor_space
+    - alpha_ordered_imports

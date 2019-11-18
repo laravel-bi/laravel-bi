@@ -65,11 +65,12 @@ abstract class BaseWidget implements \JsonSerializable, Widget
     public function jsonSerialize()
     {
         return [
-            'width'     => $this->width,
-            'key'       => $this->key,
-            'name'      => $this->name,
-            'component' => $this->component,
-            'extra'     => $this->extra()
+            'width'      => $this->width,
+            'key'        => $this->key,
+            'name'       => $this->name,
+            'component'  => $this->component,
+            'metrics'    => $this->metrics,
+            'dimensions' => $this->dimensions
         ];
     }
 

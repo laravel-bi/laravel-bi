@@ -2,9 +2,37 @@
 
 namespace LaravelBi\LaravelBi\Widgets;
 
+use Illuminate\Http\Request;
+use LaravelBi\LaravelBi\Dashboard;
+
 class Table extends BaseWidget
 {
     protected $component = 'table';
+
+    public function data(Dashboard $dashboard, Request $request)
+    {
+        $builder = $this->getBaseBuilder($dashboard);
+        $builder = $this->applyAttributes($builder);
+        $builder = $this->applyFilters($builder, $dashboard, $request);
+
+        if ($request->has('sort')) {
+            $dimension = $this->dimensions->getByKey($request->input('sort')['col']);
+            if ($dimension) {
+                $builder = $dimension->applySort($builder, $request->input('sort')['dir']);
+            } else {
+                $metric = $this->metrics->getByKey($request->input('sort')['col']);
+                if ($metric) {
+                    $builder = $metric->applySort($builder, $request->input('sort')['dir']);
+                }
+            }
+        }
+
+        $rawModels = $builder->get();
+
+        return $rawModels->map(function ($rawModel) {
+            return $this->displayModel($rawModel)->toArray();
+        });
+    }
 
     // public function rawData(Dashboard $dashboard, Request $request): Collection
     // {

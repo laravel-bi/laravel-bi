@@ -1,72 +1,107 @@
 <template>
-    <div>
-        <loading-widget
-            :loading="loading"
-            :dashboardKey="dashboardKey"
-            :widgetKey="widgetKey"
-            :widgetName="widgetName"
-            @refresh="fetchData"
-            widgetClass="overflow-auto h-widget-lg"
-        >
-            <div class="-mt-8">
-                <table class="w-full text-14">
-                    <tr class="border-b border-widget-border">
-                        <th
-                            v-for="dimension in extra.dimensions"
-                            :key="'table-' + widgetKey + '-dimension-' + dimension.key"
-                            class="text-left cursor-pointer p-16 text-12 font-light text-table-head"
-                            @click="changeSort(dimension.key)"
-                        >{{ dimension.name }}
-                            <i
-                                v-if="sort.col == dimension.key && sort.dir == 'asc'"
-                                class="fas fa-sort-up"
-                            ></i>
-                            <i
-                                v-if="sort.col == dimension.key && sort.dir == 'desc'"
-                                class="fas fa-sort-down"
-                            ></i>
-                        </th>
-                        <th
-                            v-for="metric in extra.metrics"
-                            :key="'table-' + widgetKey + '-metric-' + metric.key"
-                            class="text-left cursor-pointer p-16 pt-14 text-12 font-light text-table-head"
-                            @click="changeSort(metric.key)"
-                        >{{ metric.name }}
-                            <i
-                                v-if="sort.col == metric.key && sort.dir == 'asc'"
-                                class="fas fa-sort-up"
-                            ></i>
-                            <i
-                                v-if="sort.col == metric.key && sort.dir == 'desc'"
-                                class="fas fa-sort-down"
-                            ></i>
-                        </th>
-                    </tr>
-                    <tbody>
-                        <tr
-                            v-for="(row, i) in data"
-                            :key="'table-' + widgetKey + '-' + i"
-                            class="border-b border-widget-border last:border-b-0 hover:bg-gray-100"
+    <div class="overflow-auto bi:table-container">
+        <div class="bg-gray-300 flex relative h-full" v-if="loading">
+            <bi-loader class="absolute bi:loader"></bi-loader>
+        </div>
+
+        <table class="w-full" v-if="!loading">
+            <tr class="bg-gray-300">
+                <th
+                    class="uppercase text-xs text-gray-900 text-left p-2 cursor-pointer hover:text-gray-700"
+                    v-for="dimension in dimensions"
+                    :key="'table-' + widgetKey + '-dimension-' + dimension.key"
+                    @click="changeSort(dimension.key)"
+                >
+                    {{ dimension.name }}
+                    <span
+                        class="text-gray-900 hover:text-gray-700"
+                        v-if="sort.col == dimension.key && sort.dir == 'desc'"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            class="w-3 inline fill-current"
                         >
-                            <td
-                                v-for="dimension in extra.dimensions"
-                                :key="'table-' + widgetKey + '-dimension-col-' + dimension.key"
-                                class="p-16 text-14"
-                            >
-                                {{ row[dimension.key] }}
-                            </td>
-                            <td
-                                v-for="metric in extra.metrics"
-                                :key="'table-' + widgetKey + '-metric-col-' + metric.key"
-                                class="p-16 text-14"
-                            >
-                                {{ row[metric.key] }}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </loading-widget>
+                            <path
+                                class="heroicon-ui"
+                                d="M13 5.41V21a1 1 0 0 1-2 0V5.41l-5.3 5.3a1 1 0 1 1-1.4-1.42l7-7a1 1 0 0 1 1.4 0l7 7a1 1 0 1 1-1.4 1.42L13 5.4z"
+                            />
+                        </svg>
+                    </span>
+
+                    <span
+                        class="text-gray-900 hover:text-gray-700"
+                        v-if="sort.col == dimension.key && sort.dir == 'asc'"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            class="w-3 inline fill-current"
+                        >
+                            <path
+                                class="heroicon-ui"
+                                d="M11 18.59V3a1 1 0 0 1 2 0v15.59l5.3-5.3a1 1 0 0 1 1.4 1.42l-7 7a1 1 0 0 1-1.4 0l-7-7a1 1 0 0 1 1.4-1.42l5.3 5.3z"
+                            />
+                        </svg>
+                    </span>
+                </th>
+                <th
+                    class="uppercase text-xs text-gray-900 text-left p-2 cursor-pointer hover:text-gray-700"
+                    v-for="metric in metrics"
+                    :key="'table-' + widgetKey + '-metric-' + metric.key"
+                    @click="changeSort(metric.key)"
+                >
+                    {{ metric.name }}
+                    <span
+                        class="text-gray-900 hover:text-gray-700"
+                        v-if="sort.col == metric.key && sort.dir == 'desc'"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            class="w-3 inline fill-current"
+                        >
+                            <path
+                                class="heroicon-ui"
+                                d="M13 5.41V21a1 1 0 0 1-2 0V5.41l-5.3 5.3a1 1 0 1 1-1.4-1.42l7-7a1 1 0 0 1 1.4 0l7 7a1 1 0 1 1-1.4 1.42L13 5.4z"
+                            />
+                        </svg>
+                    </span>
+
+                    <span
+                        class="text-gray-900 hover:text-gray-700"
+                        v-if="sort.col == metric.key && sort.dir == 'asc'"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            class="w-3 inline fill-current"
+                        >
+                            <path
+                                class="heroicon-ui"
+                                d="M11 18.59V3a1 1 0 0 1 2 0v15.59l5.3-5.3a1 1 0 0 1 1.4 1.42l-7 7a1 1 0 0 1-1.4 0l-7-7a1 1 0 0 1 1.4-1.42l5.3 5.3z"
+                            />
+                        </svg>
+                    </span>
+                </th>
+            </tr>
+            <tr
+                class="border border-r-0"
+                v-for="(row, i) in data"
+                :key="'table-' + widgetKey + '-' + i"
+            >
+                <td
+                    class="p-2"
+                    v-for="dimension in dimensions"
+                    :key="'table-' + widgetKey + '-dimension-col-' + dimension.key"
+                >{{ row[dimension.key]}}</td>
+                <td
+                    class="p-2"
+                    v-for="metric in metrics"
+                    :key="'table-' + widgetKey + '-metric-col-' + metric.key"
+                >{{ row[metric.key]}}</td>
+            </tr>
+        </table>
     </div>
 </template>
 
@@ -86,7 +121,7 @@ export default {
         };
     },
     mounted() {
-        this.sort.col = this.extra.dimensions[0].key;
+        this.sort.col = this.dimensions[0].key;
     },
     methods: {
         fetchParams() {

@@ -1,31 +1,22 @@
 <template>
-
-    <div
-        class="relative mr-4"
-        v-click-outside="close"
-    >
-
-        <bi-filter-anchor
-            :active="active"
-            @activated="active = true"
-        >
-            <i class="fas fa-calendar"></i>
-            <span v-if="confirmedValue == null">
-                Select a {{ filterConfig.name }}
-            </span>
+    <div class="flex relative" v-click-outside="close">
+        <bi-filter-anchor :active="active" @activated="active = true">
+            <span v-if="confirmedValue == null">{{ filterConfig.name }}</span>
             <span v-else>
                 {{ filterConfig.name }}:
-                <span
+                <strong
                     v-for="(value, i) in confirmedValue"
                     :key="'filter-' + filterConfig.name + '-' + value.id"
                 >
-                    {{ value[otherColumn] }}<span v-if="i !== confirmedValue.length -1">,</span>
-                </span>
+                    {{ value[otherColumn] }}
+                    <span v-if="i !== confirmedValue.length -1">,</span>
+                </strong>
             </span>
         </bi-filter-anchor>
 
         <bi-filter-dropdown
             @close="close"
+            class="w-filter-dropdown-sm"
             @reset="reset"
             @apply="apply"
             v-if="active"
@@ -40,9 +31,7 @@
                 :showLabels="false"
             ></multiselect>
         </bi-filter-dropdown>
-
     </div>
-
 </template>
 
 <script>
@@ -77,9 +66,11 @@ export default {
         },
         apply() {
             this.active = false;
-            this.confirmedValue = JSON.parse(JSON.stringify(this.internalValue));
-            this.$emit("input", this.internalValue.map((item) => item.id));
-        },
+            this.confirmedValue = JSON.parse(
+                JSON.stringify(this.internalValue)
+            );
+            this.$emit("input", this.internalValue.map(item => item.id));
+        }
     }
 };
 </script>

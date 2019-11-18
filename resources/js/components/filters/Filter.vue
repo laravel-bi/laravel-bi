@@ -4,48 +4,72 @@ import vueClickOutside from "vue-click-outside";
 export default {
     props: {
         filterConfig: Object,
-        dashboardKey: String
+        dashboardKey: String,
+        value: {}
     },
     data() {
         return {
             internalValue: null,
             confirmedValue: null,
+            presetValue: null,
             active: false
         };
     },
     mounted() {
-        this.internalValue = this.value ? JSON.parse(JSON.stringify(this.value)) : this.defaultValue();
-        this.confirmedValue = this.value ? JSON.parse(JSON.stringify(this.value)) : this.defaultValue();
         this.$nextTick(() => {
-            this.$emit("input", JSON.parse(JSON.stringify(this.internalValue)));
+            if (this.value) {
+                this.presetValue = JSON.parse(JSON.stringify(this.value));
+                this.internalValue = JSON.parse(JSON.stringify(this.value));
+                this.confirmedValue = JSON.parse(JSON.stringify(this.value));
+                this.$emit("input", this.getClonedValue());
+            } else {
+                this.internalValue = this.defaultValue();
+            }
         });
-        
     },
     watch: {
         active: function(newValue) {
-            if(newValue) {
-                this.$emit('activated', this.filterConfig.key);
+            if (newValue) {
+                this.$emit("activated", this.filterConfig.key);
             }
         }
+        // value: function(newValue) {
+        //     console.log("values has changed", newValue);
+        // }
     },
     methods: {
         defaultValue() {
-            return this.filterConfig.defaultValue;
+            return null;
         },
         reset() {
-            this.internalValue = this.defaultValue();
-            this.confirmedValue = this.defaultValue();
+            if (this.presetValue) {
+                this.internalValue = JSON.parse(
+                    JSON.stringify(this.presetValue)
+                );
+                this.confirmedValue = JSON.parse(
+                    JSON.stringify(this.presetValue)
+                );
+                this.$emit("input", this.getClonedValue());
+            } else {
+                this.confirmedValue = null;
+                this.internalValue = this.defaultValue();
+                this.$emit("input", null);
+            }
             this.active = false;
-            this.$emit("input", JSON.parse(JSON.stringify(this.internalValue)));
         },
         apply() {
             this.active = false;
-            this.confirmedValue = JSON.parse(JSON.stringify(this.internalValue));
-            this.$emit("input", JSON.parse(JSON.stringify(this.internalValue)));
+            this.confirmedValue = this.getClonedValue();
+            this.$emit("input", this.getClonedValue());
         },
         close() {
             this.active = false;
-            this.internalValue = JSON.parse(JSON.stringify(this.confirmedValue));
+            this.internalValue = JSON.parse(
+                JSON.stringify(this.confirmedValue)
+            );
+        },
+        getClonedValue() {
+            return JSON.parse(JSON.stringify(this.internalValue));
         }
     },
     directives: {

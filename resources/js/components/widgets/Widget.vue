@@ -2,21 +2,23 @@
 import api from "../mixins/api.js";
 import toasts from "../mixins/toasts.js";
 
-import LoadingWidget from "./LoadingWidget";
+// import LoadingWidget from "./LoadingWidget";
 
 export default {
     abstract: true,
     mixins: [api, toasts],
     components: {
-        "loading-widget": LoadingWidget
+        // "loading-widget": LoadingWidget
     },
     props: {
         dashboardKey: String,
         widgetKey: String,
         widgetName: String,
-        extra: Object,
+        metrics: Array,
+        dimensions: Array,
         filters: Object,
-        filtersFlag: Number
+        filtersFlag: Number,
+        refreshFlag: Number
     },
     data() {
         return {
@@ -26,10 +28,13 @@ export default {
     watch: {
         filtersFlag() {
             this.fetchData();
+        },
+        refreshFlag() {
+            this.fetchData();
         }
     },
     mounted() {
-        // this.fetchData();
+        this.fetchData();
     },
     methods: {
         fetchParams() {

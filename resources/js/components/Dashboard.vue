@@ -1,31 +1,26 @@
 <template>
-    <div>
-        <bi-filters
+    <div class="flex-grow flex flex-col">    
+
+        <bi-filters-bar
             v-if="filtersConfig.length"
             :filtersConfig="filtersConfig"
             :dashboardKey="dashboardKey"
-        ></bi-filters>
-        <div class="p-4">
-            <div class="flex flex-wrap -mr-2 -ml-2">
-                <div
-                    :class="'w-' + widget.width"
-                    class="p-12"
-                    v-for="widget in widgets"
-                    :key="'widget-' + widget.key"
-                >
-                    <div class="bg-widget rounded-widget border border-1 border-widget-border">
-                        <component
-                            :is="'bi-' + widget.component"
-                            :dashboardKey="dashboardKey"
-                            :widgetKey="widget.key"
-                            :widgetName="widget.name"
-                            :extra="widget.extra"
-                            :filters="filters"
-                            :filters-flag="filtersFlag"
-                        ></component>
-                    </div>
-                </div>
+        ></bi-filters-bar>
+
+        <div class="flex-grow flex flex-wrap">
+            <div
+                :class="'w-' + widget.width"
+                v-for="widget in widgets"
+                :key="'widget-' + widget.key"
+            >
+                <bi-widget-panel
+                    :dashboardKey="dashboardKey"
+                    :widget="widget"
+                    :filters="filters"
+                    :filters-flag="filtersFlag"
+                ></bi-widget-panel>
             </div>
+
         </div>
     </div>
 </template>

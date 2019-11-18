@@ -124,3 +124,9 @@ public function widgets()
     ];
 }
 ```
+
+#### Dashboard configuration
+
+Thanks to https://github.com/sschoger/heroicons-ui
+
+

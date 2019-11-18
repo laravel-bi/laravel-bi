@@ -1,40 +1,23 @@
 <template>
-
-    <div
-        class="flex relative mr-4"
-        v-click-outside="close"
-    >
-
-        <bi-filter-anchor
-            :active="active"
-            @activated="active = true"
-        >
-            <i class="fas fa-calendar"></i>
-            <span v-if="confirmedValue == null">
-                Select a date interval
-            </span>
+    <div class="flex relative" v-click-outside="close">
+        <bi-filter-anchor :active="active" @activated="active = true">
+            <span v-if="confirmedValue == null">{{ filterConfig.name }}</span>
             <span v-else>
-                Date interval: {{ startDate }} - {{ endDate }}
+                {{ filterConfig.name }}:
+                <strong>{{ startDate }} - {{ endDate }}</strong>
             </span>
         </bi-filter-anchor>
 
-        <bi-filter-dropdown
-            @close="close"
-            @reset="reset"
-            @apply="apply"
-            v-if="active"
-        >
+        <bi-filter-dropdown @close="close" @reset="reset" @apply="apply" v-if="active">
             <v-date-picker
                 is-expanded
                 :show-day-popover="false"
-                mode='range'
+                mode="range"
                 v-model="internalValue"
                 is-inline
             ></v-date-picker>
         </bi-filter-dropdown>
-
     </div>
-
 </template>
 
 <script>
@@ -64,7 +47,7 @@ export default {
             return moment(new Date(this.confirmedValue.end)).format(
                 "YYYY-MM-DD"
             );
-        }
+        },
     }
 };
 </script>

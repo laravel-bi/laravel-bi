@@ -1,21 +1,12 @@
 <template>
-
-    <div
-        class="relative mr-4"
-        v-click-outside="close"
-    >
-
-        <bi-filter-anchor
-            :active="active"
-            @activated="active = true"
-        >
-            <i class="fas fa-calendar"></i>
-            <span v-if="confirmedValue == null || confirmedValue.operator == null">
-                Select a {{ filterConfig.name }}
-            </span>
+    <div class="flex relative" v-click-outside="close">
+        <bi-filter-anchor :active="active" @activated="active = true">
+            <span
+                v-if="confirmedValue == null || confirmedValue.operator == null"
+            >{{ filterConfig.name }}</span>
             <span v-else>
                 {{ filterConfig.name }}:
-                {{ label }}
+                <strong>{{ label }}</strong>
             </span>
         </bi-filter-anchor>
 
@@ -24,45 +15,43 @@
             @reset="reset"
             @apply="apply"
             v-if="active"
-            class="w-filter-dropdown-lg"
+            class="w-filter-dropdown-md"
         >
-
             <div class="w-1/2">
                 <multiselect
-                    class=""
+                    class
                     v-model="internalValue.operator"
                     :options="options"
                     placeholder="Operator"
                     :showLabels="false"
+                    :option-height="35"
                 ></multiselect>
             </div>
 
             <input
                 type="text"
                 v-model="internalValue.values[0]"
-                class="flex-1 min-w-0 border ml-10 text-14 px-2"
-            >
+                class="flex-1 min-w-0 border ml-2 text-sm px-2"
+            />
             <span
                 :class="{ 
                     'visible': internalValue.operator == 'between',
                     'invisible': internalValue.operator != 'between'
                 }"
-                class="ml-2 self-center text-14 ml-10"
+                class="ml-2 self-center text-sm ml-2"
             >and</span>
 
             <input
                 type="text"
                 v-model="internalValue.values[1]"
-                class="flex-1 min-w-0 border ml-10 text-14 px-2"
+                class="flex-1 min-w-0 border ml-2 text-sm px-2"
                 :class="{ 
                     'visible': internalValue.operator == 'between',
                     'invisible': internalValue.operator != 'between'
                 }"
-            >
+            />
         </bi-filter-dropdown>
-
     </div>
-
 </template>
 
 <script>

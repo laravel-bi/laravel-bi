@@ -2,33 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
-html { font-size: 62.5%; }
+#nav-bar { transition: ease 0.3s width; width: 250px; }
+#nav-bar .bi\:navbar-link, #nav-bar .bi\:navbar-title { height: 21px; }
+#nav-bar.collapsing { width: 50px; }
+#nav-bar.collapsing .bi\:navbar-label { display: none; }
+#nav-bar.collapsing .bi\:navbar-title { visibility: hidden; }
+#nav-bar.collapsed { width: 50px; }
+#nav-bar.collapsed .bi\:navbar-label { display: none; }
+#nav-bar.collapsed .bi\:navbar-title { visibility: hidden; }
+#nav-bar.expanding { width: 250px; }
+#nav-bar.expanding .bi\:navbar-label { display: none; }
+#nav-bar.expanding .bi\:navbar-title { visibility: hidden; }
+#nav-bar.expanded { width: 250px; }
+#nav-bar.expanded .bi\:navbar-label { display: inline-block; }
+#nav-bar.expanded .bi\:navbar-title { visibility: visible; }
 
-.nav { transform: translateX(-300px); transition: ease transform .2s; box-shadow: 0 1px 12px 0 rgb(45, 50, 62); }
-.nav.open { transform: translateX(0px);  }
+.bi\:table-container { height: 500px; }
+.bi\:loader { top: 50%; right: 50%; margin-top: -22px; margin-right: -22px; }
+.bi\:filter-dropdown { top: 40px; }
 
-.router-link-exact-active { @apply font-bold; }
-
-.multiselect { @apply min-h-0 !important; height: 40px !important; }
-.multiselect_select { height: 40px !important; }
-.multiselect__tags { @apply rounded-none !important; min-height: 40px !important; padding-top: 4px !important; }
-.multiselect__tag { @apply text-14 !important; }
-.multiselect__tag { @apply bg-btn text-white !important; }
-.multiselect__tag-icon { @apply bg-btn !important; }
+.multiselect__tags { @apply rounded-none !important; }
+.multiselect__tag { @apply text-sm !important; }
+.multiselect__tag { @apply bg-gray-600 text-white !important; }
+.multiselect__tag-icon { @apply bg-gray-600 !important; }
 .multiselect__tag-icon::after { @apply text-white !important; }
-.multiselect__tag-icon:hover { @apply bg-btn-h text-white !important; }
+.multiselect__tag-icon:hover { @apply bg-gray-600 text-white !important; }
 .multiselect__tag-icon::after:hover { @apply text-white !important; }
-.multiselect__single { @apply text-14 !important;  }
-.multiselect__input { @apply text-14 !important; padding-top: 2px !important; padding-left: 2px !important; }
-.multiselect__placeholder { @apply text-14 !important; padding-top: 2px !important; padding-left: 2px !important; }
-.multiselect__option { @apply text-14 py-6 px-10 min-h-0 !important; }
-.multiselect__option--highlight { @apply bg-head text-white !important; }
-.multiselect__option--highlight::after { @apply bg-head text-white !important; line-height: 32px !important; }
+.multiselect__single { @apply text-sm !important; }
+.multiselect__input { @apply text-sm  !important; }
+.multiselect__placeholder { @apply text-sm !important; }
+.multiselect__option { @apply text-sm !important; }
+.multiselect__option--highlight { @apply bg-gray-400 text-white !important; }
+.multiselect__option--highlight::after { @apply bg-gray-400 text-white !important; }
+.multiselect__content-wrapper { @apply overflow-x-hidden !important }
 
+.c-pane-container { @apply font-lato !important; }
 .c-arrow { width: 20px !important; height: 20px !important; }
-.c-title { @apply text-14 !important; }
-.c-weekdays { @apply text-12 !important; }
-.c-day-content { @apply text-12 !important; height: 25px !important; width: 25px !important;}
+.c-title { @apply text-sm !important; }
+.c-weekdays { @apply text-xs !important; }
+.c-day-content { @apply text-xs !important; height: 25px !important; width: 25px !important;}
 .c-pane { @apply min-w-0 !important; width: 200px; }
-.c-table-cell { @apply text-12 !important;}
-.c-day-background { @apply bg-btn !important; height: 2.3rem !important; }
+.c-table-cell { @apply text-xs !important;}
+.c-day-background { @apply bg-gray-600 !important; height: 25px !important; } 

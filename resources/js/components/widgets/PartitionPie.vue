@@ -1,21 +1,11 @@
 <template>
-    <div>
-        <loading-widget
-            :loading="loading"
-            :dashboardKey="dashboardKey"
-            :widgetKey="widgetKey"
-            :widgetName="widgetName"
-            @refresh="fetchData"
-            widgetClass="h-widget-sm"
-        >
-            <div class="p-4 pt-0">
-                <pie-chart
-                    ref="chart"
-                    :styles="{'height': '130px'}"
-                    :options="options"
-                ></pie-chart>
-            </div>
-        </loading-widget>
+    <div class="h-widget-sm">
+        <div class="bg-gray-300 flex relative h-full" v-if="loading">
+            <bi-loader class="absolute bi:loader"></bi-loader>
+        </div>
+        <div class="p-4" v-if="!loading">
+            <pie-chart ref="chart" :styles="{'height': '168px'}" :options="options"></pie-chart>
+        </div>
     </div>
 </template>
 
@@ -45,10 +35,10 @@ export default {
     methods: {
         onFetchData(response) {
             const labels = response.data.data.map(item => {
-                return item[this.extra.dimension.key];
+                return item[this.dimensions[0].key];
             });
             const data = response.data.data.map(item => {
-                return item[this.extra.metric.key];
+                return item[this.metrics[0].key];
             });
 
             setTimeout(() => {
@@ -57,21 +47,11 @@ export default {
                         labels,
                         datasets: [
                             {
-                                backgroundColor: this.extra.colors
-                                    ? labels.map(label => {
-                                          return (
-                                              this.extra.colors[label] ||
-                                              colors({
-                                                  luminosity: "bright",
-                                                  format: "rgb"
-                                              })
-                                          );
-                                      })
-                                    : colors({
-                                          count: data.length,
-                                          luminosity: "bright",
-                                          format: "rgb"
-                                      }),
+                                backgroundColor: colors({
+                                    count: data.length,
+                                    luminosity: "light",
+                                    format: "rgb"
+                                }),
                                 data
                             }
                         ]

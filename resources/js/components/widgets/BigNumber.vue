@@ -1,15 +1,15 @@
 <template>
-    <div>
-        <loading-widget
-            :loading="loading"
-            :dashboardKey="dashboardKey"
-            :widgetKey="widgetKey"
-            :widgetName="widgetName"
-            @refresh="fetchData"
-            widgetClass="h-widget-sm"
-        >
-            <div class="text-big-number font-condensed text-center" :style="style">{{ number }}</div>
-        </loading-widget>
+    <div class="h-widget-sm">
+        <div class="bg-gray-300 flex relative h-full" v-if="loading">
+            <bi-loader class="absolute bi:loader"></bi-loader>
+        </div>
+
+        <div class="flex h-full" v-if="!loading">
+            <div
+                class="text-5xl font-bold font-condensed flex-grow text-center self-center"
+                :style="style"
+            >{{ number }}</div>
+        </div>
     </div>
 </template>
 
@@ -27,13 +27,13 @@ export default {
     computed: {
         style() {
             return {
-                'color': this.extra.metric.color
-            }
+                color: this.metrics[0].color
+            };
         }
     },
     methods: {
         onFetchData(response) {
-            this.number = response.data.data[this.extra.metric.key];
+            this.number = response.data.data[this.metrics[0].key];
         }
     }
 };

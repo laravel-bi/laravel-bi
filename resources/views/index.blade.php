@@ -17,7 +17,7 @@
     <div class="flex flex-col min-h-full" id="laravel-bi">
 
         <div class="bg-gray-900 text-white p-4 font-semibold w-full" id="header">
-            Laravel Bi - Giocare in Scatola
+            Laravel Bi
         </div>
 
         <div class="flex flex-grow">

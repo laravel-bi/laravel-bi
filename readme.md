@@ -213,6 +213,12 @@ Download package using composer:
 composer require laravel-bi/laravel-bi
 ```
 
+Publish packages resources using:
+
+```shell
+php artisan vendor:publish
+```
+
 #### Dashboard creation
 
 Run this artisan command to create an empty dashboard

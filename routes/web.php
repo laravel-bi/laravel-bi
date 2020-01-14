@@ -1,5 +1,7 @@
 <?php
 
-Route::get('/', 'HomepageController@getIndex');
-
-Route::get('/{any}', 'HomepageController@getIndex')->where('any', '.*');
+Route::group(['middleware' => 'can:viewBi'], function () {
+    Route::get('/', 'HomepageController@getIndex');
+    Route::get('/{dashboard}', 'HomepageController@getDashboard')
+        ->name('dashboard');
+});

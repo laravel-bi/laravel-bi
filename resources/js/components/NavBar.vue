@@ -33,7 +33,7 @@
         <div class="uppercase text-sm text-gray-500 font-bold m-2 mt-4 bi:navbar-title">Actions</div>
         <ul>
             <li class="py-2">
-                <a href="#" class="flex outline-none select-none bi:navbar-link" @click="toggleCollapse">
+                <a href="#" class="flex outline-none select-none bi:navbar-link" @click.prevent="toggleCollapse">
                     <span class="text-gray-400 self-center">
                         <svg
                             class="w-4 fill-current mr-2"

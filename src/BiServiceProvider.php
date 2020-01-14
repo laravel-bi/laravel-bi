@@ -24,6 +24,11 @@ class BiServiceProvider extends ServiceProvider
 
     protected function registerPublishing()
     {
+
+        $this->publishes([
+            __DIR__ . '/../stubs/service-provider.stub' => app_path('Providers/BiServiceProvider.php')
+        ], 'bi-provider');
+
         $this->publishes([
             __DIR__ . '/../config/bi.php' => config_path('bi.php')
         ], 'bi-config');
@@ -61,7 +66,8 @@ class BiServiceProvider extends ServiceProvider
     protected function registerCommands()
     {
         $this->commands([
-            Console\DashboardCommand::class
+            Console\DashboardCommand::class,
+            Console\InstallCommand::class
         ]);
     }
 

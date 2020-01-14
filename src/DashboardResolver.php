@@ -41,4 +41,9 @@ class DashboardResolver
     {
         return $this->dashboards;
     }
+
+    public function first()
+    {
+        return $this->dashboards->first();
+    }
 }

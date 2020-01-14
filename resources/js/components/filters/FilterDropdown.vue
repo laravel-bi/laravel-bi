@@ -6,15 +6,15 @@
 
         <div class="mt-6">
             <button
-                @click="$emit('close')"
+                @click.stop="$emit('close')"
                 class="bg-gray-200 hover:bg-gray-300 text-sm p-2 py-1 text-gray-800 rounded mr-2 focus:outline-none"
             >Close</button>
             <button
-                @click="$emit('reset')"
+                @click.stop="$emit('reset')"
                 class="bg-gray-200 hover:bg-gray-300 text-sm p-2 py-1 text-gray-800 rounded focus:outline-none"
             >Reset</button>
             <button
-                @click="$emit('apply')"
+                @click.stop="$emit('apply')"
                 class="bg-gray-700 hover:bg-gray-800 text-sm p-2 py-1 text-white rounded focus:outline-none float-right"
             >Apply</button>
         </div>

@@ -34,6 +34,7 @@
                 class="flex-1 min-w-0 border ml-2 text-sm px-2"
             />
             <span
+                v-if="internalValue"
                 :class="{ 
                     'visible': internalValue.operator == 'between',
                     'invisible': internalValue.operator != 'between'
@@ -42,6 +43,7 @@
             >and</span>
 
             <input
+                v-if="internalValue"
                 type="text"
                 v-model="internalValue.values[1]"
                 class="flex-1 min-w-0 border ml-2 text-sm px-2"
@@ -72,6 +74,11 @@ export default {
     components: {
         Multiselect
     },
+    data: function() {
+        return {
+            options: [">", ">=", "<", "<=", "between"]
+        };
+    },
     computed: {
         label() {
             try {
@@ -85,9 +92,6 @@ export default {
                 return "";
             }
         }
-    },
-    mounted() {
-        this.options = [">", ">=", "<", "<=", "between"];
     },
     methods: {
         defaultValue() {

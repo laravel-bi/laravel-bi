@@ -13,7 +13,7 @@
                 is-expanded
                 :show-day-popover="false"
                 mode="range"
-                v-model="internalValue"
+                v-model="datePickerValue"
                 is-inline
             ></v-date-picker>
         </bi-filter-dropdown>
@@ -31,22 +31,65 @@ export default {
     props: {
         value: Object
     },
+    data: function() {
+        return {
+            datePickerValue: null
+        };
+    },
+    watch: {
+        datePickerValue: function() {
+            // console.log("revaluate internal value", this.datePickerValue);
+            if(this.datePickerValue) {
+                this.setInternalValu({
+                    start: moment(new Date(this.datePickerValue.start)).format(
+                        "YYYY-MM-DD"
+                    ),
+                    end: moment(new Date(this.datePickerValue.end)).format(
+                        "YYYY-MM-DD"
+                    )
+                });
+            } else {
+                this.setInternalValue(null);
+            }
+        }
+    },
     computed: {
         startDate() {
             if (this.confirmedValue == null) {
                 return null;
             }
-            return moment(new Date(this.confirmedValue.start)).format(
-                "YYYY-MM-DD"
-            );
+            return this.confirmedValue.start;
         },
         endDate() {
             if (this.confirmedValue == null) {
                 return null;
             }
-            return moment(new Date(this.confirmedValue.end)).format(
-                "YYYY-MM-DD"
-            );
+            return this.confirmedValue.end;
+        }
+    },
+    mounted() {
+        this.$nextTick(() => {
+            this.setDatePickerValue(this.initialOrDefaultValue);
+        });
+    },
+    methods: {  
+        setDatePickerValue(value) {
+            console.log('setDatePickerValue');
+            this.datePickerValue = JSON.parse(JSON.stringify(value));
+        },
+        close() {
+            console.log('close');
+            this.setInternalValue(this.confirmedOrDefaultValue);
+            this.setDatePickerValue(this.confirmedOrDefaultValue);
+            this.active = false;
+        },
+        reset: function() {
+            //console.log('reset');
+            this.setInternalValue(this.initialOrDefaultValue);
+            this.setConfirmedValue(this.initialOrDefaultValue);
+            this.setDatePickerValue(this.initialOrDefaultValue);
+            this.active = false;
+            this.emitValue();
         },
     }
 };

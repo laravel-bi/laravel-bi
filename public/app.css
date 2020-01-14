@@ -11462,21 +11462,6 @@ video {
 .multiselect__content-wrapper { overflow-x: hidden !important
 }
 
-/* .multiselect__tags { @apply rounded-none pt-2 !important; min-height: 35px !important; }
-.multiselect__tag { @apply text-sm !important; }
-.multiselect__tag { @apply bg-gray-600 text-white !important; }
-.multiselect__tag-icon { @apply bg-gray-600 !important; }
-.multiselect__tag-icon::after { @apply text-white !important; }
-.multiselect__tag-icon:hover { @apply bg-gray-600 text-white !important; }
-.multiselect__tag-icon::after:hover { @apply text-white !important; }
-.multiselect__single { @apply text-sm !important;  }
-.multiselect__input { @apply text-sm !important; }
-.multiselect__placeholder { @apply text-sm !important; }
-.multiselect__option { @apply text-sm py-2 px-3 min-h-0 !important; }
-.multiselect__option--highlight { @apply bg-gray-400 text-white !important; }
-.multiselect__option--highlight::after { @apply bg-gray-400 text-white !important; line-height: 32px !important; }
-.multiselect__content-wrapper { @apply overflow-x-hidden !important } */
-
 .c-pane-container { font-family: Lato, sans-serif !important;
 }
 

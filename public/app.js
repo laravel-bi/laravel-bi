@@ -2260,10 +2260,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     apply: function apply() {
       this.active = false;
-      this.confirmedValue = JSON.parse(JSON.stringify(this.internalValue));
-      this.$emit("input", this.internalValue.map(function (item) {
-        return item.id;
-      }));
+
+      if (this.internalValueIsNotDefault()) {
+        this.confirmedValue = JSON.parse(JSON.stringify(this.internalValue));
+        this.$emit("input", this.internalValue.map(function (item) {
+          return item.id;
+        }));
+      }
     }
   }
 });
@@ -2312,20 +2315,65 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     value: Object
   },
+  data: function data() {
+    return {
+      datePickerValue: null
+    };
+  },
+  watch: {
+    datePickerValue: function datePickerValue() {
+      // console.log("revaluate internal value", this.datePickerValue);
+      if (this.datePickerValue) {
+        this.setInternalValu({
+          start: moment__WEBPACK_IMPORTED_MODULE_0___default()(new Date(this.datePickerValue.start)).format("YYYY-MM-DD"),
+          end: moment__WEBPACK_IMPORTED_MODULE_0___default()(new Date(this.datePickerValue.end)).format("YYYY-MM-DD")
+        });
+      } else {
+        this.setInternalValue(null);
+      }
+    }
+  },
   computed: {
     startDate: function startDate() {
       if (this.confirmedValue == null) {
         return null;
       }
 
-      return moment__WEBPACK_IMPORTED_MODULE_0___default()(new Date(this.confirmedValue.start)).format("YYYY-MM-DD");
+      return this.confirmedValue.start;
     },
     endDate: function endDate() {
       if (this.confirmedValue == null) {
         return null;
       }
 
-      return moment__WEBPACK_IMPORTED_MODULE_0___default()(new Date(this.confirmedValue.end)).format("YYYY-MM-DD");
+      return this.confirmedValue.end;
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$nextTick(function () {
+      _this.setDatePickerValue(_this.initialOrDefaultValue);
+    });
+  },
+  methods: {
+    setDatePickerValue: function setDatePickerValue(value) {
+      console.log('setDatePickerValue');
+      this.datePickerValue = JSON.parse(JSON.stringify(value));
+    },
+    close: function close() {
+      console.log('close');
+      this.setInternalValue(this.confirmedOrDefaultValue);
+      this.setDatePickerValue(this.confirmedOrDefaultValue);
+      this.active = false;
+    },
+    reset: function reset() {
+      //console.log('reset');
+      this.setInternalValue(this.initialOrDefaultValue);
+      this.setConfirmedValue(this.initialOrDefaultValue);
+      this.setDatePickerValue(this.initialOrDefaultValue);
+      this.active = false;
+      this.emitValue();
     }
   }
 });
@@ -2351,66 +2399,77 @@ __webpack_require__.r(__webpack_exports__);
     value: {}
   },
   data: function data() {
+    //console.log('data');
     return {
+      initialValue: null,
       internalValue: null,
       confirmedValue: null,
-      presetValue: null,
       active: false
     };
   },
   mounted: function mounted() {
-    var _this = this;
-
-    this.$nextTick(function () {
-      if (_this.value) {
-        _this.presetValue = JSON.parse(JSON.stringify(_this.value));
-        _this.internalValue = JSON.parse(JSON.stringify(_this.value));
-        _this.confirmedValue = JSON.parse(JSON.stringify(_this.value));
-
-        _this.$emit("input", _this.getClonedValue());
-      } else {
-        _this.internalValue = _this.defaultValue();
-      }
-    });
+    //console.log('mounted');
+    this.setInternalValue(this.initialOrDefaultValue); // this.setDefaultValue(this.value);
+    // this.$nextTick(() => {
+    // });
   },
-  watch: {
-    active: function active(newValue) {
-      if (newValue) {
-        this.$emit("activated", this.filterConfig.key);
-      }
-    } // value: function(newValue) {
-    //     console.log("values has changed", newValue);
+  watch: {// value: function(oldVal, newVal) {
+    //     //console.log('watch.value', oldVal, newVal);
+    //     if(this.value) {
+    //         this.setInternalValue(this.value);
+    //         this.setInitialValue(this.value);
+    //     }
     // }
-
+    // active: function(newValue) {
+    //     if (newValue) {
+    //         this.$emit("activated", this.filterConfig.key);
+    //     }
+    // }
+  },
+  computed: {
+    initialOrDefaultValue: function initialOrDefaultValue() {
+      return JSON.parse(JSON.stringify(this.initialValue || this.defaultValue()));
+    },
+    confirmedOrDefaultValue: function confirmedOrDefaultValue() {
+      return JSON.parse(JSON.stringify(this.confirmedValue || this.initialOrDefaultValue));
+    }
   },
   methods: {
-    defaultValue: function defaultValue() {
-      return null;
+    setInitialValue: function setInitialValue(value) {
+      //console.log('setInitialValue', value);
+      this.initialValue = JSON.parse(JSON.stringify(value));
+    },
+    setInternalValue: function setInternalValue(value) {
+      //console.log('setInternalValue', value);
+      this.internalValue = JSON.parse(JSON.stringify(value));
+    },
+    setConfirmedValue: function setConfirmedValue(value) {
+      //console.log('setConfirmedValue', value);
+      this.confirmedValue = JSON.parse(JSON.stringify(value));
+    },
+    emitValue: function emitValue() {
+      this.$emit("input", JSON.parse(JSON.stringify(this.confirmedValue)));
     },
     reset: function reset() {
-      if (this.presetValue) {
-        this.internalValue = JSON.parse(JSON.stringify(this.presetValue));
-        this.confirmedValue = JSON.parse(JSON.stringify(this.presetValue));
-        this.$emit("input", this.getClonedValue());
-      } else {
-        this.confirmedValue = null;
-        this.internalValue = this.defaultValue();
-        this.$emit("input", null);
-      }
-
+      //console.log('reset');
+      this.setInternalValue(this.initialOrDefaultValue);
+      this.setConfirmedValue(this.initialOrDefaultValue);
       this.active = false;
+      this.emitValue();
     },
     apply: function apply() {
+      //console.log('apply');
+      this.setConfirmedValue(this.internalValue);
       this.active = false;
-      this.confirmedValue = this.getClonedValue();
-      this.$emit("input", this.getClonedValue());
+      this.emitValue();
     },
     close: function close() {
+      console.log('close');
+      this.setInternalValue(this.confirmedOrDefaultValue);
       this.active = false;
-      this.internalValue = JSON.parse(JSON.stringify(this.confirmedValue));
     },
-    getClonedValue: function getClonedValue() {
-      return JSON.parse(JSON.stringify(this.internalValue));
+    defaultValue: function defaultValue() {
+      return null;
     }
   },
   directives: {
@@ -2523,6 +2582,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -2537,6 +2598,11 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_3___default.a
   },
+  data: function data() {
+    return {
+      options: [">", ">=", "<", "<=", "between"]
+    };
+  },
   computed: {
     label: function label() {
       try {
@@ -2549,9 +2615,6 @@ __webpack_require__.r(__webpack_exports__);
         return "";
       }
     }
-  },
-  mounted: function mounted() {
-    this.options = [">", ">=", "<", "<=", "between"];
   },
   methods: {
     defaultValue: function defaultValue() {
@@ -38613,7 +38676,12 @@ var render = function() {
             {
               staticClass: "flex outline-none select-none bi:navbar-link",
               attrs: { href: "#" },
-              on: { click: _vm.toggleCollapse }
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.toggleCollapse($event)
+                }
+              }
             },
             [
               _c("span", { staticClass: "text-gray-400 self-center" }, [
@@ -38952,11 +39020,11 @@ var render = function() {
                   "is-inline": ""
                 },
                 model: {
-                  value: _vm.internalValue,
+                  value: _vm.datePickerValue,
                   callback: function($$v) {
-                    _vm.internalValue = $$v
+                    _vm.datePickerValue = $$v
                   },
-                  expression: "internalValue"
+                  expression: "datePickerValue"
                 }
               })
             ],
@@ -39045,6 +39113,7 @@ var render = function() {
               "bg-gray-200 hover:bg-gray-300 text-sm p-2 py-1 text-gray-800 rounded mr-2 focus:outline-none",
             on: {
               click: function($event) {
+                $event.stopPropagation()
                 return _vm.$emit("close")
               }
             }
@@ -39059,6 +39128,7 @@ var render = function() {
               "bg-gray-200 hover:bg-gray-300 text-sm p-2 py-1 text-gray-800 rounded focus:outline-none",
             on: {
               click: function($event) {
+                $event.stopPropagation()
                 return _vm.$emit("reset")
               }
             }
@@ -39073,6 +39143,7 @@ var render = function() {
               "bg-gray-700 hover:bg-gray-800 text-sm p-2 py-1 text-white rounded focus:outline-none float-right",
             on: {
               click: function($event) {
+                $event.stopPropagation()
                 return _vm.$emit("apply")
               }
             }
@@ -39196,43 +39267,51 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c(
-                "span",
-                {
-                  staticClass: "ml-2 self-center text-sm ml-2",
-                  class: {
-                    visible: _vm.internalValue.operator == "between",
-                    invisible: _vm.internalValue.operator != "between"
-                  }
-                },
-                [_vm._v("and")]
-              ),
+              _vm.internalValue
+                ? _c(
+                    "span",
+                    {
+                      staticClass: "ml-2 self-center text-sm ml-2",
+                      class: {
+                        visible: _vm.internalValue.operator == "between",
+                        invisible: _vm.internalValue.operator != "between"
+                      }
+                    },
+                    [_vm._v("and")]
+                  )
+                : _vm._e(),
               _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.internalValue.values[1],
-                    expression: "internalValue.values[1]"
-                  }
-                ],
-                staticClass: "flex-1 min-w-0 border ml-2 text-sm px-2",
-                class: {
-                  visible: _vm.internalValue.operator == "between",
-                  invisible: _vm.internalValue.operator != "between"
-                },
-                attrs: { type: "text" },
-                domProps: { value: _vm.internalValue.values[1] },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              _vm.internalValue
+                ? _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.internalValue.values[1],
+                        expression: "internalValue.values[1]"
+                      }
+                    ],
+                    staticClass: "flex-1 min-w-0 border ml-2 text-sm px-2",
+                    class: {
+                      visible: _vm.internalValue.operator == "between",
+                      invisible: _vm.internalValue.operator != "between"
+                    },
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.internalValue.values[1] },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.internalValue.values,
+                          1,
+                          $event.target.value
+                        )
+                      }
                     }
-                    _vm.$set(_vm.internalValue.values, 1, $event.target.value)
-                  }
-                }
-              })
+                  })
+                : _vm._e()
             ]
           )
         : _vm._e()

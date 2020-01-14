@@ -1,13 +1,3 @@
-const generateRem = function (limit, extra = {}) {
-    return Object.assign(
-        {},
-        [...Array(limit).keys()].reduce((o, n) => {
-            o[n] = n / 10 + 'rem';
-            return o;
-        }, {}),
-        extra
-    );
-};
 module.exports = {
     theme: {
         fontFamily: {

@@ -66,10 +66,12 @@ export default {
         },
         apply() {
             this.active = false;
-            this.confirmedValue = JSON.parse(
-                JSON.stringify(this.internalValue)
-            );
-            this.$emit("input", this.internalValue.map(item => item.id));
+            if(this.internalValueIsNotDefault()) {
+                this.confirmedValue = JSON.parse(
+                    JSON.stringify(this.internalValue)
+                );
+                this.$emit("input", this.internalValue.map(item => item.id));
+            }
         }
     }
 };

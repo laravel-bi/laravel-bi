@@ -8,69 +8,81 @@ export default {
         value: {}
     },
     data() {
+        //console.log('data');
         return {
+            initialValue: null, 
             internalValue: null,
             confirmedValue: null,
-            presetValue: null,
             active: false
         };
     },
     mounted() {
-        this.$nextTick(() => {
-            if (this.value) {
-                this.presetValue = JSON.parse(JSON.stringify(this.value));
-                this.internalValue = JSON.parse(JSON.stringify(this.value));
-                this.confirmedValue = JSON.parse(JSON.stringify(this.value));
-                this.$emit("input", this.getClonedValue());
-            } else {
-                this.internalValue = this.defaultValue();
-            }
-        });
+        //console.log('mounted');
+        this.setInternalValue(this.initialOrDefaultValue);
+        // this.setDefaultValue(this.value);
+        // this.$nextTick(() => {
+
+        // });
     },
     watch: {
-        active: function(newValue) {
-            if (newValue) {
-                this.$emit("activated", this.filterConfig.key);
-            }
-        }
-        // value: function(newValue) {
-        //     console.log("values has changed", newValue);
+        // value: function(oldVal, newVal) {
+        //     //console.log('watch.value', oldVal, newVal);
+        //     if(this.value) {
+        //         this.setInternalValue(this.value);
+        //         this.setInitialValue(this.value);
+        //     }
+        // }
+        // active: function(newValue) {
+        //     if (newValue) {
+        //         this.$emit("activated", this.filterConfig.key);
+        //     }
         // }
     },
+    computed: {
+        initialOrDefaultValue: function() {
+            return JSON.parse(JSON.stringify(this.initialValue || this.defaultValue()));
+        },
+        confirmedOrDefaultValue: function() {
+            return JSON.parse(JSON.stringify(this.confirmedValue || this.initialOrDefaultValue));
+        }
+    },
     methods: {
+        setInitialValue: function(value) {
+            //console.log('setInitialValue', value);
+            this.initialValue = JSON.parse(JSON.stringify(value));
+        },
+        setInternalValue: function(value) {
+            //console.log('setInternalValue', value);
+            this.internalValue = JSON.parse(JSON.stringify(value));
+        },
+        setConfirmedValue: function(value) {
+            //console.log('setConfirmedValue', value);
+            this.confirmedValue = JSON.parse(JSON.stringify(value));
+        },
+        emitValue: function() {
+            this.$emit("input", JSON.parse(JSON.stringify(this.confirmedValue)));
+        },
+        reset: function() {
+            //console.log('reset');
+            this.setInternalValue(this.initialOrDefaultValue);
+            this.setConfirmedValue(this.initialOrDefaultValue);
+            this.active = false;
+            this.emitValue();
+        },
+        apply: function() {
+            //console.log('apply');
+            this.setConfirmedValue(this.internalValue);
+            this.active = false;
+            this.emitValue();
+        },
+        close: function() {
+            console.log('close');
+            this.setInternalValue(this.confirmedOrDefaultValue);
+            this.active = false;
+        },
         defaultValue() {
             return null;
         },
-        reset() {
-            if (this.presetValue) {
-                this.internalValue = JSON.parse(
-                    JSON.stringify(this.presetValue)
-                );
-                this.confirmedValue = JSON.parse(
-                    JSON.stringify(this.presetValue)
-                );
-                this.$emit("input", this.getClonedValue());
-            } else {
-                this.confirmedValue = null;
-                this.internalValue = this.defaultValue();
-                this.$emit("input", null);
-            }
-            this.active = false;
-        },
-        apply() {
-            this.active = false;
-            this.confirmedValue = this.getClonedValue();
-            this.$emit("input", this.getClonedValue());
-        },
-        close() {
-            this.active = false;
-            this.internalValue = JSON.parse(
-                JSON.stringify(this.confirmedValue)
-            );
-        },
-        getClonedValue() {
-            return JSON.parse(JSON.stringify(this.internalValue));
-        }
     },
     directives: {
         "click-outside": vueClickOutside

@@ -24,7 +24,6 @@ class BiServiceProvider extends ServiceProvider
 
     protected function registerPublishing()
     {
-
         $this->publishes([
             __DIR__ . '/../stubs/service-provider.stub' => app_path('Providers/BiServiceProvider.php')
         ], 'bi-provider');

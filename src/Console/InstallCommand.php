@@ -2,9 +2,9 @@
 
 namespace LaravelBi\LaravelBi\Console;
 
+use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Console\DetectsApplicationNamespace;
-use Illuminate\Support\Str;
 
 class InstallCommand extends Command
 {
@@ -42,7 +42,7 @@ class InstallCommand extends Command
 
         $this->comment('Generating User Dashboard...');
         $this->callSilent('bi:dashboard', ['name' => 'UserDashboard']);
-        copy(__DIR__.'/../../stubs/user-dashboard.stub', app_path('Bi/Dashboards/UserDashboard.php'));
+        copy(__DIR__ . '/../../stubs/user-dashboard.stub', app_path('Bi/Dashboards/UserDashboard.php'));
 
         $this->setAppNamespace();
 
@@ -59,8 +59,8 @@ class InstallCommand extends Command
         $namespace = Str::replaceLast('\\', '', $this->getAppNamespace());
 
         file_put_contents(config_path('app.php'), str_replace(
-            "{$namespace}\\Providers\EventServiceProvider::class,".PHP_EOL,
-            "{$namespace}\\Providers\EventServiceProvider::class,".PHP_EOL."        {$namespace}\Providers\BiServiceProvider::class,".PHP_EOL,
+            "{$namespace}\\Providers\EventServiceProvider::class," . PHP_EOL,
+            "{$namespace}\\Providers\EventServiceProvider::class," . PHP_EOL . "        {$namespace}\Providers\BiServiceProvider::class," . PHP_EOL,
             file_get_contents(config_path('app.php'))
         ));
     }
@@ -81,8 +81,8 @@ class InstallCommand extends Command
     /**
      * Set the namespace on the given file.
      *
-     * @param  string  $file
-     * @param  string  $namespace
+     * @param  string $file
+     * @param  string $namespace
      * @return void
      */
     protected function setAppNamespaceOn($file, $namespace)

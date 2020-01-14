@@ -6,7 +6,6 @@ use Config;
 
 class HomepageController extends BaseController
 {
-
     public function getIndex()
     {
         return redirect(route('bidashboard', ['dashboard' => $this->dashboardResolver->first()->uriKey]));

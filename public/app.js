@@ -1977,17 +1977,6 @@ __webpack_require__.r(__webpack_exports__);
         deep: true
       });
     });
-  },
-  methods: {
-    closeOthers: function closeOthers(filterKey) {
-      var _this2 = this;
-
-      Object.keys(this.$refs).filter(function (filter) {
-        return filter != "filter-".concat(filterKey);
-      }).forEach(function (filter) {
-        _this2.$refs[filter][0].active = false;
-      });
-    }
   }
 });
 
@@ -2322,7 +2311,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     datePickerValue: function datePickerValue() {
-      // console.log("revaluate internal value", this.datePickerValue);
       if (this.datePickerValue) {
         this.setInternalValu({
           start: moment__WEBPACK_IMPORTED_MODULE_0___default()(new Date(this.datePickerValue.start)).format("YYYY-MM-DD"),
@@ -2358,17 +2346,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     setDatePickerValue: function setDatePickerValue(value) {
-      console.log('setDatePickerValue');
       this.datePickerValue = JSON.parse(JSON.stringify(value));
     },
     close: function close() {
-      console.log('close');
       this.setInternalValue(this.confirmedOrDefaultValue);
       this.setDatePickerValue(this.confirmedOrDefaultValue);
       this.active = false;
     },
     reset: function reset() {
-      //console.log('reset');
       this.setInternalValue(this.initialOrDefaultValue);
       this.setConfirmedValue(this.initialOrDefaultValue);
       this.setDatePickerValue(this.initialOrDefaultValue);
@@ -2399,7 +2384,6 @@ __webpack_require__.r(__webpack_exports__);
     value: {}
   },
   data: function data() {
-    //console.log('data');
     return {
       initialValue: null,
       internalValue: null,
@@ -2408,23 +2392,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    //console.log('mounted');
-    this.setInternalValue(this.initialOrDefaultValue); // this.setDefaultValue(this.value);
-    // this.$nextTick(() => {
-    // });
-  },
-  watch: {// value: function(oldVal, newVal) {
-    //     //console.log('watch.value', oldVal, newVal);
-    //     if(this.value) {
-    //         this.setInternalValue(this.value);
-    //         this.setInitialValue(this.value);
-    //     }
-    // }
-    // active: function(newValue) {
-    //     if (newValue) {
-    //         this.$emit("activated", this.filterConfig.key);
-    //     }
-    // }
+    this.setInternalValue(this.initialOrDefaultValue);
   },
   computed: {
     initialOrDefaultValue: function initialOrDefaultValue() {
@@ -2436,35 +2404,29 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     setInitialValue: function setInitialValue(value) {
-      //console.log('setInitialValue', value);
       this.initialValue = JSON.parse(JSON.stringify(value));
     },
     setInternalValue: function setInternalValue(value) {
-      //console.log('setInternalValue', value);
       this.internalValue = JSON.parse(JSON.stringify(value));
     },
     setConfirmedValue: function setConfirmedValue(value) {
-      //console.log('setConfirmedValue', value);
       this.confirmedValue = JSON.parse(JSON.stringify(value));
     },
     emitValue: function emitValue() {
       this.$emit("input", JSON.parse(JSON.stringify(this.confirmedValue)));
     },
     reset: function reset() {
-      //console.log('reset');
       this.setInternalValue(this.initialOrDefaultValue);
       this.setConfirmedValue(this.initialOrDefaultValue);
       this.active = false;
       this.emitValue();
     },
     apply: function apply() {
-      //console.log('apply');
       this.setConfirmedValue(this.internalValue);
       this.active = false;
       this.emitValue();
     },
     close: function close() {
-      console.log('close');
       this.setInternalValue(this.confirmedOrDefaultValue);
       this.active = false;
     },
@@ -38455,7 +38417,6 @@ var render = function() {
           refInFor: true,
           tag: "component",
           attrs: { "filter-config": filter, dashboardKey: _vm.dashboardKey },
-          on: { activated: _vm.closeOthers },
           model: {
             value: _vm.filters[filter.key],
             callback: function($$v) {
@@ -38867,50 +38828,37 @@ var render = function() {
       staticClass: "flex relative"
     },
     [
-      _c(
-        "bi-filter-anchor",
-        {
-          attrs: { active: _vm.active },
-          on: {
-            activated: function($event) {
-              _vm.active = true
-            }
-          }
-        },
-        [
-          _vm.confirmedValue == null
-            ? _c("span", [_vm._v(_vm._s(_vm.filterConfig.name))])
-            : _c(
-                "span",
-                [
-                  _vm._v(
-                    "\n            " +
-                      _vm._s(_vm.filterConfig.name) +
-                      ":\n            "
-                  ),
-                  _vm._l(_vm.confirmedValue, function(value, i) {
-                    return _c(
-                      "strong",
-                      {
-                        key: "filter-" + _vm.filterConfig.name + "-" + value.id
-                      },
-                      [
-                        _vm._v(
-                          "\n                " +
-                            _vm._s(value[_vm.otherColumn]) +
-                            "\n                "
-                        ),
-                        i !== _vm.confirmedValue.length - 1
-                          ? _c("span", [_vm._v(",")])
-                          : _vm._e()
-                      ]
-                    )
-                  })
-                ],
-                2
-              )
-        ]
-      ),
+      _c("bi-filter-anchor", { attrs: { active: _vm.active } }, [
+        _vm.confirmedValue == null
+          ? _c("span", [_vm._v(_vm._s(_vm.filterConfig.name))])
+          : _c(
+              "span",
+              [
+                _vm._v(
+                  "\n            " +
+                    _vm._s(_vm.filterConfig.name) +
+                    ":\n            "
+                ),
+                _vm._l(_vm.confirmedValue, function(value, i) {
+                  return _c(
+                    "strong",
+                    { key: "filter-" + _vm.filterConfig.name + "-" + value.id },
+                    [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(value[_vm.otherColumn]) +
+                          "\n                "
+                      ),
+                      i !== _vm.confirmedValue.length - 1
+                        ? _c("span", [_vm._v(",")])
+                        : _vm._e()
+                    ]
+                  )
+                })
+              ],
+              2
+            )
+      ]),
       _vm._v(" "),
       _vm.active
         ? _c(
@@ -54969,7 +54917,7 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   mounted: function mounted() {
     var _this = this;
 
-    console.log("Laravel Bi started!");
+    // console.log("Laravel Bi started!");
     _utils_EventBus_js__WEBPACK_IMPORTED_MODULE_19__["default"].$on("dashboard-ready", function (_ref) {
       var name = _ref.name;
       _this.dashboardName = name;

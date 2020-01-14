@@ -1,6 +1,6 @@
 <template>
     <div class="flex relative" v-click-outside="close">
-        <bi-filter-anchor :active="active" @activated="active = true">
+        <bi-filter-anchor :active="active">
             <span v-if="confirmedValue == null">{{ filterConfig.name }}</span>
             <span v-else>
                 {{ filterConfig.name }}:

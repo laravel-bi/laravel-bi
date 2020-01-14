@@ -38,7 +38,6 @@ export default {
     },
     watch: {
         datePickerValue: function() {
-            // console.log("revaluate internal value", this.datePickerValue);
             if(this.datePickerValue) {
                 this.setInternalValu({
                     start: moment(new Date(this.datePickerValue.start)).format(
@@ -74,17 +73,14 @@ export default {
     },
     methods: {  
         setDatePickerValue(value) {
-            console.log('setDatePickerValue');
             this.datePickerValue = JSON.parse(JSON.stringify(value));
         },
         close() {
-            console.log('close');
             this.setInternalValue(this.confirmedOrDefaultValue);
             this.setDatePickerValue(this.confirmedOrDefaultValue);
             this.active = false;
         },
         reset: function() {
-            //console.log('reset');
             this.setInternalValue(this.initialOrDefaultValue);
             this.setConfirmedValue(this.initialOrDefaultValue);
             this.setDatePickerValue(this.initialOrDefaultValue);

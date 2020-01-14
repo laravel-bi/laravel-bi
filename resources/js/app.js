@@ -88,7 +88,7 @@ new Vue({
         }
     },
     mounted() {
-        console.log("Laravel Bi started!");
+        // console.log("Laravel Bi started!");
         EventBus.$on("dashboard-ready", ({ name }) => {
             this.dashboardName = name;
         });

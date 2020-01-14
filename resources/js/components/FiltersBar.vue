@@ -10,7 +10,7 @@
                 v-model="filters[filter.key]"
                 :filter-config="filter"
                 :dashboardKey="dashboardKey"
-                @activated="closeOthers"
+                
             ></component>
 
         <!-- <div class="text-sm p-4 py-2 ml-auto hover:bg-gray-100 cursor-pointer">
@@ -57,17 +57,6 @@ export default {
                 }
             );
         });
-    },
-    methods: {
-        closeOthers(filterKey) {
-            Object.keys(this.$refs)
-                .filter(filter => {
-                    return filter != `filter-${filterKey}`;
-                })
-                .forEach(filter => {
-                    this.$refs[filter][0].active = false;
-                });
-        }
     }
 };
 </script>

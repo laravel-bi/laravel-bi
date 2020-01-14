@@ -5,15 +5,33 @@ Laravel Bi is a beautiful and fully-featured Business Intelligence dashboard man
 [![Build Status](https://travis-ci.org/laravel-bi/laravel-bi.svg?branch=master)](https://travis-ci.org/laravel-bi/laravel-bi)
 [![StyleCI](https://github.styleci.io/repos/203451164/shield?branch=master)](https://github.styleci.io/repos/203451164)
 
+### Installation
+
+Install Laravel Bi using composer:
+
+`composer require laravel-bi`
+
+and then run
+
+`php artisan bi:install`
+
+to setup all Laravel Bi components and to create a simple UserDashboard.
+
+#### Add new dashboards
+
+You can add new dashboard to your project using this command
+
+`php artisan bi:dashboard FooDashboard --model=FooModel`
+
 ### Main features and concept
 
-Laravel-Bi uses `dashboards` to show data to the users. Each dashboard contains `widgets`. Each widget presents data to your user using different tool. Each widget's `metrics` and `dimensions` are fully customizable.
+Laravel Bi uses `dashboards` to show data to the users. Each dashboard contains `widgets`. Each widget presents data to your user using different tool. Each widget's `metrics` and `dimensions` are fully customizable.
 
 For now, it works only with mysql databases.
 
 ### Attributes
 
-Attributes are common representation of Dimension and Metric. You can instantiate Attribute using `create` static method. It accept 2 parameters:
+Attributes are common representation of Dimension and Metric. You can instantiate Attribute using `create` static method. It accepts 2 parameters:
 
 - key: a mandatory internal identifier
 - name: a mandatory label
@@ -179,7 +197,7 @@ BigNumber::create('order_number_with_price_greater_than_10', 'Big Orders')
     });
 ```
 
-Laravel-Bi is shippend with some preconfigured widgets:
+Laravel-Bi is shipped with some preconfigured widgets:
 
 ##### `BigNumber`
 
@@ -199,33 +217,28 @@ It shows a pie chart with a single metric and a single dimension. It accept a si
 
 #### Filters
 
-Filters are special tools that allow users to filter data in each dashboard. Laravel-Bi is shippend with some preconfigured filters:
+Filters are special tools that allow users to filter data in each dashboard. You can instantiate Widgets using `create` static method. It accept 2 parameters:
 
-*TODO*
+- key: a mandatory internal identifier and column name
+- name: a mandatory label
 
-### Usage
-
-#### Installation
-
-Download package using composer:
-
-```shell
-composer require laravel-bi/laravel-bi
+```php
+StringFilter::create('type', 'Type')
 ```
 
-Publish packages resources using:
+Laravel Bi is shipped with some preconfigured filters:
 
-```shell
-php artisan vendor:publish
-```
+##### `StringFilter`
 
-#### Dashboard creation
+It shows a multiple combo with all the possible values of a particular column.
 
-Run this artisan command to create an empty dashboard
+##### `NumberFilter`
 
-```shell
-php artisan bi:dashboard ExampleDashboard
-```
+It shows a number control to select different operators.
+
+##### `DateFilter`
+
+It shows a range calendar to select a day interval.
 
 #### Dashboard configuration
 
@@ -243,7 +256,7 @@ public function widgets()
 }
 ```
 
-#### Dashboard configuration
+#### Thanks to
 
 Thanks to https://github.com/sschoger/heroicons-ui
 

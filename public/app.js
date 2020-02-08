@@ -2091,6 +2091,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 //
 //
 //
@@ -2164,7 +2166,23 @@ __webpack_require__.r(__webpack_exports__);
       this.refreshFlag++;
     },
     download: function download() {
-      document.location = "/".concat(window.bi.base, "-apis/").concat(this.dashboardKey, "/widgets/").concat(this.widget.key, "/csv");
+      document.location = "/".concat(window.bi.base, "-apis/").concat(this.dashboardKey, "/widgets/").concat(this.widget.key, "/csv?") + this.serialize({
+        filters: this.filters
+      });
+    },
+    serialize: function serialize(obj, prefix) {
+      var str = [],
+          p;
+
+      for (p in obj) {
+        if (obj.hasOwnProperty(p)) {
+          var k = prefix ? prefix + "[" + p + "]" : p,
+              v = obj[p];
+          str.push(v !== null && _typeof(v) === "object" ? this.serialize(v, k) : encodeURIComponent(k) + "=" + encodeURIComponent(v));
+        }
+      }
+
+      return str.join("&");
     }
   }
 });

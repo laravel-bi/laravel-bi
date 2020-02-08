@@ -72,7 +72,21 @@ export default {
             this.refreshFlag++;
         },
         download() {
-            document.location = `/${window.bi.base}-apis/${this.dashboardKey}/widgets/${this.widget.key}/csv`;
+            document.location = `/${window.bi.base}-apis/${this.dashboardKey}/widgets/${this.widget.key}/csv?` + this.serialize({filters: this.filters});
+        },
+        serialize(obj, prefix) {
+            var str = [],
+                p;
+            for (p in obj) {
+                if (obj.hasOwnProperty(p)) {
+                var k = prefix ? prefix + "[" + p + "]" : p,
+                    v = obj[p];
+                str.push((v !== null && typeof v === "object") ?
+                    this.serialize(v, k) :
+                    encodeURIComponent(k) + "=" + encodeURIComponent(v));
+                }
+            }
+            return str.join("&");
         }
     }
 };

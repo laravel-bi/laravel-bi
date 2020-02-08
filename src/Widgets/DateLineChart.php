@@ -29,20 +29,20 @@ class DateLineChart extends LineChart
 
         $period = CarbonPeriod::create($dateFilter['start'], $dateFilter['end']);
 
-        $adaptedData = [];
-        $keyedData   = collect($data)->keyBy($dimensionKey);
+        $adaptedData = collect();
+        $keyedData   = $data->keyBy($dimensionKey);
 
         foreach ($period as $date) {
             $dateString = $date->format('Y-m-d');
             if ($keyedData->has($dateString)) {
-                $adaptedData[] = $keyedData->get($dateString);
+                $adaptedData->push($keyedData->get($dateString));
             } else {
                 $fakeItem                = [];
                 $fakeItem[$dimensionKey] = $dateString;
                 foreach ($this->metrics as $metric) {
                     $fakeItem[$metric->key] = $metric->getEmptyValue();
                 }
-                $adaptedData[] = $fakeItem;
+                $adaptedData->push($fakeItem);
             }
         }
 

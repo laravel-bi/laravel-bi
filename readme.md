@@ -211,6 +211,10 @@ It shows some dimensions and metrics organized in a table allowing user to apply
 
 It shows a line chart with different axis on a single horizontal dimension. It accept a single dimension and multiple metrics.
 
+##### `DateLineChart`
+
+LineChart that accept a `DateDimension` as main dimension. It allows to have empty value on time line when data are not available.
+
 ##### `PartitionPie`
 
 It shows a pie chart with a single metric and a single dimension. It accept a single dimension and a single metric.

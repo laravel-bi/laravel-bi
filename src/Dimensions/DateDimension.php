@@ -22,5 +22,4 @@ class DateDimension extends BaseDimension
 
         return $this;
     }
-
 }

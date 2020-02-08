@@ -8,10 +8,10 @@ use LaravelBi\LaravelBi\Dashboard;
 
 class DateLineChart extends LineChart
 {
-
     public function data(Dashboard $dashboard, Request $request)
     {
         $data = parent::data($dashboard, $request);
+
         return $this->adaptDataMissingDate($data, $request);
     }
 

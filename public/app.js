@@ -2312,7 +2312,7 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     datePickerValue: function datePickerValue() {
       if (this.datePickerValue) {
-        this.setInternalValu({
+        this.setInternalValue({
           start: moment__WEBPACK_IMPORTED_MODULE_0___default()(new Date(this.datePickerValue.start)).format("YYYY-MM-DD"),
           end: moment__WEBPACK_IMPORTED_MODULE_0___default()(new Date(this.datePickerValue.end)).format("YYYY-MM-DD")
         });

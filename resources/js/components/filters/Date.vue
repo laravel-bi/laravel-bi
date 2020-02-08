@@ -39,7 +39,7 @@ export default {
     watch: {
         datePickerValue: function() {
             if(this.datePickerValue) {
-                this.setInternalValu({
+                this.setInternalValue({
                     start: moment(new Date(this.datePickerValue.start)).format(
                         "YYYY-MM-DD"
                     ),

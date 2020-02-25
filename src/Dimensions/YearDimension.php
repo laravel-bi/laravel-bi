@@ -7,6 +7,7 @@ class YearDimension extends DateDimension
     public function __construct($key, $name)
     {
         parent::__construct($key, $name);
-        $this->format('%Y');
+        $this->sqlFormat('%Y');
+        $this->carbonFormat('Y', 'year');
     }
 }

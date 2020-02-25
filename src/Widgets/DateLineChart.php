@@ -2,6 +2,7 @@
 
 namespace LaravelBi\LaravelBi\Widgets;
 
+use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use LaravelBi\LaravelBi\Dashboard;
@@ -12,28 +13,35 @@ class DateLineChart extends LineChart
     {
         $data = parent::data($dashboard, $request);
 
-        return $this->adaptDataMissingDate($data, $request);
+        return $this->adaptDataMissingDate($dashboard, $data, $request);
     }
 
-    private function adaptDataMissingDate($data, Request $request)
+    private function adaptDataMissingDate(Dashboard $dashboard, $data, Request $request)
     {
+        $dimension        = $this->dimensions->get(0);
         $requestedFilters = $request->input('filters');
-        $dimensionColumn  = $this->dimensions->get(0)->column;
+        $dimensionColumn  = $dimension->column;
         $dimensionKey     = $this->dimensions->get(0)->key;
 
-        if (!$requestedFilters || !array_key_exists($dimensionColumn, $requestedFilters)) {
-            return $data;
+        if ($requestedFilters && array_key_exists($dimensionColumn, $requestedFilters)) {
+            $dateLimits = [
+                'start' => Carbon::createFromFormat('Y-m-d', $requestedFilters[$dimensionColumn]['start'])->startOf($dimension->carbonInterval),
+                'end'   => Carbon::createFromFormat('Y-m-d', $requestedFilters[$dimensionColumn]['end'])->endOf($dimension->carbonInterval)
+            ];
+        } else {
+            $dateLimits = [
+                'start' => Carbon::createFromFormat($dimension->carbonFormat, $data->first()[$dimensionKey]),
+                'end'   => Carbon::createFromFormat($dimension->carbonFormat, $data->last()[$dimensionKey])
+            ];
         }
-
-        $dateFilter = $requestedFilters[$dimensionColumn];
-
-        $period = CarbonPeriod::create($dateFilter['start'], $dateFilter['end']);
+dd($dateLimits);
+        $period = CarbonPeriod::create($dateLimits['start'], $dimension->carbonInterval, $dateLimits['end']);
 
         $adaptedData = collect();
         $keyedData   = $data->keyBy($dimensionKey);
 
         foreach ($period as $date) {
-            $dateString = $date->format('Y-m-d');
+            $dateString = $date->format($dimension->carbonFormat);
             if ($keyedData->has($dateString)) {
                 $adaptedData->push($keyedData->get($dateString));
             } else {

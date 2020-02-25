@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Builder;
 
 class DateDimension extends BaseDimension
 {
-    private $format;
+    private $sqlFormat;
+    public $carbonFormat;
+    public $carbonInterval;
 
     public function __construct(string $key, string $name)
     {
@@ -19,13 +21,21 @@ class DateDimension extends BaseDimension
 
     public function apply(Builder $builder, Widget $widget): Builder
     {
-        return $builder->addSelect(DB::raw("DATE_FORMAT({$this->column}, '{$this->format}') as `{$this->key}`"))
+        return $builder->addSelect(DB::raw("DATE_FORMAT({$this->column}, '{$this->sqlFormat}') as `{$this->key}`"))
                        ->groupBy($this->key);
     }
 
-    public function format($format)
+    public function sqlFormat($sqlFormat)
     {
-        $this->format = $format;
+        $this->sqlFormat = $sqlFormat;
+
+        return $this;
+    }
+
+    public function carbonFormat($carbonFormat, $carbonInterval)
+    {
+        $this->carbonFormat   = $carbonFormat;
+        $this->carbonInterval = $carbonInterval;
 
         return $this;
     }

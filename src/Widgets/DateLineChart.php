@@ -23,19 +23,24 @@ class DateLineChart extends LineChart
         $dimensionColumn  = $dimension->column;
         $dimensionKey     = $this->dimensions->get(0)->key;
 
-        if ($requestedFilters && array_key_exists($dimensionColumn, $requestedFilters)) {
+        $methods = [
+            'startOf' . ucfirst($dimension->carbonInterval),
+            'endOf' . ucfirst($dimension->carbonInterval)
+        ];
+
+        if ($requestedFilters && array_key_exists($dimensionColumn, $requestedFilters)) {    
             $dateLimits = [
-                'start' => Carbon::createFromFormat('Y-m-d', $requestedFilters[$dimensionColumn]['start'])->startOf($dimension->carbonInterval),
-                'end'   => Carbon::createFromFormat('Y-m-d', $requestedFilters[$dimensionColumn]['end'])->endOf($dimension->carbonInterval)
+                'start' => Carbon::createFromFormat('Y-m-d', $requestedFilters[$dimensionColumn]['start'])->{$methods[0]}(),
+                'end'   => Carbon::createFromFormat('Y-m-d', $requestedFilters[$dimensionColumn]['end'])->{$methods[1]}()
             ];
         } else {
             $dateLimits = [
-                'start' => Carbon::createFromFormat($dimension->carbonFormat, $data->first()[$dimensionKey]),
-                'end'   => Carbon::createFromFormat($dimension->carbonFormat, $data->last()[$dimensionKey])
+                'start' => Carbon::createFromFormat($dimension->carbonFormat, $data->first()[$dimensionKey])->{$methods[0]}(),
+                'end'   => Carbon::createFromFormat($dimension->carbonFormat, $data->last()[$dimensionKey])->{$methods[1]}()
             ];
         }
-dd($dateLimits);
-        $period = CarbonPeriod::create($dateLimits['start'], $dimension->carbonInterval, $dateLimits['end']);
+
+        $period = CarbonPeriod::create($dateLimits['start'], "1 " . $dimension->carbonInterval, $dateLimits['end']);
 
         $adaptedData = collect();
         $keyedData   = $data->keyBy($dimensionKey);

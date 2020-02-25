@@ -10,6 +10,13 @@ class DateDimension extends BaseDimension
 {
     private $format;
 
+    public function __construct(string $key, string $name)
+    {
+        $this->key    = 'formatted_' . $key;
+        $this->name   = $name;
+        $this->column = $key;
+    }
+
     public function apply(Builder $builder, Widget $widget): Builder
     {
         return $builder->addSelect(DB::raw("DATE_FORMAT({$this->column}, '{$this->format}') as `{$this->key}`"))

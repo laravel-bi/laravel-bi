@@ -10,7 +10,7 @@ interface Metric
 {
     public function apply(Builder $builder, Widget $widget): Builder;
 
-    public function display(Model $value);
+    public function display(Model $value, array $models);
 
     public function getEmptyValue();
 }

@@ -28,9 +28,10 @@ class Table extends BaseWidget
         }
 
         $rawModels = $builder->get();
+        $rawModelsArray = $rawModels->toArray();
 
-        return $rawModels->map(function ($rawModel) {
-            return $this->displayModel($rawModel)->toArray();
+        return $rawModels->map(function ($rawModel) use ($rawModelsArray) {
+            return $this->displayModel($rawModel, $rawModelsArray)->toArray();
         });
     }
 

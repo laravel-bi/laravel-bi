@@ -38,7 +38,7 @@ class Attribute
         return $this;
     }
 
-    public function display(Model $value)
+    public function display(Model $value, array $models)
     {
         return $value->{$this->key};
     }

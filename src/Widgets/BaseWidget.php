@@ -55,10 +55,11 @@ abstract class BaseWidget implements \JsonSerializable, Widget
         $builder = $this->applyAttributes($builder);
         $builder = $this->applyFilters($builder, $dashboard, $request);
 
-        $rawModels = $builder->get();
+        $rawModels      = $builder->get();
+        $rawModelsArray = $rawModels->toArray();
 
-        return $rawModels->map(function ($rawModel) {
-            return $this->displayModel($rawModel)->toArray();
+        return $rawModels->map(function ($rawModel) use ($rawModelsArray) {
+            return $this->displayModel($rawModel, $rawModelsArray)->toArray();
         });
     }
 
@@ -104,10 +105,10 @@ abstract class BaseWidget implements \JsonSerializable, Widget
         }, $builder);
     }
 
-    protected function displayModel($rawRow)
+    protected function displayModel($rawRow, $rawModels)
     {
-        return $this->getAttributes()->reduce(function ($rawRow, $attribute) {
-            $rawRow->{$attribute->key} = $attribute->display($rawRow);
+        return $this->getAttributes()->reduce(function ($rawRow, $attribute) use ($rawModels) {
+            $rawRow->{$attribute->key} = $attribute->display($rawRow, $rawModels);
 
             return $rawRow;
         }, $rawRow);

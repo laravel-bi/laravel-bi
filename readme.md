@@ -56,7 +56,8 @@ SumMetric::create('unique_name_for_some_of_prices', 'The Sum')
 
 #### Dimensions
 
-Dimensions are attributes of your data. Laravel-Bi is shipped with some preconfigured dimensions:
+Dimensions are attributes of your data. 
+Laravel-Bi is shipped with some preconfigured dimensions:
 
 ##### `StringDimension`
 
@@ -121,7 +122,8 @@ You can easily use them in your widgets or create your custom dimensions. Please
 
 #### Metrics
 
-Metrics are quantitative measurements. Laravel-Bi is shipped with some preconfigured metrics:
+Metrics are quantitative measurements. Each metric show absolute values. If you need to show percentage of the total, you can use `asPercentage()` method
+Laravel-Bi is shipped with some preconfigured metrics:
 
 ##### `CountMetric`
 

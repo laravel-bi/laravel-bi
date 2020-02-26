@@ -46,7 +46,7 @@ class BelongsToDimension extends BaseDimension
         return $builder->orderBy($foreignKey, $dir);
     }
 
-    public function display(Model $model)
+    public function display(Model $model, array $models)
     {
         $value = $model->{$this->relation}->{$this->otherColumn};
         $model->unsetRelation($this->relation);

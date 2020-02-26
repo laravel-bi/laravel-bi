@@ -28,7 +28,7 @@ class DateLineChart extends LineChart
             'endOf' . ucfirst($dimension->carbonInterval)
         ];
 
-        if ($requestedFilters && array_key_exists($dimensionColumn, $requestedFilters)) {    
+        if ($requestedFilters && array_key_exists($dimensionColumn, $requestedFilters)) {
             $dateLimits = [
                 'start' => Carbon::createFromFormat('Y-m-d', $requestedFilters[$dimensionColumn]['start'])->{$methods[0]}(),
                 'end'   => Carbon::createFromFormat('Y-m-d', $requestedFilters[$dimensionColumn]['end'])->{$methods[1]}()
@@ -40,7 +40,7 @@ class DateLineChart extends LineChart
             ];
         }
 
-        $period = CarbonPeriod::create($dateLimits['start'], "1 " . $dimension->carbonInterval, $dateLimits['end']);
+        $period = CarbonPeriod::create($dateLimits['start'], '1 ' . $dimension->carbonInterval, $dateLimits['end']);
 
         $adaptedData = collect();
         $keyedData   = $data->keyBy($dimensionKey);

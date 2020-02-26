@@ -27,7 +27,7 @@ class Table extends BaseWidget
             }
         }
 
-        $rawModels = $builder->get();
+        $rawModels      = $builder->get();
         $rawModelsArray = $rawModels->toArray();
 
         return $rawModels->map(function ($rawModel) use ($rawModelsArray) {

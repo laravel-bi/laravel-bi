@@ -18,6 +18,7 @@ abstract class BaseMetric extends Attribute implements Metric
     public function asPercentage()
     {
         $this->asPercentage = true;
+
         return $this;
     }
 
@@ -26,6 +27,7 @@ abstract class BaseMetric extends Attribute implements Metric
         if ($this->asPercentage) {
             return round($value->{$this->key} / array_sum(array_column($models, $this->key)) * 100, 2) . '%';
         }
+        
         return parent::display($value, $models);
     }
 }

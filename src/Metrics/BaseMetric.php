@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 abstract class BaseMetric extends Attribute implements Metric
 {
-
     private $asPercentage = false;
 
     public function getEmptyValue()
@@ -27,7 +26,7 @@ abstract class BaseMetric extends Attribute implements Metric
         if ($this->asPercentage) {
             return round($value->{$this->key} / array_sum(array_column($models, $this->key)) * 100, 2) . '%';
         }
-        
+
         return parent::display($value, $models);
     }
 }

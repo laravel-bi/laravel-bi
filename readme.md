@@ -9,7 +9,7 @@ Laravel Bi is a beautiful and fully-featured Business Intelligence dashboard man
 
 Install Laravel Bi using composer:
 
-`composer require laravel-bi`
+`composer require laravel-bi/laravel-bi`
 
 and then run
 

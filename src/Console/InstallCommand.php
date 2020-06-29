@@ -4,11 +4,9 @@ namespace LaravelBi\LaravelBi\Console;
 
 use Illuminate\Support\Str;
 use Illuminate\Console\Command;
-use Illuminate\Console\DetectsApplicationNamespace;
 
 class InstallCommand extends Command
 {
-    use DetectsApplicationNamespace;
 
     /**
      * The name and signature of the console command.
@@ -56,7 +54,7 @@ class InstallCommand extends Command
      */
     protected function registerBiServiceProvider()
     {
-        $namespace = Str::replaceLast('\\', '', $this->getAppNamespace());
+        $namespace = Str::replaceLast('\\', '', $this->laravel->getNamespace());
 
         file_put_contents(config_path('app.php'), str_replace(
             "{$namespace}\\Providers\EventServiceProvider::class," . PHP_EOL,
@@ -72,7 +70,7 @@ class InstallCommand extends Command
      */
     protected function setAppNamespace()
     {
-        $namespace = $this->getAppNamespace();
+        $namespace = $this->laravel->getNamespace();
 
         $this->setAppNamespaceOn(app_path('Bi/Dashboards/UserDashboard.php'), $namespace);
         $this->setAppNamespaceOn(app_path('Providers/BiServiceProvider.php'), $namespace);

@@ -25,7 +25,7 @@
                     href="#"
                     class="text-gray-700 outline-none hover:text-gray-900"
                     title="Download CSV"
-                    @click="download"
+                    @click.prevent="download"
                 >
                     <svg
                         class="w-5 fill-current inline"

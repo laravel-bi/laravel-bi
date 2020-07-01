@@ -38766,7 +38766,12 @@ var render = function() {
               {
                 staticClass: "text-gray-700 outline-none hover:text-gray-900",
                 attrs: { href: "#", title: "Download CSV" },
-                on: { click: _vm.download }
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.download($event)
+                  }
+                }
               },
               [
                 _c(

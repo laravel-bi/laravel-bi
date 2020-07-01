@@ -17,7 +17,7 @@ class BigNumber extends BaseWidget
 
         $rawModel = $builder->first();
 
-        return $this->displayModel($rawModel)->toArray();
+        return $this->displayModel($rawModel, [$rawModel])->toArray();
     }
 
     protected function extra()

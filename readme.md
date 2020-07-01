@@ -205,6 +205,8 @@ Laravel-Bi is shipped with some preconfigured widgets:
 
 It shows a particular and relevant metric as a KPI. It accept a single metric.
 
+![Big Number Widget](https://raw.githubusercontent.com/laravel-bi/laravel-bi/master/screenshots/big-number.png)
+
 ##### `Table`
 
 It shows some dimensions and metrics organized in a table allowing user to apply a custom sorting. It accept multiple dimensions and metrics.

@@ -59,23 +59,23 @@ SumMetric::create('unique_name_for_some_of_prices', 'The Sum')
 Dimensions are attributes of your data. 
 Laravel-Bi is shipped with some preconfigured dimensions:
 
-##### `StringDimension`
+#### `StringDimension`
 
 It represents a string column. No transformation or logic are applied. It comes to your widget as it is saved in your database.
 
-##### `YearDimension`
+#### `YearDimension`
 
 It represents a year. It applies a `DATE_FORMAT` clause to your database query in order to take only year digits. Its default format is `%Y` (e.g. _2019_).
 
-##### `MonthDimension`
+#### `MonthDimension`
 
 It represents a month. It applies a `DATE_FORMAT` clause to your database query in order to take only year and month digits. Its default format is `%Y-%m` (e.g. _2019-01_).
 
-##### `DayDimension`
+#### `DayDimension`
 
 It represents a day. It applies a `DATE_FORMAT` clause to your database query in order to take only year, month and day digits. Its default format is `%Y-%m-%d`  (e.g. _2019-01-15_).
 
-##### `DateDimension`
+#### `DateDimension`
 
 It represents a date. It allows to set a custom `DATE_FORMAT` clause using `format()` method.
 
@@ -88,7 +88,7 @@ DateDimension::create('year_week', 'Year Week')
     ->format('%Y-%u');
 ```
 
-##### `BelongsToDimension`
+#### `BelongsToDimension`
 
 It represents a string value taken from a BelongsTo relationship. It comes from a JOIN clause in order to use it in filters or in sorting.
 
@@ -103,7 +103,7 @@ BelongsToDimension::create('product_name', 'Product')
     ->otherColumn('name');
 ```
 
-##### `RawDimension`
+#### `RawDimension`
 
 It represents a raw dimension you can edit as you want using `raw` method.
 
@@ -116,7 +116,7 @@ DateDimension::create('initial_of_name', 'Initial')
     ->raw('LEFT(name, 1)');
 ```
 
-##### Create your Custom dimensions
+#### Create your Custom dimensions
 
 You can easily use them in your widgets or create your custom dimensions. Please take a look to the existing dimensions.
 
@@ -125,19 +125,19 @@ You can easily use them in your widgets or create your custom dimensions. Please
 Metrics are quantitative measurements. Each metric show absolute values. If you need to show percentage of the total, you can use `asPercentage()` method
 Laravel-Bi is shipped with some preconfigured metrics:
 
-##### `CountMetric`
+#### `CountMetric`
 
 It is a simple metric that count number of records. This is not related to a particular column.
 
-##### `SumMetric`
+#### `SumMetric`
 
 It sums a particular column values.
 
-##### `AverageMetric`
+#### `AverageMetric`
 
 It calculate average of a particular column values.
 
-##### `RawMetric`
+#### `RawMetric`
 
 It represents a raw metric you can edit as you want using `raw` method.
 
@@ -150,7 +150,7 @@ DateDimension::create('discounted_price', 'Discounted Price')
     ->raw('price * 0.9');
 ```
 
-##### Custom metrics
+#### Custom metrics
 
 You can easily use them in your widgets or create your custom dimensions. Please take a look to the existing metrics.
 
@@ -201,27 +201,31 @@ BigNumber::create('order_number_with_price_greater_than_10', 'Big Orders')
 
 Laravel-Bi is shipped with some preconfigured widgets:
 
-##### `BigNumber`
+#### `BigNumber`
 
 It shows a particular and relevant metric as a KPI. It accept a single metric.
 
 ![Big Number Widget](https://raw.githubusercontent.com/laravel-bi/laravel-bi/master/screenshots/big-number.png)
 
-##### `Table`
+#### `Table`
 
 It shows some dimensions and metrics organized in a table allowing user to apply a custom sorting. It accept multiple dimensions and metrics.
 
-##### `LineChart`
+#### `LineChart`
 
 It shows a line chart with different axis on a single horizontal dimension. It accept a single dimension and multiple metrics.
 
-##### `DateLineChart`
+![Line Chart Widget](https://raw.githubusercontent.com/laravel-bi/laravel-bi/master/screenshots/line-chart.png)
+
+#### `DateLineChart`
 
 LineChart that accept a `DateDimension` as main dimension. It allows to have empty value on time line when data are not available.
 
-##### `PartitionPie`
+#### `PartitionPie`
 
 It shows a pie chart with a single metric and a single dimension. It accept a single dimension and a single metric.
+
+![Partition Pie Widget](https://raw.githubusercontent.com/laravel-bi/laravel-bi/master/screenshots/partition-pie.png)
 
 #### Filters
 
@@ -236,15 +240,15 @@ StringFilter::create('type', 'Type')
 
 Laravel Bi is shipped with some preconfigured filters:
 
-##### `StringFilter`
+#### `StringFilter`
 
 It shows a multiple combo with all the possible values of a particular column.
 
-##### `NumberFilter`
+#### `NumberFilter`
 
 It shows a number control to select different operators.
 
-##### `DateFilter`
+#### `DateFilter`
 
 It shows a range calendar to select a day interval.
 

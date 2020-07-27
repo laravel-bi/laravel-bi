@@ -46,6 +46,7 @@
             :widgetKey="widget.key"
             :widgetName="widget.name"
             :dimensions="widget.dimensions"
+            :extra="widget.extra"
             :metrics="widget.metrics"
             :filters="filters"
             :filters-flag="filtersFlag"

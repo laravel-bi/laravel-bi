@@ -18,7 +18,8 @@ export default {
         dimensions: Array,
         filters: Object,
         filtersFlag: Number,
-        refreshFlag: Number
+        refreshFlag: Number,
+        extra: Object
     },
     data() {
         return {

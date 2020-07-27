@@ -18,8 +18,6 @@ class PartitionPie extends BaseWidget
     protected function extra()
     {
         return [
-            'metric'    => $this->metrics->get(0),
-            'dimension' => $this->dimensions->get(0),
             'colors'    => $this->colors
         ];
     }

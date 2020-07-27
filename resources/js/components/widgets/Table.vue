@@ -122,6 +122,10 @@ export default {
     },
     mounted() {
         this.sort.col = this.dimensions[0].key;
+        if(this.extra && this.extra.orderBy) {
+            this.sort.col = this.extra.orderBy.col;
+            this.sort.dir = this.extra.orderBy.dir;
+        }
     },
     methods: {
         fetchParams() {

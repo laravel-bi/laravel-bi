@@ -46,7 +46,7 @@ abstract class BaseWidget implements \JsonSerializable, Widget
 
     protected function extra()
     {
-        return new \stdClass();
+        return [];
     }
 
     public function data(Dashboard $dashboard, Request $request)
@@ -71,7 +71,8 @@ abstract class BaseWidget implements \JsonSerializable, Widget
             'name'       => $this->name,
             'component'  => $this->component,
             'metrics'    => $this->metrics,
-            'dimensions' => $this->dimensions
+            'dimensions' => $this->dimensions,
+            'extra'      => $this->extra()
         ];
     }
 

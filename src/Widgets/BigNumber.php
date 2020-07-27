@@ -20,10 +20,4 @@ class BigNumber extends BaseWidget
         return $this->displayModel($rawModel, [$rawModel])->toArray();
     }
 
-    protected function extra()
-    {
-        return [
-            'metric' => $this->metrics->get(0)
-        ];
-    }
 }

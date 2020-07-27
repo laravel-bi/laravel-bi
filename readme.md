@@ -211,6 +211,21 @@ It shows a particular and relevant metric as a KPI. It accept a single metric.
 
 It shows some dimensions and metrics organized in a table allowing user to apply a custom sorting. It accept multiple dimensions and metrics.
 
+It has a one custom method:
+
+- `orderBy($column, $dir)` to set a custom orderBy clause
+
+```php
+Table::create('user-per-country', 'User per Country')
+    ->dimensions([
+        StringDimension::create('country_code', 'Country'),
+    ])
+    ->metrics([
+        CountMetric::create('count', 'Count'),
+    ])
+    ->orderBy('count', 'desc')
+```
+
 #### `LineChart`
 
 It shows a line chart with different axis on a single horizontal dimension. It accept a single dimension and multiple metrics.

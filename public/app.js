@@ -2149,6 +2149,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     dashboardKey: String,
@@ -3018,6 +3019,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.sort.col = this.dimensions[0].key;
+
+    if (this.extra && this.extra.orderBy) {
+      this.sort.col = this.extra.orderBy.col;
+      this.sort.dir = this.extra.orderBy.dir;
+    }
   },
   methods: {
     fetchParams: function fetchParams() {
@@ -3071,7 +3077,8 @@ __webpack_require__.r(__webpack_exports__);
     dimensions: Array,
     filters: Object,
     filtersFlag: Number,
-    refreshFlag: Number
+    refreshFlag: Number,
+    extra: Object
   },
   data: function data() {
     return {
@@ -38805,6 +38812,7 @@ var render = function() {
           widgetKey: _vm.widget.key,
           widgetName: _vm.widget.name,
           dimensions: _vm.widget.dimensions,
+          extra: _vm.widget.extra,
           metrics: _vm.widget.metrics,
           filters: _vm.filters,
           "filters-flag": _vm.filtersFlag,

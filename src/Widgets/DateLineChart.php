@@ -24,6 +24,8 @@ class DateLineChart extends LineChart
 
         $keyedData = $data->keyBy($dimension->key);
 
+        if($data->isEmpty()) return $data;
+
         $minDate = Carbon::createFromFormat($dimension->carbonFormat, $data->min($dimensionKey))->startOfDay();
         $maxDate = Carbon::createFromFormat($dimension->carbonFormat, $data->max($dimensionKey))->startOfDay();
 

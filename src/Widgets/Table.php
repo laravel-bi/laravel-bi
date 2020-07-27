@@ -45,7 +45,7 @@ class Table extends BaseWidget
         });
     }
 
-    protected function extra()
+    protected function extra(): array
     {
         return [
             'orderBy' => [

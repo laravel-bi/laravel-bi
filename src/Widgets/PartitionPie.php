@@ -15,7 +15,7 @@ class PartitionPie extends BaseWidget
         return $this;
     }
 
-    protected function extra()
+    protected function extra(): array
     {
         return [
             'colors'    => $this->colors

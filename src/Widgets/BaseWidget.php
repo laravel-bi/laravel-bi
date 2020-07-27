@@ -44,9 +44,11 @@ abstract class BaseWidget implements \JsonSerializable, Widget
         return $this;
     }
 
-    protected function extra()
+    protected function extra(): array
     {
-        return [];
+        return [
+            'uniqid' => uniqid()
+        ];
     }
 
     public function data(Dashboard $dashboard, Request $request)

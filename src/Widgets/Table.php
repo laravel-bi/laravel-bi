@@ -2,8 +2,8 @@
 
 namespace LaravelBi\LaravelBi\Widgets;
 
-use Illuminate\Http\Request;
 use LaravelBi\LaravelBi\Dashboard;
+use LaravelBi\LaravelBi\Support\BiRequest;
 
 class Table extends BaseWidget
 {
@@ -19,7 +19,7 @@ class Table extends BaseWidget
         return $this;
     }
 
-    public function data(Dashboard $dashboard, Request $request)
+    public function data(Dashboard $dashboard, BiRequest $request)
     {
         $builder = $this->getBaseBuilder($dashboard);
         $builder = $this->applyAttributes($builder);

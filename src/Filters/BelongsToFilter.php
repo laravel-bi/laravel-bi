@@ -2,9 +2,9 @@
 
 namespace LaravelBi\LaravelBi\Filters;
 
-use Illuminate\Http\Request;
 use LaravelBi\LaravelBi\Dashboard;
 use Illuminate\Database\Eloquent\Builder;
+use LaravelBi\LaravelBi\Support\BiRequest;
 
 class BelongsToFilter extends BaseFilter
 {
@@ -33,12 +33,12 @@ class BelongsToFilter extends BaseFilter
         return $this;
     }
 
-    public function apply(Builder $builder, array $filterData, Request $request): Builder
+    public function apply(Builder $builder, array $filterData, BiRequest $request): Builder
     {
         return $builder->whereIn($builder->getModel()->{$this->relation}()->getForeignKey(), $filterData);
     }
 
-    public function extra(Dashboard $dashboard, Request $request)
+    public function extra(Dashboard $dashboard, BiRequest $request)
     {
         return [
             'options'     => (new $dashboard->model())->{$this->relation}()->getRelated()->newQuery()->select('id', 'name')->get(),

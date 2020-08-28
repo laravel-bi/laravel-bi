@@ -2,13 +2,13 @@
 
 namespace LaravelBi\LaravelBi\Http\Controllers\Apis;
 
-use Illuminate\Http\Request;
 use LaravelBi\LaravelBi\Dashboard;
 use LaravelBi\LaravelBi\Http\Controllers\BaseController;
+use LaravelBi\LaravelBi\Support\BiRequest;
 
 class FilterController extends BaseController
 {
-    public function getFilter(Dashboard $dashboard, string $filterKey, Request $request)
+    public function getFilter(Dashboard $dashboard, string $filterKey, BiRequest $request)
     {
         $filter = $dashboard->findFilterOrFail($filterKey);
 

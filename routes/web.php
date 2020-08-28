@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['middleware' => 'can:viewBi'], function () {
+Route::group(['middleware' => ['auth', 'can:viewBi']], function () {
     Route::get('/', 'HomepageController@getIndex');
     Route::get('/{dashboard}', 'HomepageController@getDashboard')
         ->name('dashboard');

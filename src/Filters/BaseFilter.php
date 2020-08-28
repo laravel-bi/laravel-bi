@@ -2,9 +2,9 @@
 
 namespace LaravelBi\LaravelBi\Filters;
 
-use Illuminate\Http\Request;
 use LaravelBi\LaravelBi\Dashboard;
 use Illuminate\Database\Eloquent\Builder;
+use LaravelBi\LaravelBi\Support\BiRequest;
 
 abstract class BaseFilter implements Filter
 {
@@ -13,7 +13,7 @@ abstract class BaseFilter implements Filter
     public $column;
     public $defaultValue;
 
-    abstract public function apply(Builder $builder, array $filterData, Request $request);
+    abstract public function apply(Builder $builder, array $filterData, BiRequest $request);
 
     public function __construct($key, $name)
     {

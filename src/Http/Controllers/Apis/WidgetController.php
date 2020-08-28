@@ -2,17 +2,16 @@
 
 namespace LaravelBi\LaravelBi\Http\Controllers\Apis;
 
-use Response;
-use Str;
-use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use LaravelBi\LaravelBi\Dashboard;
 use LaravelBi\LaravelBi\Http\Controllers\BaseController;
+use LaravelBi\LaravelBi\Support\BiRequest;
 
 class WidgetController extends BaseController
 {
-    public function getWidget(Dashboard $dashboard, $widget, Request $request)
+    public function getWidget(Dashboard $dashboard, $widgetKey, BiRequest $request)
     {
-        $widget = $dashboard->findWidgetOrFail($widget);
+        $widget = $dashboard->findWidgetOrFail($widgetKey);
 
         return [
             'status' => 200,
@@ -20,9 +19,9 @@ class WidgetController extends BaseController
         ];
     }
 
-    public function download(Dashboard $dashboard, $widget, Request $request)
+    public function download(Dashboard $dashboard, $widgetKey, BiRequest $request)
     {
-        $widget = $dashboard->findWidgetOrFail($widget);
+        $widget = $dashboard->findWidgetOrFail($widgetKey);
 
         $data = $widget->data($dashboard, $request);
 
@@ -34,7 +33,7 @@ class WidgetController extends BaseController
             'Content-Disposition' => 'attachment; filename=' . Str::slug($widget->name) . '.csv'
         ];
 
-        return Response::stream(function () use ($data) {
+        return response()->stream(function () use ($data) {
             $file = fopen('php://output', 'w');
 
             if ($data->first()) {

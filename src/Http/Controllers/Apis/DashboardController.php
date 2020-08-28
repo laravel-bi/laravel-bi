@@ -4,10 +4,11 @@ namespace LaravelBi\LaravelBi\Http\Controllers\Apis;
 
 use LaravelBi\LaravelBi\Dashboard;
 use LaravelBi\LaravelBi\Http\Controllers\BaseController;
+use LaravelBi\LaravelBi\Support\BiRequest;
 
 class DashboardController extends BaseController
 {
-    public function getDashboards()
+    public function getDashboards(BiRequest $request)
     {
         return [
             'status' => 200,
@@ -15,7 +16,7 @@ class DashboardController extends BaseController
         ];
     }
 
-    public function getWidgets(Dashboard $dashboard)
+    public function getWidgets(Dashboard $dashboard, BiRequest $request)
     {
         return [
             'status' => 200,

@@ -3,9 +3,9 @@
 namespace LaravelBi\LaravelBi\Widgets;
 
 use Closure;
-use Illuminate\Http\Request;
 use LaravelBi\LaravelBi\Dashboard;
 use Illuminate\Database\Eloquent\Builder;
+use LaravelBi\LaravelBi\Support\BiRequest;
 
 abstract class BaseWidget implements \JsonSerializable, Widget
 {
@@ -51,7 +51,7 @@ abstract class BaseWidget implements \JsonSerializable, Widget
         ];
     }
 
-    public function data(Dashboard $dashboard, Request $request)
+    public function data(Dashboard $dashboard, BiRequest $request)
     {
         $builder = $this->getBaseBuilder($dashboard);
         $builder = $this->applyAttributes($builder);
@@ -95,7 +95,7 @@ abstract class BaseWidget implements \JsonSerializable, Widget
         return $builder;
     }
 
-    protected function applyFilters(Builder $builder, Dashboard $dashboard, Request $request)
+    protected function applyFilters(Builder $builder, Dashboard $dashboard, BiRequest $request)
     {
         $requestedFilters = $request->input('filters');
 

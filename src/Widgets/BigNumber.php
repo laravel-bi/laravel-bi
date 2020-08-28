@@ -2,14 +2,14 @@
 
 namespace LaravelBi\LaravelBi\Widgets;
 
-use Illuminate\Http\Request;
 use LaravelBi\LaravelBi\Dashboard;
+use LaravelBi\LaravelBi\Support\BiRequest;
 
 class BigNumber extends BaseWidget
 {
     protected $component = 'big-number';
 
-    public function data(Dashboard $dashboard, Request $request)
+    public function data(Dashboard $dashboard, BiRequest $request)
     {
         $builder = $this->getBaseBuilder($dashboard);
         $builder = $this->applyAttributes($builder);

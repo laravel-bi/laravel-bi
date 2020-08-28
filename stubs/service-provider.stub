@@ -16,7 +16,7 @@ class BiServiceProvider extends ServiceProvider
     protected function setupGate()
     {
         Gate::define('viewBi', function ($user) {
-            return $user !== null;
+            return true;
         });
     }
 

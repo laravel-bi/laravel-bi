@@ -4,13 +4,13 @@ namespace LaravelBi\LaravelBi\Widgets;
 
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
-use Illuminate\Http\Request;
 use LaravelBi\LaravelBi\Dashboard;
+use LaravelBi\LaravelBi\Support\BiRequest;
 
 class DateLineChart extends LineChart
 {
 
-    public function data(Dashboard $dashboard, Request $request)
+    public function data(Dashboard $dashboard, BiRequest $request)
     {
         $data = parent::data($dashboard, $request);
 

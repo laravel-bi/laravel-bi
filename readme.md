@@ -17,6 +17,16 @@ and then run
 
 to setup all Laravel Bi components and to create a simple UserDashboard.
 
+#### User Authentication
+
+Laravel BI requires users to be logged. If your application does not have a custom authentication process, you should install laravel's default one.
+
+`composer require laravel/ui`
+
+and then
+
+`php artisan ui vue --auth`
+
 #### Add new dashboards
 
 You can add new dashboard to your project using this command

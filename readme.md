@@ -37,7 +37,7 @@ You can add new dashboard to your project using this command
 
 Laravel Bi uses `dashboards` to show data to the users. Each dashboard contains `widgets`. Each widget presents data to your user using different tool. Each widget's `metrics` and `dimensions` are fully customizable.
 
-For now, it works only with mysql databases.
+**At the moment, Laravel BI works only with mysql databases.**
 
 ### Attributes
 

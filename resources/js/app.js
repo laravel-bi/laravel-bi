@@ -77,25 +77,11 @@ new Vue({
     el: "#laravel-bi",
     router,
     data: {
-        dashboardName: "",
         nav: false,
-        filters: {},
-        filtersFlag: 0
     },
     watch: {
         $route() {
             this.nav = false;
         }
-    },
-    mounted() {
-        // console.log("Laravel Bi started!");
-        EventBus.$on("dashboard-ready", ({ name }) => {
-            this.dashboardName = name;
-        });
-
-        EventBus.$on("filters-confirmed", filters => {
-            this.filters = filters;
-            this.filtersFlag++;
-        });
     }
 });

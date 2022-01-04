@@ -48,9 +48,8 @@
             :dimensions="widget.dimensions"
             :extra="widget.extra"
             :metrics="widget.metrics"
-            :filters="filters"
-            :filters-flag="filtersFlag"
             :refresh-flag="refreshFlag"
+            :download-flag="downloadFlag"
         ></component>
     </div>
 </template>
@@ -59,13 +58,12 @@
 export default {
     props: {
         dashboardKey: String,
-        widget: Object,
-        filters: Object,
-        filtersFlag: Number
+        widget: Object
     },
     data() {
         return {
-            refreshFlag: 0
+            refreshFlag: 0,
+            downloadFlag: 0
         };
     },
     methods: {
@@ -73,21 +71,7 @@ export default {
             this.refreshFlag++;
         },
         download() {
-            document.location = `/${window.bi.base}-apis/${this.dashboardKey}/widgets/${this.widget.key}/csv?` + this.serialize({filters: this.filters});
-        },
-        serialize(obj, prefix) {
-            var str = [],
-                p;
-            for (p in obj) {
-                if (obj.hasOwnProperty(p)) {
-                var k = prefix ? prefix + "[" + p + "]" : p,
-                    v = obj[p];
-                str.push((v !== null && typeof v === "object") ?
-                    this.serialize(v, k) :
-                    encodeURIComponent(k) + "=" + encodeURIComponent(v));
-                }
-            }
-            return str.join("&");
+            this.downloadFlag++;
         }
     }
 };

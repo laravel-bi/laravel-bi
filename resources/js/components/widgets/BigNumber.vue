@@ -33,7 +33,7 @@ export default {
     },
     methods: {
         onFetchData(response) {
-            this.number = response.data.data[this.metrics[0].key];
+            this.number = response.data.data[0][this.metrics[0].key];
         }
     }
 };

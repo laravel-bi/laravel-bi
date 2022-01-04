@@ -1,5 +1,5 @@
 <template>
-    <div class="flex relative" v-click-outside="close">
+    <div class="flex relative" v-click-outside="clickOutside">
         <bi-filter-anchor :active="active" @activated="active = true">
             <span v-if="confirmedValue == null">{{ filterConfig.name }}</span>
             <span v-else>
@@ -68,7 +68,7 @@ export default {
     },
     mounted() {
         this.$nextTick(() => {
-            this.setDatePickerValue(this.initialOrDefaultValue);
+            this.setDatePickerValue(this.initialValue);
         });
     },
     methods: {  
@@ -76,14 +76,14 @@ export default {
             this.datePickerValue = JSON.parse(JSON.stringify(value));
         },
         close() {
-            this.setInternalValue(this.confirmedOrDefaultValue);
-            this.setDatePickerValue(this.confirmedOrDefaultValue);
+            this.setInternalValue(this.confirmedOrInitialValue);
+            this.setDatePickerValue(this.confirmedOrInitialValue);
             this.active = false;
         },
         reset: function() {
-            this.setInternalValue(this.initialOrDefaultValue);
-            this.setConfirmedValue(this.initialOrDefaultValue);
-            this.setDatePickerValue(this.initialOrDefaultValue);
+            this.setInternalValue(this.initialValue);
+            this.setConfirmedValue(this.initialValue);
+            this.setDatePickerValue(this.initialValue);
             this.active = false;
             this.emitValue();
         },

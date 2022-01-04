@@ -2,7 +2,7 @@
 
 namespace App\Bi\Dashboards;
 
-use App\User;
+use App\Models\User;
 use LaravelBi\LaravelBi\Dashboard;
 use LaravelBi\LaravelBi\Widgets\BigNumber;
 use LaravelBi\LaravelBi\Filters\DateFilter;

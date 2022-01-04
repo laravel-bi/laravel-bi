@@ -1,5 +1,5 @@
 <template>
-    <div class="flex relative" v-click-outside="close">
+    <div class="flex relative" v-click-outside="clickOutside">
         <bi-filter-anchor :active="active" @activated="active = true">
             <span
                 v-if="confirmedValue == null || confirmedValue.operator == null"
@@ -94,7 +94,7 @@ export default {
         }
     },
     methods: {
-        defaultValue() {
+        emptyValue() {
             return {
                 operator: null,
                 values: [null, null]

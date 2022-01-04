@@ -30,7 +30,7 @@ class DashboardCommand extends GeneratorCommand
      */
     protected function buildClass($name)
     {
-        $model     = $this->laravel->getNamespace() . $this->option('model');
+        $model     = $this->laravel->getNamespace() . 'Models\\' . $this->option('model');
         $shortName = $this->argument('name');
 
         return str_replace(

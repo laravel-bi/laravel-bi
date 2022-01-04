@@ -36,13 +36,11 @@ class WidgetController extends BaseController
         return response()->stream(function () use ($data) {
             $file = fopen('php://output', 'w');
 
-            if ($data->first()) {
-                fputcsv($file, array_keys($data->first()));
-            }
+            fputcsv($file, array_keys($data[0]));            
 
-            $data->each(function ($row) use ($file) {
+            foreach($data as $row) {
                 fputcsv($file, $row);
-            });
+            }
 
             fclose($file);
         }, 200, $headers);

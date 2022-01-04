@@ -1,4 +1,14 @@
 module.exports = {
+    content: [   
+        "./resources/**/*.blade.php",    
+        "./resources/**/*.js",    
+        "./resources/**/*.vue",  
+    ],
+    safelist: [
+        {
+            pattern: /^w-/
+        }
+    ],
     theme: {
         fontFamily: {
             lato: 'Lato, sans-serif'

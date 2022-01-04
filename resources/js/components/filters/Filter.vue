@@ -9,21 +9,20 @@ export default {
     },
     data() {
         return {
-            initialValue: null, 
+            initialValue: null,
             internalValue: null,
             confirmedValue: null,
             active: false
         };
     },
     mounted() {
-        this.setInternalValue(this.initialOrDefaultValue);
+        this.setInitialValue(this.defaultValue());
+        this.setInternalValue(this.initialValue);
+        this.setConfirmedValue(this.initialValue);
     },
     computed: {
-        initialOrDefaultValue: function() {
-            return JSON.parse(JSON.stringify(this.initialValue || this.defaultValue()));
-        },
-        confirmedOrDefaultValue: function() {
-            return JSON.parse(JSON.stringify(this.confirmedValue || this.initialOrDefaultValue));
+        confirmedOrInitialValue: function() {
+            return this.confirmedValue || this.initialValue;
         }
     },
     methods: {
@@ -37,11 +36,11 @@ export default {
             this.confirmedValue = JSON.parse(JSON.stringify(value));
         },
         emitValue: function() {
-            this.$emit("input", JSON.parse(JSON.stringify(this.confirmedValue)));
+            this.$emit("input", this.confirmedValue);
         },
         reset: function() {
-            this.setInternalValue(this.initialOrDefaultValue);
-            this.setConfirmedValue(this.initialOrDefaultValue);
+            this.setInternalValue(this.initialValue);
+            this.setConfirmedValue(this.initialValue);
             this.active = false;
             this.emitValue();
         },
@@ -51,12 +50,18 @@ export default {
             this.emitValue();
         },
         close: function() {
-            this.setInternalValue(this.confirmedOrDefaultValue);
+            this.setInternalValue(this.confirmedOrInitialValue);
             this.active = false;
         },
         defaultValue() {
+            return this.filterConfig.defaultValue || this.emptyValue();
+        },
+        emptyValue() {
             return null;
         },
+        clickOutside() {
+            if(this.active) this.close();
+        }
     },
     directives: {
         "click-outside": vueClickOutside

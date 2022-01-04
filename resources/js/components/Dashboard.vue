@@ -1,13 +1,16 @@
 <template>
-    <div class="flex-grow flex flex-col">    
+    <div class="flex-grow flex flex-col content-start"
+        :key="'dashboard-'+dashboardKey"
+        v-if="ready">    
 
         <bi-filters-bar
-            v-if="filtersConfig.length"
             :filtersConfig="filtersConfig"
             :dashboardKey="dashboardKey"
+            :key="'filters-bar-'+dashboardKey"
         ></bi-filters-bar>
 
-        <div class="flex-grow flex flex-wrap">
+        <div class="flex-grow flex flex-wrap content-start"
+            :key="'widget-wrapper-'+dashboardKey">
             <div
                 :class="'w-' + widget.width"
                 v-for="widget in widgets"
@@ -16,8 +19,7 @@
                 <bi-widget-panel
                     :dashboardKey="dashboardKey"
                     :widget="widget"
-                    :filters="filters"
-                    :filters-flag="filtersFlag"
+                    :key="'widget-'+dashboardKey+'-'+widget.key"
                 ></bi-widget-panel>
             </div>
 
@@ -31,26 +33,25 @@ import EventBus from "../utils/EventBus.js";
 import api from "./mixins/api.js";
 import toasts from "./mixins/toasts.js";
 
-export default {
-    name: "bi-dashboard",
+export default {ame: "bi-dashboard",
     mixins: [api, toasts],
     props: {
-        dashboardKey: String,
-        filters: Object,
-        filtersFlag: Number
+        dashboardKey: String
     },
     data() {
         return {
-            name: "",
+            name: null,
             filtersConfig: [],
-            widgets: []
+            widgets: [],
+            ready: false
         };
     },
-    watch: {
-        $route: "fetchData"
-    },
-    created() {
+    mounted() {
+        console.log('Mounted dashboard', this.dashboardKey);
         this.fetchData();
+    },
+    destroyed() {
+        console.log('Destroyed dashboard', this.dashboardKey);
     },
     methods: {
         fetchData() {
@@ -58,8 +59,11 @@ export default {
                 this.widgets = response.data.data.widgets;
                 this.name = response.data.data.name;
                 this.filtersConfig = response.data.data.filters;
+                this.ready = true;
+
                 EventBus.$emit("dashboard-ready", {
-                    name: this.name
+                    name: this.name,
+                    key: this.dashboardKey
                 });
             });
         }

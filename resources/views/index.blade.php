@@ -24,7 +24,7 @@
 
             <bi-nav-bar :class="{ 'open': nav }" @close="nav = false"></bi-nav-bar>
 
-            <router-view :filters="filters" :filters-flag="filtersFlag"></router-view>
+            <router-view :key="$route.fullPath"></router-view>
 
         </div>
 

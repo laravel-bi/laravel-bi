@@ -2,7 +2,7 @@
 import api from "../mixins/api.js";
 import toasts from "../mixins/toasts.js";
 
-// import LoadingWidget from "./LoadingWidget";
+import EventBus from "../../utils/EventBus.js";
 
 export default {
     abstract: true,
@@ -16,34 +16,45 @@ export default {
         widgetName: String,
         metrics: Array,
         dimensions: Array,
-        filters: Object,
-        filtersFlag: Number,
         refreshFlag: Number,
+        downloadFlag: Number,
         extra: Object
     },
     data() {
         return {
-            loading: false
+            loading: false,
+            filters: {}
         };
     },
     watch: {
-        filtersFlag() {
+        refreshFlag() {
+            console.log('refresh flag changed');
             this.fetchData();
         },
-        refreshFlag() {
-            this.fetchData();
+        downloadFlag() {
+            this.downloadData();
         }
     },
     mounted() {
-        this.fetchData();
+        console.log('Mounted widget', this.widgetKey);
+        EventBus.$on("filters-confirmed", this.onFilters);
+    },
+    destroyed() {
+        console.log('Destroyed widget', this.widgetKey);
+        EventBus.$off("filters-confirmed", this.onFilters);
     },
     methods: {
+        onFilters(filters) {
+            this.filters = filters;
+            this.fetchData();
+        },
         fetchParams() {
             return {
                 filters: this.fetchFiltersParam()
             }
         },
         fetchData() {
+            console.log('fetch data widget', this.widgetKey);
             this.loading = true;
             const startTime = new Date().getTime();
             this.api(`${this.dashboardKey}/widgets/${this.widgetKey}`, this.fetchParams()).then(response => {
@@ -59,6 +70,9 @@ export default {
                     }, 2000 - diffTime);
                 }
             });
+        },
+        downloadData() {
+            document.location = `/${window.bi.base}-apis/${this.dashboardKey}/widgets/${this.widgetKey}/csv?` + this.serialize(this.fetchParams());
         },
         fetchFiltersParam() {
             return Object.keys(this.filters).reduce((carry, key) => {

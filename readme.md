@@ -17,15 +17,14 @@ and then run
 
 to setup all Laravel Bi components and to create a simple UserDashboard.
 
+### Requirements
+
+Laravel BI v1.0.0 requires Laravel 8.0. 
+If you have a previous Laravel version, please consider to use v0.0.5.
+
 #### User Authentication
 
-Laravel BI requires users to be logged. If your application does not have a custom authentication process, you should install laravel's default one.
-
-`composer require laravel/ui`
-
-and then
-
-`php artisan ui vue --auth`
+Laravel BI requires users to be logged. If your application does not have a custom authentication process, I suggest you to install [Laravel Breeze](https://laravel.com/docs/8.x/starter-kits#laravel-breeze).
 
 #### Add new dashboards
 

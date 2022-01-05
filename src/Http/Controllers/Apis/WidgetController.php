@@ -4,8 +4,8 @@ namespace LaravelBi\LaravelBi\Http\Controllers\Apis;
 
 use Illuminate\Support\Str;
 use LaravelBi\LaravelBi\Dashboard;
-use LaravelBi\LaravelBi\Http\Controllers\BaseController;
 use LaravelBi\LaravelBi\Support\BiRequest;
+use LaravelBi\LaravelBi\Http\Controllers\BaseController;
 
 class WidgetController extends BaseController
 {
@@ -36,9 +36,9 @@ class WidgetController extends BaseController
         return response()->stream(function () use ($data) {
             $file = fopen('php://output', 'w');
 
-            fputcsv($file, array_keys($data[0]));            
+            fputcsv($file, array_keys($data[0]));
 
-            foreach($data as $row) {
+            foreach ($data as $row) {
                 fputcsv($file, $row);
             }
 

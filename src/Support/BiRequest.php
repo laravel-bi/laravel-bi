@@ -14,14 +14,13 @@ class BiRequest
         $this->originalRequest = $request;
     }
 
-    public function __call($method, $args) 
+    public function __call($method, $args)
     {
-        return call_user_func_array(array($this->originalRequest, $method), $args);
+        return call_user_func_array([$this->originalRequest, $method], $args);
     }
 
     public function __get($prop)
     {
         return $this->originalRequest->$prop;
     }
-
 }

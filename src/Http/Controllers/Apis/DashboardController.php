@@ -3,8 +3,8 @@
 namespace LaravelBi\LaravelBi\Http\Controllers\Apis;
 
 use LaravelBi\LaravelBi\Dashboard;
-use LaravelBi\LaravelBi\Http\Controllers\BaseController;
 use LaravelBi\LaravelBi\Support\BiRequest;
+use LaravelBi\LaravelBi\Http\Controllers\BaseController;
 
 class DashboardController extends BaseController
 {

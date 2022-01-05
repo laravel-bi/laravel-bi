@@ -15,12 +15,11 @@ class BigNumber extends BaseWidget
         $builder = $this->applyAttributes($builder);
         $builder = $this->applyFilters($builder, $dashboard, $request);
 
-        $rawModels = $builder->get();
+        $rawModels      = $builder->get();
         $rawModelsArray = $rawModels->toArray();
 
         return $rawModels->map(function ($rawModel) use ($rawModelsArray) {
             return $this->displayModel($rawModel, $rawModelsArray)->toArray();
         });
     }
-
 }

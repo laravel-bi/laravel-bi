@@ -14,7 +14,7 @@ class Table extends BaseWidget
     public function orderBy($column, $dir): self
     {
         $this->orderByColumn = $column;
-        $this->orderByDir = $dir;
+        $this->orderByDir    = $dir;
 
         return $this;
     }
@@ -35,7 +35,7 @@ class Table extends BaseWidget
                     $builder = $metric->applySort($builder, $request->input('sort')['dir']);
                 }
             }
-        } 
+        }
 
         $rawModels      = $builder->get();
         $rawModelsArray = $rawModels->toArray();
@@ -54,5 +54,4 @@ class Table extends BaseWidget
             ]
         ];
     }
-
 }

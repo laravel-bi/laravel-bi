@@ -6,12 +6,11 @@ use Illuminate\Http\Request;
 
 class BiRequest
 {
-
     private $originalRequest;
 
     public function __construct(Request $request)
     {
-        $this->originalRequest = $request;
+    $this->originalRequest = $request;
     }
 
     public function __call($method, $args)

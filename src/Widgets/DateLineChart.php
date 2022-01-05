@@ -9,7 +9,6 @@ use LaravelBi\LaravelBi\Support\BiRequest;
 
 class DateLineChart extends LineChart
 {
-
     public function data(Dashboard $dashboard, BiRequest $request)
     {
         $data = parent::data($dashboard, $request);
@@ -24,7 +23,7 @@ class DateLineChart extends LineChart
 
         $keyedData = $data->keyBy($dimension->key);
 
-        if($data->isEmpty()) {
+        if ($data->isEmpty()) {
             return $data;
         }
 

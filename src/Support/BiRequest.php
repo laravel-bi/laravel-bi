@@ -22,4 +22,19 @@ class BiRequest
     {
         return $this->originalRequest->$prop;
     }
+
+    public function filters()
+    {
+        return $this->originalRequest->input('filters', []);
+    }
+
+    public function hasFilter($name)
+    {
+        return array_key_exists($name, $this->filters());
+    }
+
+    public function getFilter($name)
+    {
+        return $this->filters()[$name];
+    }
 }

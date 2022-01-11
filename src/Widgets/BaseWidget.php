@@ -6,6 +6,7 @@ use Closure;
 use LaravelBi\LaravelBi\Dashboard;
 use Illuminate\Database\Eloquent\Builder;
 use LaravelBi\LaravelBi\Support\BiRequest;
+use stdClass;
 
 abstract class BaseWidget implements \JsonSerializable, Widget
 {
@@ -61,7 +62,7 @@ abstract class BaseWidget implements \JsonSerializable, Widget
         $rawModelsArray = $rawModels->toArray();
 
         return $rawModels->map(function ($rawModel) use ($rawModelsArray) {
-            return $this->displayModel($rawModel, $rawModelsArray)->toArray();
+            return $this->displayModel($rawModel, $rawModelsArray);
         });
     }
 
@@ -97,7 +98,7 @@ abstract class BaseWidget implements \JsonSerializable, Widget
 
     protected function applyFilters(Builder $builder, Dashboard $dashboard, BiRequest $request)
     {
-        $requestedFilters = $request->input('filters');
+        $requestedFilters = $request->filters();
 
         return collect($dashboard->filters())->reduce(function (Builder $builder, $filter) use ($request, $requestedFilters) {
             if (isset($requestedFilters[$filter->key])) {
@@ -108,12 +109,12 @@ abstract class BaseWidget implements \JsonSerializable, Widget
         }, $builder);
     }
 
-    protected function displayModel($rawRow, $rawModels)
+    protected function displayModel($model, $rawModels)
     {
-        return $this->getAttributes()->reduce(function ($rawRow, $attribute) use ($rawModels) {
-            $rawRow->{$attribute->key} = $attribute->display($rawRow, $rawModels);
+        return $this->getAttributes()->reduce(function ($item, $attribute) use ($model, $rawModels) {
+            $item->{$attribute->key} = $attribute->display($model, $rawModels);
 
-            return $rawRow;
-        }, $rawRow);
+            return $item;
+        }, new stdClass);
     }
 }

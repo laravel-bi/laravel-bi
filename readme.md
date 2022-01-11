@@ -245,6 +245,8 @@ It shows a line chart with different axis on a single horizontal dimension. It a
 
 LineChart that accept a `DateDimension` as main dimension. It allows to have empty value on time line when data are not available.
 
+![Line Chart Widget](https://raw.githubusercontent.com/laravel-bi/laravel-bi/master/screenshots/date-line-chart.png)
+
 #### `PartitionPie`
 
 It shows a pie chart with a single metric and a single dimension. It accept a single dimension and a single metric.

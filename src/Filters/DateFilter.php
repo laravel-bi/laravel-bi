@@ -17,4 +17,14 @@ class DateFilter extends BaseFilter
 
         return $builder->whereBetween($this->column, [$start, $end]);
     }
+
+    public function defaultDates(Carbon $startDate, Carbon $endDate)
+    {
+        $this->defaultValue([
+            'start' => $startDate->format('Y-m-d'),
+            'end' => $endDate->format('Y-m-d')
+        ]);
+        
+        return $this;
+    }
 }

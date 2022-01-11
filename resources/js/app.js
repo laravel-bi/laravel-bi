@@ -78,10 +78,19 @@ new Vue({
     router,
     data: {
         nav: false,
+        toast: null
     },
     watch: {
         $route() {
             this.nav = false;
         }
+    },
+    mounted() {
+        EventBus.$on('toast', toast => {
+            this.toast = toast;
+            setTimeout(() => {
+                this.toast = null;
+            }, 5000);
+        });
     }
 });

@@ -28,7 +28,6 @@ export default {
     },
     watch: {
         refreshFlag() {
-            console.log('refresh flag changed');
             this.fetchData();
         },
         downloadFlag() {
@@ -36,11 +35,9 @@ export default {
         }
     },
     mounted() {
-        console.log('Mounted widget', this.widgetKey);
         EventBus.$on("filters-confirmed", this.onFilters);
     },
     destroyed() {
-        console.log('Destroyed widget', this.widgetKey);
         EventBus.$off("filters-confirmed", this.onFilters);
     },
     methods: {
@@ -54,7 +51,6 @@ export default {
             }
         },
         fetchData() {
-            console.log('fetch data widget', this.widgetKey);
             this.loading = true;
             const startTime = new Date().getTime();
             this.api(`${this.dashboardKey}/widgets/${this.widgetKey}`, this.fetchParams()).then(response => {

@@ -47,11 +47,7 @@ export default {ame: "bi-dashboard",
         };
     },
     mounted() {
-        console.log('Mounted dashboard', this.dashboardKey);
         this.fetchData();
-    },
-    destroyed() {
-        console.log('Destroyed dashboard', this.dashboardKey);
     },
     methods: {
         fetchData() {

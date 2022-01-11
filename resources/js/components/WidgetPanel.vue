@@ -9,7 +9,7 @@
                     href="#"
                     class="text-gray-700 outline-none hover:text-gray-900"
                     title="Refresh data"
-                    @click="refresh"
+                    @click.prevent="refresh"
                 >
                     <svg
                         class="w-5 fill-current inline"

@@ -16,21 +16,22 @@ axios.interceptors.request.use(config => {
 export default {
     methods: {
         api(url, params) {
-            return axios
+            return new Promise((resolve, reject) => {
+            axios
                 .get(`/${window.bi.base}-apis/${url}`, {
                     params: params
                 })
                 .then(response => {
                     const status = response.data.status;
                     if (status === 200) {
-                        return response;
+                        return resolve(response);
                     }
                     this.sendToast(response.data.error);
                 })
                 .catch(error => {
-                    console.log(error);
-                    this.sendToast(error.message);
+                    this.sendToast(error.response.data.message || error.message);
                 });
+            });
         },
         serialize(obj, prefix) {
             var str = [],

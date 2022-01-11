@@ -44,3 +44,5 @@
 .c-pane { @apply min-w-0 !important; width: 200px; }
 .c-table-cell { @apply text-xs !important;}
 .c-day-background { @apply bg-gray-600 !important; height: 25px !important; } 
+
+[v-cloak] { display: none;}

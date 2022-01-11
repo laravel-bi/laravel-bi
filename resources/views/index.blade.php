@@ -14,20 +14,26 @@
 
 <body class="bg-gray-200 min-h-full font-lato">
 
-    <div class="flex flex-col min-h-screen" id="laravel-bi">
+    <div  id="laravel-bi">
+        <div class="flex flex-col min-h-screen">
 
-        <div class="bg-gray-900 text-white p-4 font-semibold w-full" id="header">
-            Laravel Bi
+            <div class="bg-gray-900 text-white p-4 font-semibold w-full" id="header">
+                Laravel Bi
+            </div>
+
+            <div class="flex flex-grow">
+
+                <bi-nav-bar :class="{ 'open': nav }" @close="nav = false"></bi-nav-bar>
+
+                <router-view :key="$route.fullPath"></router-view>
+
+            </div>
+
         </div>
 
-        <div class="flex flex-grow">
-
-            <bi-nav-bar :class="{ 'open': nav }" @close="nav = false"></bi-nav-bar>
-
-            <router-view :key="$route.fullPath"></router-view>
-
+        <div class="absolute bottom-0 right-0 bg-red-600 rounded mb-4 mr-4 text-white px-4 py-2 text-sm" v-cloak v-if="toast">
+            @{{ toast.message }}
         </div>
-
     </div>
 
     <script>

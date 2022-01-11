@@ -31,11 +31,7 @@ export default {
             filters: {}
         };
     },
-    destroyed() {
-        console.log('Destroyed filters');
-    },
     mounted() {
-        console.log('Mounted filters')
         // create empty property to improve watchers
         this.filters = this.filtersConfig.reduce((carry, filterConfig) => {
             carry[filterConfig.key] = filterConfig.defaultValue;

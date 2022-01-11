@@ -2208,11 +2208,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    console.log('Mounted dashboard', this.dashboardKey);
     this.fetchData();
-  },
-  destroyed: function destroyed() {
-    console.log('Destroyed dashboard', this.dashboardKey);
   },
   methods: {
     fetchData: function fetchData() {
@@ -2279,14 +2275,10 @@ __webpack_require__.r(__webpack_exports__);
       filters: {}
     };
   },
-  destroyed: function destroyed() {
-    console.log('Destroyed filters');
-  },
   mounted: function mounted() {
     var _this = this;
 
-    console.log('Mounted filters'); // create empty property to improve watchers
-
+    // create empty property to improve watchers
     this.filters = this.filtersConfig.reduce(function (carry, filterConfig) {
       carry[filterConfig.key] = filterConfig.defaultValue;
       return carry;
@@ -3423,7 +3415,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     refreshFlag: function refreshFlag() {
-      console.log('refresh flag changed');
       this.fetchData();
     },
     downloadFlag: function downloadFlag() {
@@ -3431,11 +3422,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    console.log('Mounted widget', this.widgetKey);
     _utils_EventBus_js__WEBPACK_IMPORTED_MODULE_2__["default"].$on("filters-confirmed", this.onFilters);
   },
   destroyed: function destroyed() {
-    console.log('Destroyed widget', this.widgetKey);
     _utils_EventBus_js__WEBPACK_IMPORTED_MODULE_2__["default"].$off("filters-confirmed", this.onFilters);
   },
   methods: {
@@ -3451,7 +3440,6 @@ __webpack_require__.r(__webpack_exports__);
     fetchData: function fetchData() {
       var _this = this;
 
-      console.log('fetch data widget', this.widgetKey);
       this.loading = true;
       var startTime = new Date().getTime();
       this.api("".concat(this.dashboardKey, "/widgets/").concat(this.widgetKey), this.fetchParams()).then(function (response) {
@@ -3582,12 +3570,23 @@ new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
   el: "#laravel-bi",
   router: router,
   data: {
-    nav: false
+    nav: false,
+    toast: null
   },
   watch: {
     $route: function $route() {
       this.nav = false;
     }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    _utils_EventBus_js__WEBPACK_IMPORTED_MODULE_19__["default"].$on('toast', function (toast) {
+      _this.toast = toast;
+      setTimeout(function () {
+        _this.toast = null;
+      }, 2000);
+    });
   }
 });
 
@@ -3629,20 +3628,20 @@ axios__WEBPACK_IMPORTED_MODULE_0___default().interceptors.request.use(function (
     api: function api(url, params) {
       var _this = this;
 
-      return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/".concat(window.bi.base, "-apis/").concat(url), {
-        params: params
-      }).then(function (response) {
-        var status = response.data.status;
+      return new Promise(function (resolve, reject) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default().get("/".concat(window.bi.base, "-apis/").concat(url), {
+          params: params
+        }).then(function (response) {
+          var status = response.data.status;
 
-        if (status === 200) {
-          return response;
-        }
+          if (status === 200) {
+            return resolve(response);
+          }
 
-        _this.sendToast(response.data.error);
-      })["catch"](function (error) {
-        console.log(error);
-
-        _this.sendToast(error.message);
+          _this.sendToast(response.data.error);
+        })["catch"](function (error) {
+          _this.sendToast(error.response.data.message || error.message);
+        });
       });
     },
     serialize: function serialize(obj, prefix) {
@@ -3681,6 +3680,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     sendToast: function sendToast(message) {
       var error = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      console.log('sendToast', message);
       _utils_EventBus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('toast', {
         message: message,
         error: error,
@@ -45340,7 +45340,12 @@ var render = function () {
               {
                 staticClass: "text-gray-700 outline-none hover:text-gray-900",
                 attrs: { href: "#", title: "Refresh data" },
-                on: { click: _vm.refresh },
+                on: {
+                  click: function ($event) {
+                    $event.preventDefault()
+                    return _vm.refresh.apply(null, arguments)
+                  },
+                },
               },
               [
                 _c(

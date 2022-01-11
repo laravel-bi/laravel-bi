@@ -3585,7 +3585,7 @@ new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
       _this.toast = toast;
       setTimeout(function () {
         _this.toast = null;
-      }, 2000);
+      }, 5000);
     });
   }
 });
@@ -3680,7 +3680,6 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     sendToast: function sendToast(message) {
       var error = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-      console.log('sendToast', message);
       _utils_EventBus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('toast', {
         message: message,
         error: error,

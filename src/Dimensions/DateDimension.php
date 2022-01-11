@@ -3,8 +3,8 @@
 namespace LaravelBi\LaravelBi\Dimensions;
 
 use Illuminate\Support\Facades\DB;
-use LaravelBi\LaravelBi\Widgets\Widget;
 use Illuminate\Database\Eloquent\Model;
+use LaravelBi\LaravelBi\Widgets\Widget;
 use Illuminate\Database\Eloquent\Builder;
 
 class DateDimension extends BaseDimension
@@ -35,7 +35,7 @@ class DateDimension extends BaseDimension
     }
 
     public function display(Model $value, array $models)
-    {  
+    {
         return $value->getRawOriginal($this->key);
     }
 }

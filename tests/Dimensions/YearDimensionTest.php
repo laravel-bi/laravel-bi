@@ -14,6 +14,6 @@ class YearDimensionTest extends AbstractDimensionTest
 
     protected function getQuery(): string
     {
-        return 'select DATE_FORMAT(column, \'%Y\') as `formatted_dimension` from `foo` group by `formatted_dimension`';
+        return 'select DATE_FORMAT(column, \'%Y\') as `dimension` from `foo` group by `dimension`';
     }
 }

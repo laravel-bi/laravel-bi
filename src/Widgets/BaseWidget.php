@@ -3,10 +3,10 @@
 namespace LaravelBi\LaravelBi\Widgets;
 
 use Closure;
+use stdClass;
 use LaravelBi\LaravelBi\Dashboard;
 use Illuminate\Database\Eloquent\Builder;
 use LaravelBi\LaravelBi\Support\BiRequest;
-use stdClass;
 
 abstract class BaseWidget implements \JsonSerializable, Widget
 {

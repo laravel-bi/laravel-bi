@@ -29,10 +29,10 @@ class DateLineChart extends LineChart
 
         $hasFilter = $request->hasFilter($dimensionKey);
 
-        if($hasFilter) {
+        if ($hasFilter) {
             $dimensionFilter = $request->getFilter($dimensionKey);
-            $minDate = Carbon::createFromFormat('Y-m-d', $dimensionFilter['start'])->startOfDay();
-            $maxDate = Carbon::createFromFormat('Y-m-d', $dimensionFilter['end'])->startOfDay();
+            $minDate         = Carbon::createFromFormat('Y-m-d', $dimensionFilter['start'])->startOfDay();
+            $maxDate         = Carbon::createFromFormat('Y-m-d', $dimensionFilter['end'])->startOfDay();
         } else {
             $minDate = Carbon::createFromFormat($dimension->carbonFormat, $data->min($dimensionKey))->startOfDay();
             $maxDate = Carbon::createFromFormat($dimension->carbonFormat, $data->max($dimensionKey))->startOfDay();
@@ -45,7 +45,7 @@ class DateLineChart extends LineChart
 
         foreach ($period as $date) {
             $dateString = $date->format($dimension->carbonFormat);
-            
+
             if ($keyedData->has($dateString)) {
                 $adaptedData->push($keyedData->get($dateString));
             } else {

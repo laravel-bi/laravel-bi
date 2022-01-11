@@ -24,7 +24,7 @@ class DateFilter extends BaseFilter
             'start' => $startDate->format('Y-m-d'),
             'end' => $endDate->format('Y-m-d')
         ]);
-        
+
         return $this;
     }
 }

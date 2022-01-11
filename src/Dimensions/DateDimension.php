@@ -2,24 +2,16 @@
 
 namespace LaravelBi\LaravelBi\Dimensions;
 
-
-use LaravelBi\LaravelBi\Widgets\Widget;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use LaravelBi\LaravelBi\Widgets\Widget;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class DateDimension extends BaseDimension
 {
     private $sqlFormat;
     public $carbonFormat;
     public $carbonInterval;
-
-    // public function __construct(string $key, string $name)
-    // {
-    //     $this->key    = 'formatted_' . $key;
-    //     $this->name   = $name;
-    //     $this->column = $key;
-    // }
 
     public function apply(Builder $builder, Widget $widget): Builder
     {
@@ -43,7 +35,7 @@ class DateDimension extends BaseDimension
     }
 
     public function display(Model $value, array $models)
-    {        
+    {  
         return $value->getRawOriginal($this->key);
     }
 }

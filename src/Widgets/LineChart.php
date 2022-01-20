@@ -5,8 +5,8 @@ namespace LaravelBi\LaravelBi\Widgets;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use LaravelBi\LaravelBi\Dashboard;
-use LaravelBi\LaravelBi\Dimensions\DateDimension;
 use LaravelBi\LaravelBi\Support\BiRequest;
+use LaravelBi\LaravelBi\Dimensions\DateDimension;
 
 class LineChart extends BaseWidget
 {

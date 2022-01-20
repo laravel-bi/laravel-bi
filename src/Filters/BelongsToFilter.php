@@ -35,10 +35,10 @@ class BelongsToFilter extends BaseFilter
 
     public function apply(Builder $builder, array $filterData, BiRequest $request): Builder
     {
-        return $builder->whereIn($builder->getModel()->{$this->relation}()->getForeignKey(), $filterData);
+        return $builder->whereIn($builder->getModel()->{$this->relation}()->getForeignKeyName(), $filterData);
     }
 
-    public function extra(Dashboard $dashboard, BiRequest $request)
+    public function extra(Dashboard $dashboard, BiRequest $request): array
     {
         return [
             'options'     => (new $dashboard->model())->{$this->relation}()->getRelated()->newQuery()->select('id', 'name')->get(),

@@ -66,7 +66,7 @@ abstract class BaseWidget implements \JsonSerializable, Widget
         });
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return [
             'width'      => $this->width,

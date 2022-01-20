@@ -15,7 +15,7 @@ class StringFilter extends BaseFilter
         return $builder->whereIn($this->column, $filterData);
     }
 
-    public function extra(Dashboard $dashboard, BiRequest $request)
+    public function extra(Dashboard $dashboard, BiRequest $request) : array
     {
         return [
             'options' => $dashboard->model::query()->select($this->column)->distinct()->pluck($this->column)

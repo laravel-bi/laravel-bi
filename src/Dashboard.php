@@ -37,7 +37,7 @@ abstract class Dashboard implements \JsonSerializable
         return $filter;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return [
             'uriKey'  => $this->uriKey,

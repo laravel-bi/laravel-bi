@@ -1,6 +1,6 @@
 <template>
     <div class="flex relative" v-click-outside="clickOutside">
-        <bi-filter-anchor :active="active">
+        <bi-filter-anchor :active="active" @activated="active = true">
             <span v-if="confirmedValue == null">{{ filterConfig.name }}</span>
             <span v-else>
                 {{ filterConfig.name }}:
@@ -63,15 +63,6 @@ export default {
                 this.options = response.data.extra.options;
                 this.otherColumn = response.data.extra.otherColumn;
             });
-        },
-        apply() {
-            this.active = false;
-            if(this.internalValueIsNotDefault()) {
-                this.confirmedValue = JSON.parse(
-                    JSON.stringify(this.internalValue)
-                );
-                this.$emit("input", this.internalValue.map(item => item.id));
-            }
         }
     }
 };

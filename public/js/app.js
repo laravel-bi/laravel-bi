@@ -2567,16 +2567,6 @@ __webpack_require__.r(__webpack_exports__);
         _this.options = response.data.extra.options;
         _this.otherColumn = response.data.extra.otherColumn;
       });
-    },
-    apply: function apply() {
-      this.active = false;
-
-      if (this.internalValueIsNotDefault()) {
-        this.confirmedValue = JSON.parse(JSON.stringify(this.internalValue));
-        this.$emit("input", this.internalValue.map(function (item) {
-          return item.id;
-        }));
-      }
     }
   }
 });
@@ -45457,37 +45447,50 @@ var render = function () {
       staticClass: "flex relative",
     },
     [
-      _c("bi-filter-anchor", { attrs: { active: _vm.active } }, [
-        _vm.confirmedValue == null
-          ? _c("span", [_vm._v(_vm._s(_vm.filterConfig.name))])
-          : _c(
-              "span",
-              [
-                _vm._v(
-                  "\n            " +
-                    _vm._s(_vm.filterConfig.name) +
-                    ":\n            "
-                ),
-                _vm._l(_vm.confirmedValue, function (value, i) {
-                  return _c(
-                    "strong",
-                    { key: "filter-" + _vm.filterConfig.name + "-" + value.id },
-                    [
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(value[_vm.otherColumn]) +
-                          "\n                "
-                      ),
-                      i !== _vm.confirmedValue.length - 1
-                        ? _c("span", [_vm._v(",")])
-                        : _vm._e(),
-                    ]
-                  )
-                }),
-              ],
-              2
-            ),
-      ]),
+      _c(
+        "bi-filter-anchor",
+        {
+          attrs: { active: _vm.active },
+          on: {
+            activated: function ($event) {
+              _vm.active = true
+            },
+          },
+        },
+        [
+          _vm.confirmedValue == null
+            ? _c("span", [_vm._v(_vm._s(_vm.filterConfig.name))])
+            : _c(
+                "span",
+                [
+                  _vm._v(
+                    "\n            " +
+                      _vm._s(_vm.filterConfig.name) +
+                      ":\n            "
+                  ),
+                  _vm._l(_vm.confirmedValue, function (value, i) {
+                    return _c(
+                      "strong",
+                      {
+                        key: "filter-" + _vm.filterConfig.name + "-" + value.id,
+                      },
+                      [
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(value[_vm.otherColumn]) +
+                            "\n                "
+                        ),
+                        i !== _vm.confirmedValue.length - 1
+                          ? _c("span", [_vm._v(",")])
+                          : _vm._e(),
+                      ]
+                    )
+                  }),
+                ],
+                2
+              ),
+        ]
+      ),
       _vm._v(" "),
       _vm.active
         ? _c(

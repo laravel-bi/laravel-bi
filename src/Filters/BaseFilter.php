@@ -41,7 +41,7 @@ abstract class BaseFilter implements Filter
         return $this;
     }
 
-    public function extra(Dashboard $dashboard, Request $request)
+    public function extra(Dashboard $dashboard, BiRequest $request): array
     {
         return [];
     }

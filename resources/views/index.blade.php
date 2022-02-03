@@ -7,8 +7,8 @@
 
     <title>Laravel Bi</title>
 
-    <link rel="stylesheet" href="{{ mix('app.css', 'vendor/bi') }}">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="{{ asset('vendor/bi/css/app.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 
 </head>
 
@@ -39,7 +39,7 @@
     <script>
         window.bi = @json($serverData);
     </script>
-    <script src="{{ mix('app.js', 'vendor/bi') }}"></script>
+    <script src="{{ asset('vendor/bi/js/app.js') }}"></script>
 
     
 </body>

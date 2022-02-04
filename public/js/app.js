@@ -2623,6 +2623,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     datePickerValue: function datePickerValue() {
+      console.log(this.datePickerValue);
+
       if (this.datePickerValue) {
         this.setInternalValue({
           date: moment__WEBPACK_IMPORTED_MODULE_0___default()(new Date(this.datePickerValue)).format("YYYY-MM-DD")

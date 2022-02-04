@@ -37,6 +37,7 @@ export default {
     },
     watch: {
         datePickerValue: function() {
+            console.log(this.datePickerValue);
             if(this.datePickerValue) {
                 this.setInternalValue({
                     date: moment(new Date(this.datePickerValue)).format(

@@ -6,6 +6,7 @@
                 {{ filterConfig.name }}:
                 <strong>{{ pickedDate }}</strong>
             </span>
+            {{ confirmedValue }}
         </bi-filter-anchor>
 
         <bi-filter-dropdown @close="close" @reset="reset" @apply="apply" v-if="active">
@@ -50,11 +51,10 @@ export default {
     },
     computed: {
         pickedDate() {
-            console.log('a', this.confirmedValue);
             if (this.confirmedValue == null) {
                 return null;
             }
-            return this.confirmedValue.date;
+            return this.confirmedValue;
         }
     },
     mounted() {

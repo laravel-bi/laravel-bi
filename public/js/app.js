@@ -2608,6 +2608,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2634,13 +2635,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     pickedDate: function pickedDate() {
-      console.log('a', this.confirmedValue);
-
       if (this.confirmedValue == null) {
         return null;
       }
 
-      return this.confirmedValue.date;
+      return this.confirmedValue;
     }
   },
   mounted: function mounted() {
@@ -45756,6 +45755,7 @@ var render = function () {
                 ),
                 _c("strong", [_vm._v(_vm._s(_vm.pickedDate))]),
               ]),
+          _vm._v("\n        " + _vm._s(_vm.confirmedValue) + "\n    "),
         ]
       ),
       _vm._v(" "),

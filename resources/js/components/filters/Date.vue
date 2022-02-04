@@ -54,7 +54,7 @@ export default {
             if (this.confirmedValue == null) {
                 return null;
             }
-            return this.confirmedValue;
+            return this.confirmedValue.date;
         }
     },
     mounted() {

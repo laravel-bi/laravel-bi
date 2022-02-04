@@ -2639,7 +2639,7 @@ __webpack_require__.r(__webpack_exports__);
         return null;
       }
 
-      return this.confirmedValue;
+      return this.confirmedValue.date;
     }
   },
   mounted: function mounted() {
@@ -2815,25 +2815,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     setInitialValue: function setInitialValue(value) {
-      if (value instanceof Array) {
-        this.initialValue = JSON.parse(JSON.stringify(value));
-      } else {
-        this.initialValue = value;
-      }
+      this.initialValue = JSON.parse(JSON.stringify(value));
     },
     setInternalValue: function setInternalValue(value) {
-      if (value instanceof Array) {
-        this.internalValue = JSON.parse(JSON.stringify(value));
-      } else {
-        this.internalValue = value;
-      }
+      this.internalValue = JSON.parse(JSON.stringify(value));
     },
     setConfirmedValue: function setConfirmedValue(value) {
-      if (value instanceof Array) {
-        this.confirmedValue = JSON.parse(JSON.stringify(value));
-      } else {
-        this.confirmedValue = value;
-      }
+      this.confirmedValue = JSON.parse(JSON.stringify(value));
     },
     emitValue: function emitValue() {
       this.$emit("input", this.confirmedValue);

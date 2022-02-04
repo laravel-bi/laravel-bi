@@ -2815,13 +2815,25 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     setInitialValue: function setInitialValue(value) {
-      this.initialValue = JSON.parse(JSON.stringify(value));
+      if (value instanceof Array) {
+        this.initialValue = JSON.parse(JSON.stringify(value));
+      } else {
+        this.initialValue = value;
+      }
     },
     setInternalValue: function setInternalValue(value) {
-      this.internalValue = JSON.parse(JSON.stringify(value));
+      if (value instanceof Array) {
+        this.internalValue = JSON.parse(JSON.stringify(value));
+      } else {
+        this.internalValue = value;
+      }
     },
     setConfirmedValue: function setConfirmedValue(value) {
-      this.confirmedValue = JSON.parse(JSON.stringify(value));
+      if (value instanceof Array) {
+        this.confirmedValue = JSON.parse(JSON.stringify(value));
+      } else {
+        this.confirmedValue = value;
+      }
     },
     emitValue: function emitValue() {
       this.$emit("input", this.confirmedValue);

@@ -27,13 +27,25 @@ export default {
     },
     methods: {
         setInitialValue: function(value) {
-            this.initialValue = JSON.parse(JSON.stringify(value));
+            if (value instanceof Array) {
+                this.initialValue = JSON.parse(JSON.stringify(value));
+            } else {
+                this.initialValue = value;
+            }
         },
         setInternalValue: function(value) {
-            this.internalValue = JSON.parse(JSON.stringify(value));
+            if (value instanceof Array) {
+                this.internalValue = JSON.parse(JSON.stringify(value));
+            } else {
+                this.internalValue = value;
+            }
         },
         setConfirmedValue: function(value) {
-            this.confirmedValue = JSON.parse(JSON.stringify(value));
+            if (value instanceof Array) {
+                this.confirmedValue = JSON.parse(JSON.stringify(value));
+            } else {
+                this.confirmedValue = value;
+            }
         },
         emitValue: function() {
             this.$emit("input", this.confirmedValue);

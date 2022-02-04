@@ -19,7 +19,7 @@ class DateFilter extends BaseFilter
 
     public function defaultDate(Carbon $date)
     {
-        $this->defaultValue(['date' => $date->format('Y-m-d')]);
+        $this->defaultValue($date->format('Y-m-d'));
 
         return $this;
     }

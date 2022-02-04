@@ -4,7 +4,7 @@
             <span v-if="confirmedValue == null">{{ filterConfig.name }}</span>
             <span v-else>
                 {{ filterConfig.name }}:
-                <strong>{{ startDate }}</strong>
+                <strong>{{ pickedDate }}</strong>
             </span>
         </bi-filter-anchor>
 
@@ -37,7 +37,6 @@ export default {
     },
     watch: {
         datePickerValue: function() {
-            console.log(this.datePickerValue);
             if(this.datePickerValue) {
                 this.setInternalValue({
                     date: moment(new Date(this.datePickerValue)).format(
@@ -50,17 +49,11 @@ export default {
         }
     },
     computed: {
-        startDate() {
+        pickedDate() {
             if (this.confirmedValue == null) {
                 return null;
             }
-            return this.confirmedValue.start;
-        },
-        endDate() {
-            if (this.confirmedValue == null) {
-                return null;
-            }
-            return this.confirmedValue.end;
+            return this.confirmedValue.date;
         }
     },
     mounted() {
@@ -70,7 +63,7 @@ export default {
     },
     methods: {  
         setDatePickerValue(value) {
-            this.datePickerValue = JSON.parse(JSON.stringify(value));
+            this.datePickerValue = value;
         },
         close() {
             this.setInternalValue(this.confirmedOrInitialValue);

@@ -2623,8 +2623,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     datePickerValue: function datePickerValue() {
-      console.log(this.datePickerValue);
-
       if (this.datePickerValue) {
         this.setInternalValue({
           date: moment__WEBPACK_IMPORTED_MODULE_0___default()(new Date(this.datePickerValue)).format("YYYY-MM-DD")
@@ -2635,19 +2633,12 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
-    startDate: function startDate() {
+    pickedDate: function pickedDate() {
       if (this.confirmedValue == null) {
         return null;
       }
 
-      return this.confirmedValue.start;
-    },
-    endDate: function endDate() {
-      if (this.confirmedValue == null) {
-        return null;
-      }
-
-      return this.confirmedValue.end;
+      return this.confirmedValue.date;
     }
   },
   mounted: function mounted() {
@@ -2659,7 +2650,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     setDatePickerValue: function setDatePickerValue(value) {
-      this.datePickerValue = JSON.parse(JSON.stringify(value));
+      this.datePickerValue = value;
     },
     close: function close() {
       this.setInternalValue(this.confirmedOrInitialValue);
@@ -45761,7 +45752,7 @@ var render = function () {
                     _vm._s(_vm.filterConfig.name) +
                     ":\n            "
                 ),
-                _c("strong", [_vm._v(_vm._s(_vm.startDate))]),
+                _c("strong", [_vm._v(_vm._s(_vm.pickedDate))]),
               ]),
         ]
       ),

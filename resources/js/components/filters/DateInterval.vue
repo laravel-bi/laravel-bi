@@ -26,7 +26,7 @@ import moment from "moment";
 import Filter from "./Filter.vue";
 
 export default {
-    name: "bi-filter-date",
+    name: "bi-filter-date-interval",
     extends: Filter,
     props: {
         value: Object

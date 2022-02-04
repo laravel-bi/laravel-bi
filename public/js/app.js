@@ -2715,7 +2715,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "bi-filter-date",
+  name: "bi-filter-date-interval",
   "extends": _Filter_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
   props: {
     value: Object

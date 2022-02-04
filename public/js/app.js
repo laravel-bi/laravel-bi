@@ -2634,6 +2634,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     pickedDate: function pickedDate() {
+      console.log('a', this.confirmedValue);
+
       if (this.confirmedValue == null) {
         return null;
       }

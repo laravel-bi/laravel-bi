@@ -14,7 +14,7 @@ class DateFilter extends BaseFilter
     {
         $date = Carbon::createFromFormat('Y-m-d', $filterData['date']);
 
-        return $builder->where($this->column, $date);
+        return $builder->whereBetween($this->column, [$date->copy()->startOfDay(), $date->endOfDay()]);
     }
 
     public function defaultDate(Carbon $date)

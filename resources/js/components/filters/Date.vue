@@ -50,6 +50,7 @@ export default {
     },
     computed: {
         pickedDate() {
+            console.log('a', this.confirmedValue);
             if (this.confirmedValue == null) {
                 return null;
             }

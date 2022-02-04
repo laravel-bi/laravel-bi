@@ -8,7 +8,7 @@ use LaravelBi\LaravelBi\Support\BiRequest;
 
 class DateIntervalFilter extends BaseFilter
 {
-    public $component = 'date';
+    public $component = 'date-interval';
 
     public function apply(Builder $builder, array $filterData, BiRequest $request): Builder
     {

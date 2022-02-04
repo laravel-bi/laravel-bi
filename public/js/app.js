@@ -2608,6 +2608,109 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "bi-filter-date",
+  "extends": _Filter_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+  props: {
+    value: Object
+  },
+  data: function data() {
+    return {
+      datePickerValue: null
+    };
+  },
+  watch: {
+    datePickerValue: function datePickerValue() {
+      if (this.datePickerValue) {
+        this.setInternalValue({
+          date: moment__WEBPACK_IMPORTED_MODULE_0___default()(new Date(this.datePickerValue)).format("YYYY-MM-DD")
+        });
+      } else {
+        this.setInternalValue(null);
+      }
+    }
+  },
+  computed: {
+    startDate: function startDate() {
+      if (this.confirmedValue == null) {
+        return null;
+      }
+
+      return this.confirmedValue.start;
+    },
+    endDate: function endDate() {
+      if (this.confirmedValue == null) {
+        return null;
+      }
+
+      return this.confirmedValue.end;
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$nextTick(function () {
+      _this.setDatePickerValue(_this.initialValue);
+    });
+  },
+  methods: {
+    setDatePickerValue: function setDatePickerValue(value) {
+      this.datePickerValue = JSON.parse(JSON.stringify(value));
+    },
+    close: function close() {
+      this.setInternalValue(this.confirmedOrInitialValue);
+      this.setDatePickerValue(this.confirmedOrInitialValue);
+      this.active = false;
+    },
+    reset: function reset() {
+      this.setInternalValue(this.initialValue);
+      this.setConfirmedValue(this.initialValue);
+      this.setDatePickerValue(this.initialValue);
+      this.active = false;
+      this.emitValue();
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/filters/DateInterval.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/filters/DateInterval.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Filter_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Filter.vue */ "./resources/js/components/filters/Filter.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 
 
@@ -3490,19 +3593,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_filters_FilterAnchor_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/filters/FilterAnchor.vue */ "./resources/js/components/filters/FilterAnchor.vue");
 /* harmony import */ var _components_filters_FilterDropdown_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/filters/FilterDropdown.vue */ "./resources/js/components/filters/FilterDropdown.vue");
 /* harmony import */ var _components_filters_Date_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/filters/Date.vue */ "./resources/js/components/filters/Date.vue");
-/* harmony import */ var _components_filters_String_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/filters/String.vue */ "./resources/js/components/filters/String.vue");
-/* harmony import */ var _components_filters_Number_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/filters/Number.vue */ "./resources/js/components/filters/Number.vue");
-/* harmony import */ var _components_filters_BelongsTo_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/filters/BelongsTo.vue */ "./resources/js/components/filters/BelongsTo.vue");
-/* harmony import */ var v_calendar__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! v-calendar */ "./node_modules/v-calendar/lib/v-calendar.min.js");
-/* harmony import */ var v_calendar__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(v_calendar__WEBPACK_IMPORTED_MODULE_17__);
-/* harmony import */ var v_calendar_lib_v_calendar_min_css__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! v-calendar/lib/v-calendar.min.css */ "./node_modules/v-calendar/lib/v-calendar.min.css");
-/* harmony import */ var _utils_EventBus_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./utils/EventBus.js */ "./resources/js/utils/EventBus.js");
+/* harmony import */ var _components_filters_DateInterval_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/filters/DateInterval.vue */ "./resources/js/components/filters/DateInterval.vue");
+/* harmony import */ var _components_filters_String_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/filters/String.vue */ "./resources/js/components/filters/String.vue");
+/* harmony import */ var _components_filters_Number_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/filters/Number.vue */ "./resources/js/components/filters/Number.vue");
+/* harmony import */ var _components_filters_BelongsTo_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/filters/BelongsTo.vue */ "./resources/js/components/filters/BelongsTo.vue");
+/* harmony import */ var v_calendar__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! v-calendar */ "./node_modules/v-calendar/lib/v-calendar.min.js");
+/* harmony import */ var v_calendar__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(v_calendar__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var v_calendar_lib_v_calendar_min_css__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! v-calendar/lib/v-calendar.min.css */ "./node_modules/v-calendar/lib/v-calendar.min.css");
+/* harmony import */ var _utils_EventBus_js__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./utils/EventBus.js */ "./resources/js/utils/EventBus.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
 
  // import Toast from "./components/Toast.vue";
+
 
 
 
@@ -3530,9 +3635,10 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("bi-line-chart", _componen
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("bi-filter-anchor", _components_filters_FilterAnchor_vue__WEBPACK_IMPORTED_MODULE_11__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("bi-filter-dropdown", _components_filters_FilterDropdown_vue__WEBPACK_IMPORTED_MODULE_12__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("bi-filter-date", _components_filters_Date_vue__WEBPACK_IMPORTED_MODULE_13__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("bi-filter-string", _components_filters_String_vue__WEBPACK_IMPORTED_MODULE_14__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("bi-filter-number", _components_filters_Number_vue__WEBPACK_IMPORTED_MODULE_15__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("bi-filter-belongs-to", _components_filters_BelongsTo_vue__WEBPACK_IMPORTED_MODULE_16__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("bi-filter-date-interval", _components_filters_DateInterval_vue__WEBPACK_IMPORTED_MODULE_14__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("bi-filter-string", _components_filters_String_vue__WEBPACK_IMPORTED_MODULE_15__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("bi-filter-number", _components_filters_Number_vue__WEBPACK_IMPORTED_MODULE_16__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component("bi-filter-belongs-to", _components_filters_BelongsTo_vue__WEBPACK_IMPORTED_MODULE_17__["default"]);
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   base: window.bi.base,
@@ -3552,7 +3658,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     }
   }]
 });
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].use((v_calendar__WEBPACK_IMPORTED_MODULE_17___default()), {
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].use((v_calendar__WEBPACK_IMPORTED_MODULE_18___default()), {
   firstDayOfWeek: 2
 });
 
@@ -3571,7 +3677,7 @@ new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
   mounted: function mounted() {
     var _this = this;
 
-    _utils_EventBus_js__WEBPACK_IMPORTED_MODULE_19__["default"].$on('toast', function (toast) {
+    _utils_EventBus_js__WEBPACK_IMPORTED_MODULE_20__["default"].$on('toast', function (toast) {
       _this.toast = toast;
       setTimeout(function () {
         _this.toast = null;
@@ -44026,6 +44132,45 @@ component.options.__file = "resources/js/components/filters/Date.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/filters/DateInterval.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/filters/DateInterval.vue ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _DateInterval_vue_vue_type_template_id_704aed92___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DateInterval.vue?vue&type=template&id=704aed92& */ "./resources/js/components/filters/DateInterval.vue?vue&type=template&id=704aed92&");
+/* harmony import */ var _DateInterval_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DateInterval.vue?vue&type=script&lang=js& */ "./resources/js/components/filters/DateInterval.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DateInterval_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DateInterval_vue_vue_type_template_id_704aed92___WEBPACK_IMPORTED_MODULE_0__.render,
+  _DateInterval_vue_vue_type_template_id_704aed92___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/filters/DateInterval.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/filters/Filter.vue":
 /*!****************************************************!*\
   !*** ./resources/js/components/filters/Filter.vue ***!
@@ -44512,6 +44657,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/filters/DateInterval.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/filters/DateInterval.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DateInterval_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DateInterval.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/filters/DateInterval.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DateInterval_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/filters/Filter.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************!*\
   !*** ./resources/js/components/filters/Filter.vue?vue&type=script&lang=js& ***!
@@ -44784,6 +44945,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Date_vue_vue_type_template_id_7046042d___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Date_vue_vue_type_template_id_7046042d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Date.vue?vue&type=template&id=7046042d& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/filters/Date.vue?vue&type=template&id=7046042d&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/filters/DateInterval.vue?vue&type=template&id=704aed92&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/filters/DateInterval.vue?vue&type=template&id=704aed92& ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DateInterval_vue_vue_type_template_id_704aed92___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DateInterval_vue_vue_type_template_id_704aed92___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DateInterval_vue_vue_type_template_id_704aed92___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DateInterval.vue?vue&type=template&id=704aed92& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/filters/DateInterval.vue?vue&type=template&id=704aed92&");
 
 
 /***/ }),
@@ -45536,6 +45714,94 @@ render._withStripped = true
 /*!************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/filters/Date.vue?vue&type=template&id=7046042d& ***!
   \************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      directives: [
+        {
+          name: "click-outside",
+          rawName: "v-click-outside",
+          value: _vm.clickOutside,
+          expression: "clickOutside",
+        },
+      ],
+      staticClass: "flex relative",
+    },
+    [
+      _c(
+        "bi-filter-anchor",
+        {
+          attrs: { active: _vm.active },
+          on: {
+            activated: function ($event) {
+              _vm.active = true
+            },
+          },
+        },
+        [
+          _vm.confirmedValue == null
+            ? _c("span", [_vm._v(_vm._s(_vm.filterConfig.name))])
+            : _c("span", [
+                _vm._v(
+                  "\n            " +
+                    _vm._s(_vm.filterConfig.name) +
+                    ":\n            "
+                ),
+                _c("strong", [_vm._v(_vm._s(_vm.startDate))]),
+              ]),
+        ]
+      ),
+      _vm._v(" "),
+      _vm.active
+        ? _c(
+            "bi-filter-dropdown",
+            { on: { close: _vm.close, reset: _vm.reset, apply: _vm.apply } },
+            [
+              _c("v-date-picker", {
+                attrs: {
+                  "is-expanded": "",
+                  "show-day-popover": false,
+                  "is-inline": "",
+                },
+                model: {
+                  value: _vm.datePickerValue,
+                  callback: function ($$v) {
+                    _vm.datePickerValue = $$v
+                  },
+                  expression: "datePickerValue",
+                },
+              }),
+            ],
+            1
+          )
+        : _vm._e(),
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/filters/DateInterval.vue?vue&type=template&id=704aed92&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/filters/DateInterval.vue?vue&type=template&id=704aed92& ***!
+  \********************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -61925,7 +62191,7 @@ Vue.compile = compileToFunctions;
 /******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
 /******/ 					installedChunks[chunkId][0]();
 /******/ 				}
-/******/ 				installedChunks[chunkIds[i]] = 0;
+/******/ 				installedChunks[chunkId] = 0;
 /******/ 			}
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}

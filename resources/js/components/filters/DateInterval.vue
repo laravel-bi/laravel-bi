@@ -4,7 +4,7 @@
             <span v-if="confirmedValue == null">{{ filterConfig.name }}</span>
             <span v-else>
                 {{ filterConfig.name }}:
-                <strong>{{ startDate }}</strong>
+                <strong>{{ startDate }} - {{ endDate }}</strong>
             </span>
         </bi-filter-anchor>
 
@@ -12,6 +12,7 @@
             <v-date-picker
                 is-expanded
                 :show-day-popover="false"
+                mode="range"
                 v-model="datePickerValue"
                 is-inline
             ></v-date-picker>
@@ -39,7 +40,10 @@ export default {
         datePickerValue: function() {
             if(this.datePickerValue) {
                 this.setInternalValue({
-                    date: moment(new Date(this.datePickerValue)).format(
+                    start: moment(new Date(this.datePickerValue.start)).format(
+                        "YYYY-MM-DD"
+                    ),
+                    end: moment(new Date(this.datePickerValue.end)).format(
                         "YYYY-MM-DD"
                     )
                 });

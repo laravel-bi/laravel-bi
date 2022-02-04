@@ -270,6 +270,10 @@ It shows a number control to select different operators.
 
 #### `DateFilter`
 
+It shows a calendar to select a date.
+
+#### `DateIntervalFilter`
+
 It shows a range calendar to select a day interval.
 
 #### Dashboard configuration

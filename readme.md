@@ -20,7 +20,7 @@ to setup all Laravel Bi components and to create a simple UserDashboard.
 ### Updating
 
 Run this artisan command to update assets:
-`php artisan vendor:publish --tag=bi-assets`
+`php artisan vendor:publish --tag=bi-assets --force`
 
 ### Requirements
 

@@ -45,7 +45,6 @@ export default {
             this.emitValue();
         },
         apply: function() {
-            alert('HEY')
             this.setConfirmedValue(this.internalValue);
             this.active = false;
             this.emitValue();

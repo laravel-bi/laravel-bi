@@ -6,6 +6,7 @@
                 {{ filterConfig.name }}:
                 <strong>{{ pickedDate }}</strong>
             </span>
+            {{ cDatePickerValue }}
         </bi-filter-anchor>
 
         <bi-filter-dropdown @close="close" @reset="reset" @apply="apply" v-if="active">

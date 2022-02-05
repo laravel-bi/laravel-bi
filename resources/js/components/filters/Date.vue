@@ -1,23 +1,6 @@
 <template>
     <div class="flex relative" v-click-outside="clickOutside">
-        <bi-filter-anchor :active="active" @activated="active = true">
-            DATE
-            <span v-if="confirmedValue == null">{{ filterConfig.name }}</span>
-            <span v-else>
-                {{ filterConfig.name }}:
-                <strong>{{ pickedDate }}</strong>
-            </span>
-            {{ cDatePickerValue }}
-        </bi-filter-anchor>
 
-        <bi-filter-dropdown @close="close" @reset="reset" @apply="apply" v-if="active">
-            <v-date-picker
-                is-expanded
-                :show-day-popover="false"
-                v-model="cDatePickerValue"
-                is-inline
-            ></v-date-picker>
-        </bi-filter-dropdown>
     </div>
 </template>
 

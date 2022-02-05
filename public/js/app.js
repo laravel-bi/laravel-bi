@@ -2593,23 +2593,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -45726,72 +45709,17 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      directives: [
-        {
-          name: "click-outside",
-          rawName: "v-click-outside",
-          value: _vm.clickOutside,
-          expression: "clickOutside",
-        },
-      ],
-      staticClass: "flex relative",
-    },
-    [
-      _c(
-        "bi-filter-anchor",
-        {
-          attrs: { active: _vm.active },
-          on: {
-            activated: function ($event) {
-              _vm.active = true
-            },
-          },
-        },
-        [
-          _vm._v("\n        DATE\n        "),
-          _vm.confirmedValue == null
-            ? _c("span", [_vm._v(_vm._s(_vm.filterConfig.name))])
-            : _c("span", [
-                _vm._v(
-                  "\n            " +
-                    _vm._s(_vm.filterConfig.name) +
-                    ":\n            "
-                ),
-                _c("strong", [_vm._v(_vm._s(_vm.pickedDate))]),
-              ]),
-          _vm._v("\n        " + _vm._s(_vm.cDatePickerValue) + "\n    "),
-        ]
-      ),
-      _vm._v(" "),
-      _vm.active
-        ? _c(
-            "bi-filter-dropdown",
-            { on: { close: _vm.close, reset: _vm.reset, apply: _vm.apply } },
-            [
-              _c("v-date-picker", {
-                attrs: {
-                  "is-expanded": "",
-                  "show-day-popover": false,
-                  "is-inline": "",
-                },
-                model: {
-                  value: _vm.cDatePickerValue,
-                  callback: function ($$v) {
-                    _vm.cDatePickerValue = $$v
-                  },
-                  expression: "cDatePickerValue",
-                },
-              }),
-            ],
-            1
-          )
-        : _vm._e(),
+  return _c("div", {
+    directives: [
+      {
+        name: "click-outside",
+        rawName: "v-click-outside",
+        value: _vm.clickOutside,
+        expression: "clickOutside",
+      },
     ],
-    1
-  )
+    staticClass: "flex relative",
+  })
 }
 var staticRenderFns = []
 render._withStripped = true

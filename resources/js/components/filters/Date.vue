@@ -1,6 +1,21 @@
 <template>
     <div class="flex relative" v-click-outside="clickOutside">
+        <bi-filter-anchor :active="active" @activated="active = true">
+            <span v-if="confirmedValue == null">{{ filterConfig.name }}</span>
+            <span v-else>
+                {{ filterConfig.name }}:
+                <strong>{{ pickedDate }}</strong>
+            </span>
+        </bi-filter-anchor>
 
+        <bi-filter-dropdown @close="close" @reset="reset" @apply="apply" v-if="active">
+            <v-date-picker
+                is-expanded
+                :show-day-popover="false"
+                v-model="datePickerValue"
+                is-inline
+            ></v-date-picker>
+        </bi-filter-dropdown>
     </div>
 </template>
 
@@ -20,25 +35,20 @@ export default {
             datePickerValue: null
         };
     },
-    computed: {
-        cDatePickerValue: {
-            get() {
-                return this.datePickerValue;
-            },
-            set(value) {
-                this.datePickerValue = value;
-
-                if(this.value) {
-                    this.setInternalValue({
-                        date: moment(new Date(value)).format(
-                            "YYYY-MM-DD"
-                        )
-                    });
-                } else {
-                    this.setInternalValue(null);
-                }
+    watch: {
+        datePickerValue: function() {
+            if(this.datePickerValue) {
+                this.setInternalValue({
+                    date: moment(new Date(this.datePickerValue)).format(
+                        "YYYY-MM-DD"
+                    )
+                });
+            } else {
+                this.setInternalValue(null);
             }
-        },
+        }
+    },
+    computed: {
         pickedDate() {
             if (this.confirmedValue == null) {
                 return null;

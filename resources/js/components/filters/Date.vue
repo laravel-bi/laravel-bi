@@ -6,7 +6,6 @@
                 {{ filterConfig.name }}:
                 <strong>{{ pickedDate }}</strong>
             </span>
-            {{ confirmedValue }}
         </bi-filter-anchor>
 
         <bi-filter-dropdown @close="close" @reset="reset" @apply="apply" v-if="active">

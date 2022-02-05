@@ -2622,18 +2622,23 @@ __webpack_require__.r(__webpack_exports__);
       datePickerValue: null
     };
   },
-  watch: {
-    datePickerValue: function datePickerValue() {
-      if (this.datePickerValue) {
-        this.setInternalValue({
-          date: moment__WEBPACK_IMPORTED_MODULE_0___default()(new Date(this.datePickerValue)).format("YYYY-MM-DD")
-        });
-      } else {
-        this.setInternalValue(null);
-      }
-    }
-  },
   computed: {
+    cDatePickerValue: {
+      get: function get() {
+        return this.datePickerValue;
+      },
+      set: function set(value) {
+        this.datePickerValue = value;
+
+        if (this.value) {
+          this.setInternalValue({
+            date: moment__WEBPACK_IMPORTED_MODULE_0___default()(new Date(value)).format("YYYY-MM-DD")
+          });
+        } else {
+          this.setInternalValue(null);
+        }
+      }
+    },
     pickedDate: function pickedDate() {
       if (this.confirmedValue == null) {
         return null;
@@ -45771,11 +45776,11 @@ var render = function () {
                   "is-inline": "",
                 },
                 model: {
-                  value: _vm.datePickerValue,
+                  value: _vm.cDatePickerValue,
                   callback: function ($$v) {
-                    _vm.datePickerValue = $$v
+                    _vm.cDatePickerValue = $$v
                   },
-                  expression: "datePickerValue",
+                  expression: "cDatePickerValue",
                 },
               }),
             ],

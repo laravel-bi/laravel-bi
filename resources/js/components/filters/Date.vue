@@ -13,7 +13,7 @@
             <v-date-picker
                 is-expanded
                 :show-day-popover="false"
-                v-model="datePickerValue"
+                v-model="cDatePickerValue"
                 is-inline
             ></v-date-picker>
         </bi-filter-dropdown>
@@ -36,20 +36,25 @@ export default {
             datePickerValue: null
         };
     },
-    watch: {
-        datePickerValue: function() {
-            if(this.datePickerValue) {
-                this.setInternalValue({
-                    date: moment(new Date(this.datePickerValue)).format(
-                        "YYYY-MM-DD"
-                    )
-                });
-            } else {
-                this.setInternalValue(null);
-            }
-        }
-    },
     computed: {
+        cDatePickerValue: {
+            get() {
+                return this.datePickerValue;
+            },
+            set(value) {
+                this.datePickerValue = value;
+
+                if(this.value) {
+                    this.setInternalValue({
+                        date: moment(new Date(value)).format(
+                            "YYYY-MM-DD"
+                        )
+                    });
+                } else {
+                    this.setInternalValue(null);
+                }
+            }
+        },
         pickedDate() {
             if (this.confirmedValue == null) {
                 return null;

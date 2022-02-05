@@ -17,6 +17,11 @@ and then run
 
 to setup all Laravel Bi components and to create a simple UserDashboard.
 
+### Updating
+
+Run this artisan command to update assets:
+`php artisan vendor:publish --tag=bi-assets`
+
 ### Requirements
 
 Laravel BI v1.0.0 requires Laravel 8.0. 

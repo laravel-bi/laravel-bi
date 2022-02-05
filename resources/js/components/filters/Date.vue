@@ -1,6 +1,7 @@
 <template>
     <div class="flex relative" v-click-outside="clickOutside">
         <bi-filter-anchor :active="active" @activated="active = true">
+            DATE
             <span v-if="confirmedValue == null">{{ filterConfig.name }}</span>
             <span v-else>
                 {{ filterConfig.name }}:

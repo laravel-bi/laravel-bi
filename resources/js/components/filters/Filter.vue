@@ -30,7 +30,6 @@ export default {
             this.initialValue = JSON.parse(JSON.stringify(value));
         },
         setInternalValue: function(value) {
-            console.log(value);
             this.internalValue = JSON.parse(JSON.stringify(value));
         },
         setConfirmedValue: function(value) {

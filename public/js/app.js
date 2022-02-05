@@ -2609,6 +2609,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2823,7 +2824,6 @@ __webpack_require__.r(__webpack_exports__);
       this.initialValue = JSON.parse(JSON.stringify(value));
     },
     setInternalValue: function setInternalValue(value) {
-      console.log(value);
       this.internalValue = JSON.parse(JSON.stringify(value));
     },
     setConfirmedValue: function setConfirmedValue(value) {
@@ -45751,6 +45751,7 @@ var render = function () {
           },
         },
         [
+          _vm._v("\n        DATE\n        "),
           _vm.confirmedValue == null
             ? _c("span", [_vm._v(_vm._s(_vm.filterConfig.name))])
             : _c("span", [

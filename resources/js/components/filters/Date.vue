@@ -28,7 +28,7 @@ export default {
     name: "bi-filter-date",
     extends: Filter,
     props: {
-        value: Object
+        value: Array
     },
     data: function() {
         return {
@@ -38,22 +38,22 @@ export default {
     watch: {
         datePickerValue: function() {
             if(this.datePickerValue) {
-                this.setInternalValue({
-                    date: moment(new Date(this.datePickerValue)).format(
+                this.setInternalValue([
+                    moment(new Date(this.datePickerValue)).format(
                         "YYYY-MM-DD"
                     )
-                });
+                ]);
             } else {
-                this.setInternalValue(null);
+                this.setInternalValue([null]);
             }
         }
     },
     computed: {
         pickedDate() {
-            if (this.confirmedValue == null) {
+            if (this.confirmedValue.length == 0 || this.confirmedValue[0] == null) {
                 return null;
             }
-            return this.confirmedValue.date;
+            return this.confirmedValue[0];
         }
     },
     mounted() {
@@ -63,7 +63,7 @@ export default {
     },
     methods: {  
         setDatePickerValue(value) {
-            this.datePickerValue = value;
+            this.datePickerValue = new Date(value[0]);
         },
         close() {
             this.setInternalValue(this.confirmedOrInitialValue);

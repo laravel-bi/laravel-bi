@@ -4,7 +4,7 @@
             <span v-if="confirmedValue == null">{{ filterConfig.name }}</span>
             <span v-else>
                 {{ filterConfig.name }}:
-                <strong>{{ pickedDate }}</strong>
+                <strong>{{ startDate }} - {{ endDate }}</strong>
             </span>
         </bi-filter-anchor>
 
@@ -12,6 +12,7 @@
             <v-date-picker
                 is-expanded
                 :show-day-popover="false"
+                mode="range"
                 v-model="datePickerValue"
                 is-inline
             ></v-date-picker>
@@ -25,7 +26,7 @@ import moment from "moment";
 import Filter from "./Filter.vue";
 
 export default {
-    name: "bi-filter-date",
+    name: "bi-filter-date-interval",
     extends: Filter,
     props: {
         value: Object
@@ -39,7 +40,10 @@ export default {
         datePickerValue: function() {
             if(this.datePickerValue) {
                 this.setInternalValue({
-                    date: moment(new Date(this.datePickerValue)).format(
+                    start: moment(new Date(this.datePickerValue.start)).format(
+                        "YYYY-MM-DD"
+                    ),
+                    end: moment(new Date(this.datePickerValue.end)).format(
                         "YYYY-MM-DD"
                     )
                 });
@@ -49,11 +53,17 @@ export default {
         }
     },
     computed: {
-        pickedDate() {
+        startDate() {
             if (this.confirmedValue == null) {
                 return null;
             }
-            return this.confirmedValue.date;
+            return this.confirmedValue.start;
+        },
+        endDate() {
+            if (this.confirmedValue == null) {
+                return null;
+            }
+            return this.confirmedValue.end;
         }
     },
     mounted() {
@@ -63,7 +73,7 @@ export default {
     },
     methods: {  
         setDatePickerValue(value) {
-            this.datePickerValue = value;
+            this.datePickerValue = JSON.parse(JSON.stringify(value));
         },
         close() {
             this.setInternalValue(this.confirmedOrInitialValue);

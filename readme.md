@@ -17,6 +17,11 @@ and then run
 
 to setup all Laravel Bi components and to create a simple UserDashboard.
 
+### Updating
+
+Run this artisan command to update assets:
+`php artisan vendor:publish --tag=bi-assets --force`
+
 ### Requirements
 
 Laravel BI v1.0.0 requires Laravel 8.0. 
@@ -269,6 +274,10 @@ It shows a multiple combo with all the possible values of a particular column.
 It shows a number control to select different operators.
 
 #### `DateFilter`
+
+It shows a calendar to select a date.
+
+#### `DateIntervalFilter`
 
 It shows a range calendar to select a day interval.
 

@@ -12,18 +12,14 @@ class DateFilter extends BaseFilter
 
     public function apply(Builder $builder, array $filterData, BiRequest $request): Builder
     {
-        $start = Carbon::createFromFormat('Y-m-d', $filterData['start']);
-        $end   = Carbon::createFromFormat('Y-m-d', $filterData['end']);
+        $date = Carbon::createFromFormat('Y-m-d', $filterData['date']);
 
-        return $builder->whereBetween($this->column, [$start, $end]);
+        return $builder->whereBetween($this->column, [$date->copy()->startOfDay(), $date->endOfDay()]);
     }
 
-    public function defaultDates(Carbon $startDate, Carbon $endDate)
+    public function defaultDate(Carbon $date)
     {
-        $this->defaultValue([
-            'start' => $startDate->format('Y-m-d'),
-            'end' => $endDate->format('Y-m-d')
-        ]);
+        $this->defaultValue($date->format('Y-m-d'));
 
         return $this;
     }

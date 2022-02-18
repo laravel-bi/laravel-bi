@@ -7,7 +7,6 @@ use Carbon\CarbonPeriod;
 use LaravelBi\LaravelBi\Dashboard;
 use LaravelBi\LaravelBi\Support\BiRequest;
 use LaravelBi\LaravelBi\Dimensions\DateDimension;
-use LaravelBi\LaravelBi\Filters\DateIntervalFilter;
 
 class LineChart extends BaseWidget
 {

@@ -39,7 +39,7 @@ class DateDimension extends BaseDimension
     public function carbonFunctions($start, $end)
     {
         $this->carbonStartFunction = $start;
-        $this->carbonEndFunction = $end;
+        $this->carbonEndFunction   = $end;
 
         return $this;
     }

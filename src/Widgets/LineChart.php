@@ -7,6 +7,7 @@ use Carbon\CarbonPeriod;
 use LaravelBi\LaravelBi\Dashboard;
 use LaravelBi\LaravelBi\Support\BiRequest;
 use LaravelBi\LaravelBi\Dimensions\DateDimension;
+use LaravelBi\LaravelBi\Filters\DateIntervalFilter;
 
 class LineChart extends BaseWidget
 {
@@ -38,8 +39,13 @@ class LineChart extends BaseWidget
 
         if ($hasFilter) {
             $dimensionFilter = $request->getFilter($dimensionKey);
-            $minDate         = Carbon::createFromFormat('Y-m-d', $dimensionFilter['start'])->startOfDay();
-            $maxDate         = Carbon::createFromFormat('Y-m-d', $dimensionFilter['end'])->startOfDay();
+            if (isset($dimensionFilter['start']) && isset($dimensionFilter['end'])) {
+                $minDate         = Carbon::createFromFormat('Y-m-d', $dimensionFilter['start'])->startOfDay();
+                $maxDate         = Carbon::createFromFormat('Y-m-d', $dimensionFilter['end'])->startOfDay();
+            } else {
+                $minDate = Carbon::createFromFormat($dimension->carbonFormat, $data->min($dimensionKey))->startOfDay();
+                $maxDate = Carbon::createFromFormat($dimension->carbonFormat, $data->max($dimensionKey))->startOfDay();
+            }
         } else {
             $minDate = Carbon::createFromFormat($dimension->carbonFormat, $data->min($dimensionKey))->startOfDay();
             $maxDate = Carbon::createFromFormat($dimension->carbonFormat, $data->max($dimensionKey))->startOfDay();

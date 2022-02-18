@@ -9,5 +9,6 @@ class DayDimension extends DateDimension
         parent::__construct($key, $name);
         $this->sqlFormat('%Y-%m-%d');
         $this->carbonFormat('Y-m-d', 'day');
+        $this->carbonFunctions('startOfDay', 'endOfDay');
     }
 }

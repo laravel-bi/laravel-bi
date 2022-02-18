@@ -39,15 +39,15 @@ class LineChart extends BaseWidget
         if ($hasFilter) {
             $dimensionFilter = $request->getFilter($dimensionKey);
             if (isset($dimensionFilter['start']) && isset($dimensionFilter['end'])) {
-                $minDate         = Carbon::createFromFormat('Y-m-d', $dimensionFilter['start'])->startOfDay();
-                $maxDate         = Carbon::createFromFormat('Y-m-d', $dimensionFilter['end'])->startOfDay();
+                $minDate         = Carbon::createFromFormat('Y-m-d', $dimensionFilter['start'])->{$dimension->carbonStartFunction}();
+                $maxDate         = Carbon::createFromFormat('Y-m-d', $dimensionFilter['end'])->{$dimension->carbonEndFunction}();
             } else {
-                $minDate = Carbon::createFromFormat($dimension->carbonFormat, $data->min($dimensionKey))->startOfDay();
-                $maxDate = Carbon::createFromFormat($dimension->carbonFormat, $data->max($dimensionKey))->startOfDay();
+                $minDate = Carbon::createFromFormat($dimension->carbonFormat, $data->min($dimensionKey))->{$dimension->carbonStartFunction}();
+                $maxDate = Carbon::createFromFormat($dimension->carbonFormat, $data->max($dimensionKey))->{$dimension->carbonEndFunction}();
             }
         } else {
-            $minDate = Carbon::createFromFormat($dimension->carbonFormat, $data->min($dimensionKey))->startOfDay();
-            $maxDate = Carbon::createFromFormat($dimension->carbonFormat, $data->max($dimensionKey))->startOfDay();
+            $minDate = Carbon::createFromFormat($dimension->carbonFormat, $data->min($dimensionKey))->{$dimension->carbonStartFunction}();
+            $maxDate = Carbon::createFromFormat($dimension->carbonFormat, $data->max($dimensionKey))->{$dimension->carbonEndFunction}();
         }
 
         $period = CarbonPeriod::create($minDate, '1 ' . $dimension->carbonInterval, $maxDate);

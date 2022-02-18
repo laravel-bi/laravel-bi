@@ -5,6 +5,8 @@ Laravel Bi is a beautiful and fully-featured Business Intelligence dashboard man
 [![Build Status](https://travis-ci.org/laravel-bi/laravel-bi.svg?branch=master)](https://travis-ci.org/laravel-bi/laravel-bi)
 [![StyleCI](https://github.styleci.io/repos/203451164/shield?branch=master)](https://github.styleci.io/repos/203451164)
 
+![Laravel BI](https://raw.githubusercontent.com/laravel-bi/laravel-bi/master/screenshots/bi.png)
+
 ### Installation
 
 Install Laravel Bi using composer:

@@ -11,7 +11,7 @@ class Table extends BaseWidget
     public $orderByColumn;
     public $orderByDir;
 
-    public function orderBy($column, $dir): self
+    public function orderBy($column, $dir = 'asc'): self
     {
         $this->orderByColumn = $column;
         $this->orderByDir    = $dir;

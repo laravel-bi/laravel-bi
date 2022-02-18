@@ -9,5 +9,6 @@ class MonthDimension extends DateDimension
         parent::__construct($key, $name);
         $this->sqlFormat('%Y-%m');
         $this->carbonFormat('Y-m', 'month');
+        $this->carbonFunctions('startOfMonth', 'endOfMonth');
     }
 }
